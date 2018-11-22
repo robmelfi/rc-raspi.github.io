@@ -1,0 +1,20 @@
+entity Controller {
+  name String
+  mode IO
+}
+
+entity Pin {
+  name String
+}
+
+enum IO {
+  INPUT, OUTPUT
+}
+
+relationship ManyToOne {
+  Controller{pin(name)} to Pin
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with infinite-scroll

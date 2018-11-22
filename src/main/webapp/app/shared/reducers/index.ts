@@ -12,6 +12,14 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import controller, {
+  ControllerState
+} from 'app/entities/controller/controller.reducer';
+// prettier-ignore
+import pin, {
+  PinState
+} from 'app/entities/pin/pin.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -25,6 +33,8 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly controller: ControllerState;
+  readonly pin: PinState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -40,6 +50,8 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  controller,
+  pin,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

@@ -1,0 +1,9 @@
+{
+  "rcraspiApp": {
+    "IO": {
+      "null": "",
+      "INPUT": "INPUT",
+      "OUTPUT": "OUTPUT"
+    }
+  }
+}

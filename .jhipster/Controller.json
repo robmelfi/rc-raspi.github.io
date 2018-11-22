@@ -1,0 +1,31 @@
+{
+    "name": "Controller",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mode",
+            "fieldType": "IO",
+            "fieldValues": "INPUT,OUTPUT"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pin",
+            "otherEntityName": "pin",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20181122132944",
+    "entityTableName": "controller",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
