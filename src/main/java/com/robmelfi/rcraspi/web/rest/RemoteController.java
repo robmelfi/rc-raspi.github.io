@@ -1,6 +1,6 @@
 package com.robmelfi.rcraspi.web.rest;
 
-import com.robmelfi.rcraspi.service.TestService;
+import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
  * TestResource controller
  */
 @RestController
-@RequestMapping("/api/test")
-public class TestResource {
+@RequestMapping("/api/rc")
+public class RemoteController {
 
-    private final Logger log = LoggerFactory.getLogger(TestResource.class);
+    private final Logger log = LoggerFactory.getLogger(RemoteController.class);
 
-    private TestService testService;
+    private RemoteControllerService remoteControllerService;
 
-    public TestResource(TestService testService) {
-        this.testService = testService;
+    public RemoteController(RemoteControllerService remoteControllerService) {
+        this.remoteControllerService = remoteControllerService;
     }
 
     /**
@@ -27,7 +27,7 @@ public class TestResource {
     */
     @GetMapping("/on")
     public void on() {
-        testService.on();
+        remoteControllerService.on();
     }
 
     /**
@@ -35,7 +35,7 @@ public class TestResource {
     */
     @GetMapping("/off")
     public void off() {
-        testService.off();
+        remoteControllerService.off();
     }
 
     /**
@@ -43,7 +43,7 @@ public class TestResource {
      */
     @GetMapping("/toggle")
     public void toggle() {
-        testService.toggle();
+        remoteControllerService.toggle();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.robmelfi.rcraspi.service;
 
-public interface TestService {
+public interface RemoteControllerService {
 
     void on();
 

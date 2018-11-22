@@ -1,7 +1,7 @@
 package com.robmelfi.rcraspi.config;
 
-import com.robmelfi.rcraspi.service.TestService;
-import com.robmelfi.rcraspi.service.impl.TestServiceDevImpl;
+import com.robmelfi.rcraspi.service.RemoteControllerService;
+import com.robmelfi.rcraspi.service.impl.RemoteControllerServiceDevImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class TestConfig {
 
     @Bean
-    public TestService getTestService() {
-        return new TestServiceDevImpl();
+    public RemoteControllerService getTestService() {
+        return new RemoteControllerServiceDevImpl();
     }
 }

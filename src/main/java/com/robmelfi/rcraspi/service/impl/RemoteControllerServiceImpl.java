@@ -1,6 +1,6 @@
 package com.robmelfi.rcraspi.service.impl;
 
-import com.robmelfi.rcraspi.service.TestService;
+import com.robmelfi.rcraspi.service.RemoteControllerService;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,23 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@Profile(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)
-public class TestServiceDevImpl implements TestService {
+@Profile(JHipsterConstants.SPRING_PROFILE_PRODUCTION)
+public class RemoteControllerServiceImpl implements RemoteControllerService {
 
-    private final Logger log = LoggerFactory.getLogger(TestServiceDevImpl.class);
+    private final Logger log = LoggerFactory.getLogger(RemoteControllerServiceImpl.class);
 
     @Override
     public void on() {
-        log.debug("ON - DEV");
+        log.debug("ON - PROD");
     }
 
     @Override
     public void off() {
-        log.debug("ON - DEV");
+        log.debug("OFF - PROD");
     }
 
     @Override
     public void toggle() {
-        log.debug("TOGGLE - DEV");
+        log.debug("TOGGLE - PROD");
     }
 }

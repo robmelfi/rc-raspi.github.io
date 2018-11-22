@@ -1,7 +1,7 @@
 package com.robmelfi.rcraspi.web.rest;
 
 import com.robmelfi.rcraspi.RcraspiApp;
-import com.robmelfi.rcraspi.service.TestService;
+import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,24 +17,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the TestResource REST controller.
  *
- * @see TestResource
+ * @see RemoteController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RcraspiApp.class)
-public class TestResourceIntTest {
+public class RemoteControllerIntTest {
 
     private MockMvc restMockMvc;
 
     @Autowired
-    private TestService testService;
+    private RemoteControllerService remoteControllerService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);;
 
-        TestResource testResource = new TestResource(testService);
+        RemoteController remoteController = new RemoteController(remoteControllerService);
         restMockMvc = MockMvcBuilders
-            .standaloneSetup(testResource)
+            .standaloneSetup(remoteController)
             .build();
 
     }
