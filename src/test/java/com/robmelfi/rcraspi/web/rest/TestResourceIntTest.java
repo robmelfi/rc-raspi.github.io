@@ -40,7 +40,7 @@ public class TestResourceIntTest {
     }
 
     /**
-     * Test test
+     * Test on
      */
     @Test
     public void on() throws Exception {
@@ -50,11 +50,20 @@ public class TestResourceIntTest {
     }
 
     /**
-     * Test test
+     * Test off
      */
     @Test
     public void off() throws Exception {
         restMockMvc.perform(get("/api/test/off"))
+            .andExpect(status().isOk());
+    }
+
+    /**
+     * Test toggle
+     */
+    @Test
+    public void toggle() throws Exception {
+        restMockMvc.perform(get("/api/test/toggle"))
             .andExpect(status().isOk());
     }
 }

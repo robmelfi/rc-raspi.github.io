@@ -23,19 +23,27 @@ public class TestResource {
     }
 
     /**
-    * GET test
+    * GET on
     */
     @GetMapping("/on")
-    public String on() {
-        return testService.on();
+    public void on() {
+        testService.on();
     }
 
     /**
-    * GET test
+    * GET off
     */
     @GetMapping("/off")
-    public String off() {
-        return testService.off();
+    public void off() {
+        testService.off();
+    }
+
+    /**
+     * GET toggle
+     */
+    @GetMapping("/toggle")
+    public void toggle() {
+        testService.toggle();
     }
 
 }

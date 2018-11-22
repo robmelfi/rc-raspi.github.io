@@ -2,7 +2,9 @@ package com.robmelfi.rcraspi.service;
 
 public interface TestService {
 
-    String on();
+    void on();
 
-    String off();
+    void off();
+
+    void toggle();
 }

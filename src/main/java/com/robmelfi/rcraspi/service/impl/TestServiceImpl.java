@@ -16,12 +16,17 @@ public class TestServiceImpl implements TestService {
     private final Logger log = LoggerFactory.getLogger(TestServiceImpl.class);
 
     @Override
-    public String on() {
-        return "on-prod";
+    public void on() {
+        log.debug("ON - PROD");
     }
 
     @Override
-    public String off() {
-        return "off-prod";
+    public void off() {
+        log.debug("OFF - PROD");
+    }
+
+    @Override
+    public void toggle() {
+        log.debug("TOGGLE - PROD");
     }
 }
