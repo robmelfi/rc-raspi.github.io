@@ -52,6 +52,16 @@ public class GpioServiceDevImpl implements GpioService {
     }
 
     @Override
+    public void toggle(String pinName) {
+
+    }
+
+    @Override
+    public boolean getState(String pinName) {
+        return false;
+    }
+
+    @Override
     public void addController(Controller c) {
         com.robmelfi.rcraspi.domain.Pin pin = pinRepository.findById(c.getPin().getId()).get();
         if (c.getMode().equals(IO.OUTPUT)) {

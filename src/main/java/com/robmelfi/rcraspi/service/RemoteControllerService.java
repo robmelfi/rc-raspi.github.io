@@ -2,9 +2,11 @@ package com.robmelfi.rcraspi.service;
 
 public interface RemoteControllerService {
 
-    void on(String pinName);
+    void setHigh(String pinName);
 
-    void off(String pinName);
+    void setLow(String pinName);
 
     void toggle(String pinName);
+
+    boolean getState(String pinName);
 }

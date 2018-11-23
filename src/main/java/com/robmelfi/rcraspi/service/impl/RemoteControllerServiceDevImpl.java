@@ -16,17 +16,23 @@ public class RemoteControllerServiceDevImpl implements RemoteControllerService {
     private final Logger log = LoggerFactory.getLogger(RemoteControllerServiceDevImpl.class);
 
     @Override
-    public void on(String pin) {
-        log.debug("ON - DEV - {}", pin);
+    public void setHigh(String pin) {
+        log.debug("[DEV] - setHigh pin {}", pin);
     }
 
     @Override
-    public void off(String pin) {
-        log.debug("OFF - DEV - {}", pin);
+    public void setLow(String pin) {
+        log.debug("[DEV] - setLow pin {}", pin);
     }
 
     @Override
     public void toggle(String pin) {
-        log.debug("TOGGLE - DEV - {}", pin);
+        log.debug("[DEV] - toggle pin {}", pin);
+    }
+
+    @Override
+    public boolean getState(String pin) {
+        log.debug("[DEV] - get pin state {}", pin);
+        return false;
     }
 }

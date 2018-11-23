@@ -23,19 +23,26 @@ public class RemoteControllerServiceImpl implements RemoteControllerService {
     }
 
     @Override
-    public void on(String pin) {
-        log.info("ON - PROD");
+    public void setHigh(String pin) {
+        log.info("setHigh pin {}", pin);
         gpioService.setHigh(pin);
     }
 
     @Override
-    public void off(String pin) {
-        log.info("OFF - PROD");
+    public void setLow(String pin) {
+        log.info("setHigh low {}", pin);
         gpioService.setLow(pin);
     }
 
     @Override
     public void toggle(String pin) {
-        log.info("TOGGLE - PROD");
+        log.info("toggle pin {}", pin);
+        gpioService.toggle(pin);
+    }
+
+    @Override
+    public boolean getState(String pin) {
+        log.debug(" get pin state {}", pin);
+        return  gpioService.getState(pin);
     }
 }
