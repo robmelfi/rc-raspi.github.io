@@ -4,6 +4,7 @@ import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,25 +26,25 @@ public class RemoteController {
     /**
     * GET on
     */
-    @GetMapping("/on")
-    public void on() {
-        remoteControllerService.on();
+    @GetMapping("/on/{pin}")
+    public void on(@PathVariable String pin) {
+        remoteControllerService.on(pin);
     }
 
     /**
     * GET off
     */
-    @GetMapping("/off")
-    public void off() {
-        remoteControllerService.off();
+    @GetMapping("/off/{pin}")
+    public void off(@PathVariable String pin) {
+        remoteControllerService.off(pin);
     }
 
     /**
      * GET toggle
      */
-    @GetMapping("/toggle")
-    public void toggle() {
-        remoteControllerService.toggle();
+    @GetMapping("/toggle/{pin}")
+    public void toggle(@PathVariable String pin) {
+        remoteControllerService.toggle(pin);
     }
 
 }

@@ -25,11 +25,14 @@ public class ControllerService {
 
     private final ControllerRepository controllerRepository;
 
+    private final GpioService gpioService;
+
     private final ControllerMapper controllerMapper;
 
-    public ControllerService(ControllerRepository controllerRepository, ControllerMapper controllerMapper) {
+    public ControllerService(ControllerRepository controllerRepository, ControllerMapper controllerMapper, GpioService gpioService) {
         this.controllerRepository = controllerRepository;
         this.controllerMapper = controllerMapper;
+        this.gpioService = gpioService;
     }
 
     /**
@@ -43,6 +46,7 @@ public class ControllerService {
 
         Controller controller = controllerMapper.toEntity(controllerDTO);
         controller = controllerRepository.save(controller);
+        gpioService.addController(controller);
         return controllerMapper.toDto(controller);
     }
 
@@ -80,6 +84,7 @@ public class ControllerService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Controller : {}", id);
+        gpioService.removeController(id);
         controllerRepository.deleteById(id);
     }
 }

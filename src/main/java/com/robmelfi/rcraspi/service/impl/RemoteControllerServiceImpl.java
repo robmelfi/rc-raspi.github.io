@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.service.impl;
 
+import com.robmelfi.rcraspi.service.GpioService;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
@@ -15,18 +16,26 @@ public class RemoteControllerServiceImpl implements RemoteControllerService {
 
     private final Logger log = LoggerFactory.getLogger(RemoteControllerServiceImpl.class);
 
-    @Override
-    public void on() {
-        log.debug("ON - PROD");
+    private GpioService gpioService;
+
+    public RemoteControllerServiceImpl(GpioService gpioService) {
+        this.gpioService = gpioService;
     }
 
     @Override
-    public void off() {
-        log.debug("OFF - PROD");
+    public void on(String pin) {
+        log.info("ON - PROD");
+        gpioService.setHigh(pin);
     }
 
     @Override
-    public void toggle() {
-        log.debug("TOGGLE - PROD");
+    public void off(String pin) {
+        log.info("OFF - PROD");
+        gpioService.setLow(pin);
+    }
+
+    @Override
+    public void toggle(String pin) {
+        log.info("TOGGLE - PROD");
     }
 }
