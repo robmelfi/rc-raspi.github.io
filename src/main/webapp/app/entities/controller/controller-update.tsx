@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label } from 'reactstrap';
+import { Button, Row, Col, Label, FormText } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
@@ -110,15 +110,18 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="mode"
-                    value={(!isNew && controllerEntity.mode) || 'INPUT'}
+                    value={(!isNew && controllerEntity.mode) || 'OUTPUT'}
                   >
-                    <option value="INPUT">
-                      <Translate contentKey="rcraspiApp.IO.INPUT" />
-                    </option>
+                    {/*<option value="INPUT">*/}
+                      {/*<Translate contentKey="rcraspiApp.IO.INPUT" />*/}
+                    {/*</option>*/}
                     <option value="OUTPUT">
                       <Translate contentKey="rcraspiApp.IO.OUTPUT" />
                     </option>
                   </AvInput>
+                  <FormText color="muted">
+                    <Translate contentKey="rcraspiApp.IO.message" />
+                  </FormText>
                 </AvGroup>
                 <AvGroup>
                   <Label for="pin.name">
