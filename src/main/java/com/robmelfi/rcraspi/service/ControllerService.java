@@ -7,12 +7,13 @@ import com.robmelfi.rcraspi.service.mapper.ControllerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Controller.
@@ -53,14 +54,14 @@ public class ControllerService {
     /**
      * Get all the controllers.
      *
-     * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<ControllerDTO> findAll(Pageable pageable) {
+    public List<ControllerDTO> findAll() {
         log.debug("Request to get all Controllers");
-        return controllerRepository.findAll(pageable)
-            .map(controllerMapper::toDto);
+        return controllerRepository.findAll().stream()
+            .map(controllerMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 

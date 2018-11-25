@@ -4,15 +4,10 @@ import com.codahale.metrics.annotation.Timed;
 import com.robmelfi.rcraspi.service.PinService;
 import com.robmelfi.rcraspi.web.rest.errors.BadRequestAlertException;
 import com.robmelfi.rcraspi.web.rest.util.HeaderUtil;
-import com.robmelfi.rcraspi.web.rest.util.PaginationUtil;
 import com.robmelfi.rcraspi.service.dto.PinDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,16 +79,13 @@ public class PinResource {
     /**
      * GET  /pins : get all the pins.
      *
-     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of pins in body
      */
     @GetMapping("/pins")
     @Timed
-    public ResponseEntity<List<PinDTO>> getAllPins(Pageable pageable) {
-        log.debug("REST request to get a page of Pins");
-        Page<PinDTO> page = pinService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/pins");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    public List<PinDTO> getAllPins() {
+        log.debug("REST request to get all Pins");
+        return pinService.findAll();
     }
 
     /**

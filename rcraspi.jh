@@ -17,4 +17,3 @@ relationship ManyToOne {
 
 dto * with mapstruct
 service * with serviceClass
-paginate * with infinite-scroll

@@ -1,67 +1,23 @@
 import React from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAllAction, getSortState, IPaginationBaseState } from 'react-jhipster';
+import { Translate, ICrudGetAllAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities, reset } from './controller.reducer';
+import { getEntities } from './controller.reducer';
 import { IController } from 'app/shared/model/controller.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
-import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
 export interface IControllerProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export type IControllerState = IPaginationBaseState;
-
-export class Controller extends React.Component<IControllerProps, IControllerState> {
-  state: IControllerState = {
-    ...getSortState(this.props.location, ITEMS_PER_PAGE)
-  };
-
+export class Controller extends React.Component<IControllerProps> {
   componentDidMount() {
-    this.reset();
+    this.props.getEntities();
   }
-
-  componentDidUpdate() {
-    if (this.props.updateSuccess) {
-      this.reset();
-    }
-  }
-
-  reset = () => {
-    this.props.reset();
-    this.setState({ activePage: 1 }, () => {
-      this.getEntities();
-    });
-  };
-
-  handleLoadMore = () => {
-    if (window.pageYOffset > 0) {
-      this.setState({ activePage: this.state.activePage + 1 }, () => this.getEntities());
-    }
-  };
-
-  sort = prop => () => {
-    this.setState(
-      {
-        order: this.state.order === 'asc' ? 'desc' : 'asc',
-        sort: prop
-      },
-      () => {
-        this.reset();
-      }
-    );
-  };
-
-  getEntities = () => {
-    const { activePage, itemsPerPage, sort, order } = this.state;
-    this.props.getEntities(activePage - 1, itemsPerPage, `${sort},${order}`);
-  };
 
   render() {
     const { controllerList, match } = this.props;
@@ -75,72 +31,63 @@ export class Controller extends React.Component<IControllerProps, IControllerSta
           </Link>
         </h2>
         <div className="table-responsive">
-          <InfiniteScroll
-            pageStart={this.state.activePage}
-            loadMore={this.handleLoadMore}
-            hasMore={this.state.activePage - 1 < this.props.links.next}
-            loader={<div className="loader">Loading ...</div>}
-            threshold={0}
-            initialLoad={false}
-          >
-            <Table responsive>
-              <thead>
-                <tr>
-                  <th className="hand" onClick={this.sort('id')}>
-                    <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th className="hand" onClick={this.sort('name')}>
-                    <Translate contentKey="rcraspiApp.controller.name">Name</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th className="hand" onClick={this.sort('mode')}>
-                    <Translate contentKey="rcraspiApp.controller.mode">Mode</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th>
-                    <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {controllerList.map((controller, i) => (
-                  <tr key={`entity-${i}`}>
-                    <td>
-                      <Button tag={Link} to={`${match.url}/${controller.id}`} color="link" size="sm">
-                        {controller.id}
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
+                  <Translate contentKey="global.field.id">ID</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="rcraspiApp.controller.mode">Mode</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
+                </th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {controllerList.map((controller, i) => (
+                <tr key={`entity-${i}`}>
+                  <td>
+                    <Button tag={Link} to={`${match.url}/${controller.id}`} color="link" size="sm">
+                      {controller.id}
+                    </Button>
+                  </td>
+                  <td>{controller.name}</td>
+                  <td>
+                    <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />
+                  </td>
+                  <td>{controller.pinName ? <Link to={`pin/${controller.pinId}`}>{controller.pinName}</Link> : ''}</td>
+                  <td className="text-right">
+                    <div className="btn-group flex-btn-group-container">
+                      <Button tag={Link} to={`${match.url}/${controller.id}`} color="info" size="sm">
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
-                    </td>
-                    <td>{controller.name}</td>
-                    <td>
-                      <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />
-                    </td>
-                    <td>{controller.pinName ? <Link to={`pin/${controller.pinId}`}>{controller.pinName}</Link> : ''}</td>
-                    <td className="text-right">
-                      <div className="btn-group flex-btn-group-container">
-                        <Button tag={Link} to={`${match.url}/${controller.id}`} color="info" size="sm">
-                          <FontAwesomeIcon icon="eye" />{' '}
-                          <span className="d-none d-md-inline">
-                            <Translate contentKey="entity.action.view">View</Translate>
-                          </span>
-                        </Button>
-                        <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
-                          <FontAwesomeIcon icon="pencil-alt" />{' '}
-                          <span className="d-none d-md-inline">
-                            <Translate contentKey="entity.action.edit">Edit</Translate>
-                          </span>
-                        </Button>
-                        <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">
-                          <FontAwesomeIcon icon="trash" />{' '}
-                          <span className="d-none d-md-inline">
-                            <Translate contentKey="entity.action.delete">Delete</Translate>
-                          </span>
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </InfiniteScroll>
+                      <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
+                      </Button>
+                      <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </div>
       </div>
     );
@@ -148,16 +95,11 @@ export class Controller extends React.Component<IControllerProps, IControllerSta
 }
 
 const mapStateToProps = ({ controller }: IRootState) => ({
-  controllerList: controller.entities,
-  totalItems: controller.totalItems,
-  links: controller.links,
-  entity: controller.entity,
-  updateSuccess: controller.updateSuccess
+  controllerList: controller.entities
 });
 
 const mapDispatchToProps = {
-  getEntities,
-  reset
+  getEntities
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

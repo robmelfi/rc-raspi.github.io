@@ -22,7 +22,7 @@
     "changelogDate": "20181122132944",
     "entityTableName": "controller",
     "dto": "mapstruct",
-    "pagination": "infinite-scroll",
+    "pagination": "no",
     "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

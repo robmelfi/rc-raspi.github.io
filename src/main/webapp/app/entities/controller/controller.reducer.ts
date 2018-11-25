@@ -1,12 +1,5 @@
 import axios from 'axios';
-import {
-  parseHeaderForLinks,
-  loadMoreDataWhenScrolled,
-  ICrudGetAction,
-  ICrudGetAllAction,
-  ICrudPutAction,
-  ICrudDeleteAction
-} from 'react-jhipster';
+import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
@@ -27,9 +20,7 @@ const initialState = {
   errorMessage: null,
   entities: [] as ReadonlyArray<IController>,
   entity: defaultValue,
-  links: { next: 0 },
   updating: false,
-  totalItems: 0,
   updateSuccess: false
 };
 
@@ -69,13 +60,10 @@ export default (state: ControllerState = initialState, action): ControllerState 
         errorMessage: action.payload
       };
     case SUCCESS(ACTION_TYPES.FETCH_CONTROLLER_LIST):
-      const links = parseHeaderForLinks(action.payload.headers.link);
       return {
         ...state,
-        links,
         loading: false,
-        totalItems: action.payload.headers['x-total-count'],
-        entities: loadMoreDataWhenScrolled(state.entities, action.payload.data, links)
+        entities: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_CONTROLLER):
       return {
@@ -111,13 +99,10 @@ const apiUrl = 'api/controllers';
 
 // Actions
 
-export const getEntities: ICrudGetAllAction<IController> = (page, size, sort) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
-  return {
-    type: ACTION_TYPES.FETCH_CONTROLLER_LIST,
-    payload: axios.get<IController>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`)
-  };
-};
+export const getEntities: ICrudGetAllAction<IController> = (page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_CONTROLLER_LIST,
+  payload: axios.get<IController>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
 
 export const getEntity: ICrudGetAction<IController> = id => {
   const requestUrl = `${apiUrl}/${id}`;
@@ -132,6 +117,7 @@ export const createEntity: ICrudPutAction<IController> = entity => async dispatc
     type: ACTION_TYPES.CREATE_CONTROLLER,
     payload: axios.post(apiUrl, cleanEntity(entity))
   });
+  dispatch(getEntities());
   return result;
 };
 
@@ -140,6 +126,7 @@ export const updateEntity: ICrudPutAction<IController> = entity => async dispatc
     type: ACTION_TYPES.UPDATE_CONTROLLER,
     payload: axios.put(apiUrl, cleanEntity(entity))
   });
+  dispatch(getEntities());
   return result;
 };
 
@@ -149,6 +136,7 @@ export const deleteEntity: ICrudDeleteAction<IController> = id => async dispatch
     type: ACTION_TYPES.DELETE_CONTROLLER,
     payload: axios.delete(requestUrl)
   });
+  dispatch(getEntities());
   return result;
 };
 

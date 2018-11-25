@@ -39,7 +39,9 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
   }
 
   componentDidMount() {
-    if (!this.state.isNew) {
+    if (this.state.isNew) {
+      this.props.reset();
+    } else {
       this.props.getEntity(this.props.match.params.id);
     }
 

@@ -35,7 +35,9 @@ export class PinUpdate extends React.Component<IPinUpdateProps, IPinUpdateState>
   }
 
   componentDidMount() {
-    if (!this.state.isNew) {
+    if (this.state.isNew) {
+      this.props.reset();
+    } else {
       this.props.getEntity(this.props.match.params.id);
     }
   }
