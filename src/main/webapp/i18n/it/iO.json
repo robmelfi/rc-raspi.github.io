@@ -3,7 +3,8 @@
     "IO": {
       "null": "",
       "INPUT": "INPUT",
-      "OUTPUT": "OUTPUT"
+      "OUTPUT": "OUTPUT",
+      "message": "La versione attuale consente di selezionare solo la modalità di OUTPUT"
     }
   }
 }
