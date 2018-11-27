@@ -2,7 +2,7 @@
   "rcraspiApp": {
     "pin": {
       "home": {
-        "title": "Pins",
+        "title": "GPIO Pin",
         "createLabel": "Genera un nuovo Pin",
         "createOrEditLabel": "Genera o modifica un Pin"
       },

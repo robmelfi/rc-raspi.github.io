@@ -25,10 +25,6 @@ export class Pin extends React.Component<IPinProps> {
       <div>
         <h2 id="pin-heading">
           <Translate contentKey="rcraspiApp.pin.home.title">Pins</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
-            <Translate contentKey="rcraspiApp.pin.home.createLabel">Create new Pin</Translate>
-          </Link>
         </h2>
         <div className="table-responsive">
           <Table responsive>
@@ -52,28 +48,6 @@ export class Pin extends React.Component<IPinProps> {
                     </Button>
                   </td>
                   <td>{pin.name}</td>
-                  <td className="text-right">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${pin.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${pin.id}/edit`} color="primary" size="sm">
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${pin.id}/delete`} color="danger" size="sm">
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>

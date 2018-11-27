@@ -20,7 +20,7 @@ export class Home extends React.Component<IHomeProp> {
     const { account } = this.props;
     return (
       <Row>
-        <Col md="9">
+        <Col md="12">
           <h2>
             <Translate contentKey="home.title">Welcome, Java Hipster!</Translate>
           </h2>
@@ -97,9 +97,6 @@ export class Home extends React.Component<IHomeProp> {
             </a>
             !
           </p>
-        </Col>
-        <Col md="3" className="pad">
-          <span className="hipster rounded" />
         </Col>
       </Row>
     );
