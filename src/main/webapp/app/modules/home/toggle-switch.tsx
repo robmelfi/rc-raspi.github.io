@@ -7,8 +7,14 @@ const toggleSwitch = props => {
 
   return (
     <ButtonGroup>
-      <Button color="primary" onClick={props.on}>ON</Button>
-      <Button color="primary" onClick={props.off}>OFF</Button>
+      <Button
+        color="primary"
+        onClick={props.on}
+        disabled={props.status}>ON</Button>
+      <Button
+        color="primary"
+        onClick={props.off}
+        disabled={!props.status}>OFF</Button>
     </ButtonGroup>
   );
 };

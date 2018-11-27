@@ -43,12 +43,14 @@ export class Home extends React.Component<IHomeProp> {
               <div>
                 <ToggleSwitch
                   on={() => this.set('high', 'GPIO_00')}
-                  off={() => this.set('low', 'GPIO_00')}/>
+                  off={() => this.set('low', 'GPIO_00')}
+                  status={true}/>
               </div>
               <div className="mt-2">
                 <ToggleSwitch
                   on={() => this.set('high', 'GPIO_01')}
-                  off={() => this.set('low', 'GPIO_01')}/>
+                  off={() => this.set('low', 'GPIO_01')}
+                  status={true}/>
               </div>
             </div>
           ) : (
