@@ -4,10 +4,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
-import { Row, Col, Alert } from 'reactstrap';
+import { Row, Col, Alert, Button, ButtonGroup } from 'reactstrap';
+import ToggleSwitch from './toggle-switch';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
+import { set } from 'app/shared/reducers/remote-controller.ts';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
@@ -15,6 +17,10 @@ export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
     this.props.getSession();
   }
+
+  set = (type, pin) => {
+    this.props.set(type, pin);
+  };
 
   render() {
     const { account } = this.props;
@@ -34,6 +40,16 @@ export class Home extends React.Component<IHomeProp> {
                   You are logged in as user {account.login}.
                 </Translate>
               </Alert>
+              <div>
+                <ToggleSwitch
+                  on={() => this.set('high', 'GPIO_00')}
+                  off={() => this.set('low', 'GPIO_00')}/>
+              </div>
+              <div className="mt-2">
+                <ToggleSwitch
+                  on={() => this.set('high', 'GPIO_01')}
+                  off={() => this.set('low', 'GPIO_01')}/>
+              </div>
             </div>
           ) : (
             <div>
@@ -58,45 +74,6 @@ export class Home extends React.Component<IHomeProp> {
               </Alert>
             </div>
           )}
-          <p>
-            <Translate contentKey="home.question">If you have any question on JHipster:</Translate>
-          </p>
-
-          <ul>
-            <li>
-              <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-                <Translate contentKey="home.link.homepage">JHipster homepage</Translate>
-              </a>
-            </li>
-            <li>
-              <a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-                <Translate contentKey="home.link.stackoverflow">JHipster on Stack Overflow</Translate>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-                <Translate contentKey="home.link.bugtracker">JHipster bug tracker</Translate>
-              </a>
-            </li>
-            <li>
-              <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-                <Translate contentKey="home.link.chat">JHipster public chat room</Translate>
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/java_hipster" target="_blank" rel="noopener noreferrer">
-                <Translate contentKey="home.link.follow">follow @java_hipster on Twitter</Translate>
-              </a>
-            </li>
-          </ul>
-
-          <p>
-            <Translate contentKey="home.like">If you like JHipster, do not forget to give us a star on</Translate>{' '}
-            <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              Github
-            </a>
-            !
-          </p>
         </Col>
       </Row>
     );
@@ -108,7 +85,7 @@ const mapStateToProps = storeState => ({
   isAuthenticated: storeState.authentication.isAuthenticated
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, set };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

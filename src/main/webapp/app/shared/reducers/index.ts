@@ -4,6 +4,7 @@ import { loadingBarReducer as loadingBar } from 'react-redux-loading-bar';
 import locale, { LocaleState } from './locale';
 import authentication, { AuthenticationState } from './authentication';
 import applicationProfile, { ApplicationProfileState } from './application-profile';
+import remoteController, { RemoteControllerState } from 'app/shared/reducers/remote-controller';
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
@@ -26,6 +27,7 @@ export interface IRootState {
   readonly authentication: AuthenticationState;
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
+  readonly remoteController: RemoteControllerState;
   readonly administration: AdministrationState;
   readonly userManagement: UserManagementState;
   readonly register: RegisterState;
@@ -43,6 +45,7 @@ const rootReducer = combineReducers<IRootState>({
   authentication,
   locale,
   applicationProfile,
+  remoteController,
   administration,
   userManagement,
   register,
