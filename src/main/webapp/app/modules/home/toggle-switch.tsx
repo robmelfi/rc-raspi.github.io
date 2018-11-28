@@ -2,9 +2,6 @@ import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 
 const toggleSwitch = props => {
-
-  let disabled = true;
-
   return (
     <ButtonGroup>
       <Button

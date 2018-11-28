@@ -9,6 +9,7 @@ export interface IController {
   mode?: IO;
   pinName?: string;
   pinId?: number;
+  status?: boolean;
 }
 
 export const defaultValue: Readonly<IController> = {};

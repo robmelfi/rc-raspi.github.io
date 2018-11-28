@@ -31,6 +31,8 @@ public class GpioServiceDevImpl implements GpioService {
 
     private PinRepository pinRepository;
 
+    private boolean status = false;
+
     public GpioServiceDevImpl(ControllerRepository controllerRepository, PinRepository pinRepository) {
         this.controllerRepository = controllerRepository;
         this.pinRepository = pinRepository;
@@ -42,23 +44,26 @@ public class GpioServiceDevImpl implements GpioService {
 
     @Override
     public void setHigh(String pinName){
+        status = true;
         log.debug("[DEV] - setHigh pin {}", getOutputPin(pinName));
     }
 
     @Override
     public void setLow(String pinName){
+        status = false;
         log.debug("[DEV] - setLow pin {}", getOutputPin(pinName));
     }
 
     @Override
     public void toggle(String pinName) {
+        status = !status;
         log.debug("[DEV] - toggle pin {}", getOutputPin(pinName));
     }
 
     @Override
     public boolean getState(String pinName) {
-        log.debug("[DEV] - state pin {}", getOutputPin(pinName));
-        return false;
+        log.debug("[DEV] - state pin {} - {}", getOutputPin(pinName), status);
+        return status;
     }
 
     @Override

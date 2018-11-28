@@ -19,6 +19,8 @@ public class ControllerDTO implements Serializable {
 
     private String pinName;
 
+    private boolean status;
+
     public Long getId() {
         return id;
     }
@@ -57,6 +59,14 @@ public class ControllerDTO implements Serializable {
 
     public void setPinName(String pinName) {
         this.pinName = pinName;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
