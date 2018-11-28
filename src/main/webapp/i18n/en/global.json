@@ -52,9 +52,9 @@
       "info": {
         "authenticated": {
           "prefix": "If you want to ",
-          "link": "sign in",
+          "link": "Sign in",
           "suffix":
-            ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+            " to start control your raspberry"
         },
         "register": {
           "noaccount": "You don't have an account yet?",

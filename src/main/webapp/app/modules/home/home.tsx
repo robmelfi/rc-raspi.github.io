@@ -17,7 +17,15 @@ export interface IHomeProp extends StateProps, DispatchProps {}
 export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
     this.props.getSession();
-    this.props.getControllers();
+    if (this.props.isAuthenticated) {
+      this.props.getControllers();
+    }
+  }
+
+  componentDidUpdate(prevProps: IHomeProp, prevState) {
+    if (this.props.account !== prevProps.account) {
+      this.props.getControllers();
+    }
   }
 
   set = (type, pin) => {
@@ -44,33 +52,27 @@ export class Home extends React.Component<IHomeProp> {
                 </Translate>
               </Alert>
               {controllerList.map((controller, i) => (
-                <Card>
-                  <Row key={i}>
-                    <Col sm={{ size: 6, offset: 3 }}>
-                        <span className="align-middle">{controller.name}</span>
-                        <span className="align-middle float-right">
-                          <ToggleSwitch
-                            on={this.set.bind(this, 'high', controller.pinName)}
-                            off={this.set.bind(this, 'low', controller.pinName)}
-                            status={controller.status} />
-                        </span>
-                      </Col>
+                  <Row key={`controller-${i}`}>
+                    <Col className="border m-1 p-1">
+                      <span className="align-middle ml-2">{controller.name}</span>
+                      <span className="align-middle float-right">
+                        <ToggleSwitch
+                          on={this.set.bind(this, 'high', controller.pinName)}
+                          off={this.set.bind(this, 'low', controller.pinName)}
+                          status={controller.status} />
+                      </span>
+                    </Col>
                   </Row>
-                </Card>
-
               ))}
             </div>
           ) : (
             <div>
               <Alert color="warning">
-                <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
                 <Link to="/login" className="alert-link">
                   <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
                 </Link>
                 <Translate contentKey="global.messages.info.authenticated.suffix">
-                  , you can try the default accounts:
-                  <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                  <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
+                  to start control your raspberry
                 </Translate>
               </Alert>
 
