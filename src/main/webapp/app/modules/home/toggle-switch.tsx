@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 
 const toggleSwitch = props => {
-  return (
+  const content = (
     <ButtonGroup>
       <Button
         color="primary"
@@ -14,6 +14,7 @@ const toggleSwitch = props => {
         disabled={!props.status}>OFF</Button>
     </ButtonGroup>
   );
+  return content;
 };
 
 export default toggleSwitch;
