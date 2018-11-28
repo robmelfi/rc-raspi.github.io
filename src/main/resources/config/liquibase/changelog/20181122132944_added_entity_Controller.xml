@@ -30,6 +30,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="state" type="bit">
+                <constraints nullable="true" />
+            </column>
+
             <column name="pin_id" type="bigint">
                 <constraints nullable="true" />
             </column>

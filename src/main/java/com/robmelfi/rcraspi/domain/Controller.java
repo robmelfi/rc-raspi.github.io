@@ -32,6 +32,9 @@ public class Controller implements Serializable {
     @Column(name = "jhi_mode")
     private IO mode;
 
+    @Column(name = "state")
+    private Boolean state;
+
     @ManyToOne
     @JsonIgnoreProperties("")
     private Pin pin;
@@ -69,6 +72,19 @@ public class Controller implements Serializable {
 
     public void setMode(IO mode) {
         this.mode = mode;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public Controller state(Boolean state) {
+        this.state = state;
+        return this;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public Pin getPin() {
@@ -111,6 +127,7 @@ public class Controller implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", mode='" + getMode() + "'" +
+            ", state='" + getState() + "'" +
             "}";
     }
 }

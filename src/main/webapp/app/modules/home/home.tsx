@@ -58,7 +58,7 @@ export class Home extends React.Component<IHomeProp> {
                       <ToggleSwitch
                         on={this.set.bind(this, 'high', controller.pinName)}
                         off={this.set.bind(this, 'low', controller.pinName)}
-                        status={controller.status}
+                        status={controller.state}
                       />
                     </span>
                   </Col>

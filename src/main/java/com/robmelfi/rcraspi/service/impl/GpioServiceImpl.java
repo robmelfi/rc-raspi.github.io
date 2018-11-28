@@ -44,16 +44,20 @@ public class GpioServiceImpl implements GpioService {
     @Override
     public void setHigh(String pinName){
         getOutputPin(pinName).high();
+        updateController(pinName, true);
     }
 
     @Override
     public void setLow(String pinName){
         getOutputPin(pinName).low();
+        updateController(pinName, false);
     }
 
     @Override
     public void toggle(String pinName) {
+        Boolean actualState = this.getState(pinName);
         getOutputPin(pinName).toggle();
+        updateController(pinName, !actualState);
     }
 
     @Override
@@ -61,11 +65,18 @@ public class GpioServiceImpl implements GpioService {
         return getOutputPin(pinName).getState().isHigh();
     }
 
+    private void updateController(String pinName, Boolean state) {
+        Controller c = controllerRepository.findByPinName(pinName);
+        c.setState(state);
+        controllerRepository.save(c);
+    }
+
     @Override
     public void addController(Controller c) {
         com.robmelfi.rcraspi.domain.Pin pin = pinRepository.findById(c.getPin().getId()).get();
+        PinState state = c.getState() ? PinState.HIGH : PinState.LOW;
         if (c.getMode().equals(IO.OUTPUT)) {
-            GpioPinDigitalOutput gpioPin = gpio.provisionDigitalOutputPin(getRaspiPin(pin.getName()));
+            GpioPinDigitalOutput gpioPin = gpio.provisionDigitalOutputPin(getRaspiPin(pin.getName()), state);
             gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
         } else {
             // TODO INPUT

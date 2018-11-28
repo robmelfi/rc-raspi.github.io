@@ -17,6 +17,7 @@
       },
       "name": "Name",
       "mode": "Mode",
+      "state": "Initial State",
       "pin": "Pin",
       "status": "Status"
     }

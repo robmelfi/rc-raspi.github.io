@@ -1,6 +1,7 @@
 entity Controller {
   name String
   mode IO
+  state Boolean
 }
 
 entity Pin {

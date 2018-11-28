@@ -124,6 +124,12 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                   </FormText>
                 </AvGroup>
                 <AvGroup>
+                  <Label id="stateLabel" check>
+                    <AvInput id="controller-state" type="checkbox" className="form-control" name="state" />
+                    <Translate contentKey="rcraspiApp.controller.state">Initial State</Translate>
+                  </Label>
+                </AvGroup>
+                <AvGroup>
                   <Label for="pin.name">
                     <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
                   </Label>

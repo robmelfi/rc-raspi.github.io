@@ -15,11 +15,11 @@ public class ControllerDTO implements Serializable {
 
     private IO mode;
 
+    private Boolean state;
+
     private Long pinId;
 
     private String pinName;
-
-    private boolean status;
 
     public Long getId() {
         return id;
@@ -45,6 +45,14 @@ public class ControllerDTO implements Serializable {
         this.mode = mode;
     }
 
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
+    }
+
     public Long getPinId() {
         return pinId;
     }
@@ -59,14 +67,6 @@ public class ControllerDTO implements Serializable {
 
     public void setPinName(String pinName) {
         this.pinName = pinName;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     @Override
@@ -96,6 +96,7 @@ public class ControllerDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", mode='" + getMode() + "'" +
+            ", state='" + getState() + "'" +
             ", pin=" + getPinId() +
             ", pin='" + getPinName() + "'" +
             "}";

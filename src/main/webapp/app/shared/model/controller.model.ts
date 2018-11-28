@@ -7,9 +7,11 @@ export interface IController {
   id?: number;
   name?: string;
   mode?: IO;
+  state?: boolean;
   pinName?: string;
   pinId?: number;
-  status?: boolean;
 }
 
-export const defaultValue: Readonly<IController> = {};
+export const defaultValue: Readonly<IController> = {
+  state: false
+};

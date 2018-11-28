@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ControllerRepository extends JpaRepository<Controller, Long> {
-
+    Controller findByPinName(String pinName);
 }

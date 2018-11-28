@@ -49,6 +49,9 @@ public class ControllerResourceIntTest {
     private static final IO DEFAULT_MODE = IO.INPUT;
     private static final IO UPDATED_MODE = IO.OUTPUT;
 
+    private static final Boolean DEFAULT_STATE = false;
+    private static final Boolean UPDATED_STATE = true;
+
     @Autowired
     private ControllerRepository controllerRepository;
 
@@ -94,7 +97,8 @@ public class ControllerResourceIntTest {
     public static Controller createEntity(EntityManager em) {
         Controller controller = new Controller()
             .name(DEFAULT_NAME)
-            .mode(DEFAULT_MODE);
+            .mode(DEFAULT_MODE)
+            .state(DEFAULT_STATE);
         return controller;
     }
 
@@ -121,6 +125,7 @@ public class ControllerResourceIntTest {
         Controller testController = controllerList.get(controllerList.size() - 1);
         assertThat(testController.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testController.getMode()).isEqualTo(DEFAULT_MODE);
+        assertThat(testController.getState()).isEqualTo(DEFAULT_STATE);
     }
 
     @Test
@@ -155,7 +160,8 @@ public class ControllerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(controller.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].mode").value(hasItem(DEFAULT_MODE.toString())));
+            .andExpect(jsonPath("$.[*].mode").value(hasItem(DEFAULT_MODE.toString())))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.booleanValue())));
     }
     
     @Test
@@ -170,7 +176,8 @@ public class ControllerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(controller.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.mode").value(DEFAULT_MODE.toString()));
+            .andExpect(jsonPath("$.mode").value(DEFAULT_MODE.toString()))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.booleanValue()));
     }
 
     @Test
@@ -195,7 +202,8 @@ public class ControllerResourceIntTest {
         em.detach(updatedController);
         updatedController
             .name(UPDATED_NAME)
-            .mode(UPDATED_MODE);
+            .mode(UPDATED_MODE)
+            .state(UPDATED_STATE);
         ControllerDTO controllerDTO = controllerMapper.toDto(updatedController);
 
         restControllerMockMvc.perform(put("/api/controllers")
@@ -209,6 +217,7 @@ public class ControllerResourceIntTest {
         Controller testController = controllerList.get(controllerList.size() - 1);
         assertThat(testController.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testController.getMode()).isEqualTo(UPDATED_MODE);
+        assertThat(testController.getState()).isEqualTo(UPDATED_STATE);
     }
 
     @Test

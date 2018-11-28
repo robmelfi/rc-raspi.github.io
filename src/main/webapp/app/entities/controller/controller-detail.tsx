@@ -41,6 +41,12 @@ export class ControllerDetail extends React.Component<IControllerDetailProps> {
             </dt>
             <dd>{controllerEntity.mode}</dd>
             <dt>
+              <span id="state">
+                <Translate contentKey="rcraspiApp.controller.state">State</Translate>
+              </span>
+            </dt>
+            <dd>{controllerEntity.state ? 'high' : 'low'}</dd>
+            <dt>
               <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
             </dt>
             <dd>{controllerEntity.pinName ? controllerEntity.pinName : ''}</dd>

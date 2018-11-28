@@ -6,6 +6,7 @@ export default class ControllerUpdatePage {
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   nameInput: ElementFinder = element(by.css('input#controller-name'));
   modeSelect: ElementFinder = element(by.css('select#controller-mode'));
+  stateInput: ElementFinder = element(by.css('input#controller-state'));
   pinSelect: ElementFinder = element(by.css('select#controller-pin'));
 
   getPageTitle() {
@@ -33,6 +34,9 @@ export default class ControllerUpdatePage {
       .all(by.tagName('option'))
       .last()
       .click();
+  }
+  getStateInput() {
+    return this.stateInput;
   }
   async pinSelectLastOption() {
     await this.pinSelect

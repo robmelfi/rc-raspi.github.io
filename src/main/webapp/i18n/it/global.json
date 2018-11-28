@@ -53,8 +53,7 @@
         "authenticated": {
           "prefix": "Se vuoi ",
           "link": "Accedi",
-          "suffix":
-            " per iniziare a controllare il tuo raspberry"
+          "suffix": " per iniziare a controllare il tuo raspberry"
         },
         "register": {
           "noaccount": "Non hai ancora un account?",

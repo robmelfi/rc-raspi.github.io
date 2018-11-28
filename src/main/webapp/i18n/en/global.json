@@ -53,8 +53,7 @@
         "authenticated": {
           "prefix": "If you want to ",
           "link": "Sign in",
-          "suffix":
-            " to start control your raspberry"
+          "suffix": " to start control your raspberry"
         },
         "register": {
           "noaccount": "You don't have an account yet?",

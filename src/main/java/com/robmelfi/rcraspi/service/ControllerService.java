@@ -59,13 +59,9 @@ public class ControllerService {
     @Transactional(readOnly = true)
     public List<ControllerDTO> findAll() {
         log.debug("Request to get all Controllers");
-        List<ControllerDTO> controllers = controllerRepository.findAll().stream()
+        return controllerRepository.findAll().stream()
             .map(controllerMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
-        for (ControllerDTO c: controllers) {
-            c.setStatus(gpioService.getState(c.getPinName()));
-        }
-        return controllers;
     }
 
 

@@ -9,6 +9,10 @@
             "fieldName": "mode",
             "fieldType": "IO",
             "fieldValues": "INPUT,OUTPUT"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [

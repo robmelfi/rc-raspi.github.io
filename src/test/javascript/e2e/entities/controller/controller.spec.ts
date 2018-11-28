@@ -49,6 +49,14 @@ describe('Controller e2e test', () => {
     await controllerUpdatePage.setNameInput('name');
     expect(await controllerUpdatePage.getNameInput()).to.match(/name/);
     await controllerUpdatePage.modeSelectLastOption();
+    const selectedState = await controllerUpdatePage.getStateInput().isSelected();
+    if (selectedState) {
+      await controllerUpdatePage.getStateInput().click();
+      expect(await controllerUpdatePage.getStateInput().isSelected()).to.be.false;
+    } else {
+      await controllerUpdatePage.getStateInput().click();
+      expect(await controllerUpdatePage.getStateInput().isSelected()).to.be.true;
+    }
     await controllerUpdatePage.pinSelectLastOption();
     await waitUntilDisplayed(controllerUpdatePage.getSaveButton());
     await controllerUpdatePage.save();

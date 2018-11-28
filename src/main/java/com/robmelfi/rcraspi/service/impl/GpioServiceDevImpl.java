@@ -44,26 +44,34 @@ public class GpioServiceDevImpl implements GpioService {
 
     @Override
     public void setHigh(String pinName){
-        status = true;
+        updateController(pinName, true);
         log.debug("[DEV] - setHigh pin {}", getOutputPin(pinName));
     }
 
     @Override
     public void setLow(String pinName){
-        status = false;
+        updateController(pinName, false);
         log.debug("[DEV] - setLow pin {}", getOutputPin(pinName));
     }
 
     @Override
     public void toggle(String pinName) {
-        status = !status;
+        Boolean actualState = this.getState(pinName);
+        updateController(pinName, !actualState);
         log.debug("[DEV] - toggle pin {}", getOutputPin(pinName));
     }
 
     @Override
     public boolean getState(String pinName) {
-        log.debug("[DEV] - state pin {} - {}", getOutputPin(pinName), status);
-        return status;
+        Controller c = controllerRepository.findByPinName(pinName);
+        log.debug("[DEV] - state pin {} - {}", getOutputPin(pinName), c.getState());
+        return c.getState();
+    }
+
+    private void updateController(String pinName, Boolean state) {
+        Controller c = controllerRepository.findByPinName(pinName);
+        c.setState(state);
+        controllerRepository.save(c);
     }
 
     @Override
