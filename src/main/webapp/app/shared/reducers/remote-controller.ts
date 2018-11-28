@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { getEntities as getControllers } from 'app/entities/controller/controller.reducer';
 
 export const ACTION_TYPES = {
   SET: 'remote-controller/SET',
@@ -49,10 +50,11 @@ const apiUrl = 'api/rc';
 
 // Actions
 
-export const set = (type, pin) => {
+export const set = (type, pin) => async dispatch => {
   const requestUrl = `${apiUrl}/${type}/${pin}`;
-  return {
+  await dispatch({
     type: ACTION_TYPES.SET,
     payload: axios.post(requestUrl)
-  };
+  });
+  dispatch(getControllers());
 };

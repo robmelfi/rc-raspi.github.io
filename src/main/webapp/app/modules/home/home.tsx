@@ -30,7 +30,6 @@ export class Home extends React.Component<IHomeProp> {
 
   set = (type, pin) => {
     this.props.set(type, pin);
-    this.props.getControllers();
   };
 
   render() {
@@ -52,17 +51,18 @@ export class Home extends React.Component<IHomeProp> {
                 </Translate>
               </Alert>
               {controllerList.map((controller, i) => (
-                  <Row key={`controller-${i}`}>
-                    <Col className="border m-1 p-1">
-                      <span className="align-middle ml-2">{controller.name}</span>
-                      <span className="align-middle float-right">
-                        <ToggleSwitch
-                          on={this.set.bind(this, 'high', controller.pinName)}
-                          off={this.set.bind(this, 'low', controller.pinName)}
-                          status={controller.status} />
-                      </span>
-                    </Col>
-                  </Row>
+                <Row key={`controller-${i}`}>
+                  <Col className="border m-1 p-1">
+                    <span className="align-middle ml-2">{controller.name}</span>
+                    <span className="align-middle float-right">
+                      <ToggleSwitch
+                        on={this.set.bind(this, 'high', controller.pinName)}
+                        off={this.set.bind(this, 'low', controller.pinName)}
+                        status={controller.status}
+                      />
+                    </span>
+                  </Col>
+                </Row>
               ))}
             </div>
           ) : (
@@ -71,9 +71,7 @@ export class Home extends React.Component<IHomeProp> {
                 <Link to="/login" className="alert-link">
                   <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
                 </Link>
-                <Translate contentKey="global.messages.info.authenticated.suffix">
-                  to start control your raspberry
-                </Translate>
+                <Translate contentKey="global.messages.info.authenticated.suffix">to start control your raspberry</Translate>
               </Alert>
 
               <Alert color="warning">
