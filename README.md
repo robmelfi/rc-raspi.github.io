@@ -14,7 +14,7 @@ The software was designed with the following requirements in mind:
 - simple, intuitive usage and interface
 - lightweight, can run on simple devices
 
-### Features
+### Features (rcraspi v1.0)
 
 - Add a contoller for GPIO pin
 - Select mode (for this version only OUTPUT)
