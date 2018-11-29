@@ -132,7 +132,8 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     id="controller-state"
                     type="select"
                     className="form-control"
-                    name="state">
+                    name="state"
+                    value={'false'}>
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>
