@@ -1,7 +1,7 @@
 # rcraspi
 Controlling Raspberry GPIO for home automation with a web/mobile app.
 
-Click on the image to view the video on youtube.
+**Click [here](http://www.youtube.com/watch?v=EWZKmvhpyBQ) or on the image to view the video on youtube.**
 
 [![](http://img.youtube.com/vi/EWZKmvhpyBQ/0.jpg)](http://www.youtube.com/watch?v=EWZKmvhpyBQ "rcraspi")
 
