@@ -29,8 +29,6 @@ The software was designed with the following requirements in mind:
 - Select INPUT mode, to connect sensors like humidity and temperature sensor
 - Add preset configuration for many types of sensors
 
-<video src="video.mp4" width="320" height="200" controls preload></video>
-
 ## Development
 
 To start your application in the dev profile, simply run:
@@ -39,8 +37,6 @@ To start your application in the dev profile, simply run:
 
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-
 
 ## Building for production
 
