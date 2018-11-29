@@ -3,8 +3,8 @@
     "controller": {
       "home": {
         "title": "Controllers",
-        "createLabel": "Create a new Controller",
-        "createOrEditLabel": "Create or edit a Controller"
+        "createLabel": "Create a Controller",
+        "createOrEditLabel": "Create a Controller"
       },
       "created": "A new Controller is created with identifier {{ param }}",
       "updated": "A Controller is updated with identifier {{ param }}",

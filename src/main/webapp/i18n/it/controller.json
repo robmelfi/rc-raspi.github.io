@@ -4,7 +4,7 @@
       "home": {
         "title": "Controllers",
         "createLabel": "Aggiungi un Controller",
-        "createOrEditLabel": "Aggiungi o modifica un Controller"
+        "createOrEditLabel": "Aggiungi un Controller"
       },
       "created": "E' stato aggiunto un nuovo Controller",
       "updated": "E' stato aggiornato il Controller",
