@@ -6,9 +6,9 @@
         "createLabel": "Aggiungi un Controller",
         "createOrEditLabel": "Aggiungi o modifica un Controller"
       },
-      "created": "&Egrave; stato aggiunto un nuovo Controller",
-      "updated": "&Egrave; stato aggiornato il Controller",
-      "deleted": "&Egrave; stato eliminato il Controller",
+      "created": "E' stato aggiunto un nuovo Controller",
+      "updated": "E' stato aggiornato il Controller",
+      "deleted": "E' stato eliminato il Controller",
       "delete": {
         "question": "Sei sicuro di volere eliminare Controller {{ id }}?"
       },
