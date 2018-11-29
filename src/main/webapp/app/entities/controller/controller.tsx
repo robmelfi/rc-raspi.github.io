@@ -64,7 +64,7 @@ export class Controller extends React.Component<IControllerProps> {
                   <td>
                     <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />
                   </td>
-                  <td>{controller.pinName ? <Link to={`pin/${controller.pinId}`}>{controller.pinName}</Link> : ''}</td>
+                  <td>{controller.pinName ? controller.pinName : ''}</td>
                   <td>{controller.state ? 'High' : 'Low'}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

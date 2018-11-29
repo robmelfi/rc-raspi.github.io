@@ -1,6 +1,5 @@
 package com.robmelfi.rcraspi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -35,8 +34,7 @@ public class Controller implements Serializable {
     @Column(name = "state")
     private Boolean state;
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
+    @OneToOne    @JoinColumn(unique = true)
     private Pin pin;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

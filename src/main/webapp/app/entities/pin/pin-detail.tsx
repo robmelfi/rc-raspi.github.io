@@ -40,12 +40,6 @@ export class PinDetail extends React.Component<IPinDetailProps> {
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
-          <Button tag={Link} to={`/entity/pin/${pinEntity.id}/edit`} replace color="primary">
-            <FontAwesomeIcon icon="pencil-alt" />{' '}
-            <span className="d-none d-md-inline">
-              <Translate contentKey="entity.action.edit">Edit</Translate>
-            </span>
           </Button>
         </Col>
       </Row>

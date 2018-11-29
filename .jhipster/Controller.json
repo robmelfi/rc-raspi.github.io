@@ -17,10 +17,12 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-one",
             "relationshipName": "pin",
             "otherEntityName": "pin",
-            "otherEntityField": "name"
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "controller"
         }
     ],
     "changelogDate": "20181122132944",

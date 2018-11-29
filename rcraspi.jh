@@ -12,7 +12,7 @@ enum IO {
   INPUT, OUTPUT
 }
 
-relationship ManyToOne {
+relationship OneToOne {
   Controller{pin(name)} to Pin
 }
 

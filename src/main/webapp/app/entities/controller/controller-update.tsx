@@ -123,12 +123,21 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <Translate contentKey="rcraspiApp.IO.message" />
                   </FormText>
                 </AvGroup>
+
                 <AvGroup>
-                  <Label id="stateLabel" check>
-                    <AvInput id="controller-state" type="checkbox" className="form-control" name="state" />
+                  <Label id="stateLabel">
                     <Translate contentKey="rcraspiApp.controller.state">Initial State</Translate>
                   </Label>
+                  <AvInput
+                    id="controller-state"
+                    type="select"
+                    className="form-control"
+                    name="state">
+                    <option value="false">Low</option>
+                    <option value="true">High</option>
+                  </AvInput>
                 </AvGroup>
+
                 <AvGroup>
                   <Label for="pin.name">
                     <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
