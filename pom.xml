@@ -9,6 +9,15 @@
     <name>Rcraspi</name>
 
     <repositories>
+        <repository>
+            <id>oss-snapshots-repo</id>
+            <name>Sonatype OSS Maven Repository</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
         <!-- jhipster-needle-maven-repository -->
     </repositories>
 
@@ -98,7 +107,7 @@
 
         <!-- jhipster-needle-maven-property -->
 
-        <pi4j.version>1.1</pi4j.version>
+        <pi4j.version>1.2-SNAPSHOT</pi4j.version>
     </properties>
 
     <dependencyManagement>
