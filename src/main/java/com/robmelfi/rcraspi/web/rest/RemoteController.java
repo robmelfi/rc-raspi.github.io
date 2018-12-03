@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.web.rest;
 
+import com.robmelfi.rcraspi.sensor.DHT11;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,4 +52,9 @@ public class RemoteController {
         return remoteControllerService.getState(pin);
     }
 
+    @GetMapping("/temp/{pin}") void getTemp(@PathVariable int pin) {
+        final DHT11 dht = new DHT11();
+        String output = dht.getTemperature(pin);
+        log.info(output);
+    }
 }
