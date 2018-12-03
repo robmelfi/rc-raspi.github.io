@@ -33,8 +33,9 @@ The software was designed with the following requirements in mind:
 
 To start your application in the dev profile, simply run:
 
-    ./mvnw    
+```./mvnw``` (on Mac OS X/Linux) or ```mvnw```(on Windows)
 
+The application will be available on http://localhost:8080
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
