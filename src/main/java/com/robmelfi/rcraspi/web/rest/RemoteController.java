@@ -14,7 +14,7 @@ public class RemoteController {
 
     private final Logger log = LoggerFactory.getLogger(RemoteController.class);
 
-    private RemoteControllerService remoteControllerService;
+    private final RemoteControllerService remoteControllerService;
 
     public RemoteController(RemoteControllerService remoteControllerService) {
         this.remoteControllerService = remoteControllerService;
