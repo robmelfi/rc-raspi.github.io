@@ -1,6 +1,8 @@
 package com.robmelfi.rcraspi.web.rest;
 
 import com.robmelfi.rcraspi.sensor.DHT11;
+import com.robmelfi.rcraspi.sensor.dto.DHT11DataDTO;
+import com.robmelfi.rcraspi.service.DHT11Service;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +19,11 @@ public class RemoteController {
 
     private RemoteControllerService remoteControllerService;
 
-    public RemoteController(RemoteControllerService remoteControllerService) {
+    private final DHT11Service dht11Service;
+
+    public RemoteController(RemoteControllerService remoteControllerService, DHT11Service dht11Service) {
         this.remoteControllerService = remoteControllerService;
+        this.dht11Service = dht11Service;
     }
 
     /**
@@ -52,9 +57,8 @@ public class RemoteController {
         return remoteControllerService.getState(pin);
     }
 
-    @GetMapping("/temp/{pin}") void getTemp(@PathVariable int pin) {
-        final DHT11 dht = new DHT11();
-        String output = dht.getTemperature(pin);
-        log.info(output);
+    @GetMapping("/dht11/{pin}")
+    public DHT11DataDTO getTemp(@PathVariable int pin) {
+        return dht11Service.readTempHum(pin);
     }
 }

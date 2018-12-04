@@ -2,7 +2,13 @@ package com.robmelfi.rcraspi.sensor;
 
 import com.pi4j.wiringpi.Gpio;
 import com.pi4j.wiringpi.GpioUtil;
+import com.robmelfi.rcraspi.sensor.dto.DHT11DataDTO;
+import io.github.jhipster.config.JHipsterConstants;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
+@Component
+@Profile(JHipsterConstants.SPRING_PROFILE_PRODUCTION)
 public class DHT11 {
     private static final int    MAXTIMINGS  = 85;
     private final int[]         dht11_dat   = { 0, 0, 0, 0, 0 };
@@ -18,8 +24,8 @@ public class DHT11 {
         GpioUtil.export(3, GpioUtil.DIRECTION_OUT);
     }
 
-    public String getTemperature(final int pin) {
-        String output = null;
+    public DHT11DataDTO getTempHum(final int pin) {
+        DHT11DataDTO result = new DHT11DataDTO();
         int laststate = Gpio.HIGH;
         int j = 0;
         dht11_dat[0] = dht11_dat[1] = dht11_dat[2] = dht11_dat[3] = dht11_dat[4] = 0;
@@ -72,13 +78,12 @@ public class DHT11 {
                 c = -c;
             }
             final float f = c * 1.8f + 32;
-            output = "Humidity = " + h + " Temperature = " + c + "(" + f + "f)";
-            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
+            result.setTemperature(c);
+            result.setHumidity(h);
         } else {
-            output = "Data not good, skip";
-            System.out.println("Data not good, skip");
+            return null;
         }
-        return output;
+        return result;
     }
 
     private boolean checkParity() {
