@@ -17,7 +17,7 @@ public class RemoteController {
 
     private final Logger log = LoggerFactory.getLogger(RemoteController.class);
 
-    private RemoteControllerService remoteControllerService;
+    private final RemoteControllerService remoteControllerService;
 
     private final DHT11Service dht11Service;
 

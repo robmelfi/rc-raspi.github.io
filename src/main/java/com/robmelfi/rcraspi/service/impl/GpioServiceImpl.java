@@ -24,13 +24,13 @@ public class GpioServiceImpl implements GpioService {
 
     private final Logger log = LoggerFactory.getLogger(GpioServiceImpl.class);
 
-    final private GpioController gpio;
+    private final GpioController gpio;
 
-    final private Map<String, GpioPinDigitalOutput> gpioPinDigitalOutputs;
+    private final Map<String, GpioPinDigitalOutput> gpioPinDigitalOutputs;
 
-    private ControllerRepository controllerRepository;
+    private final ControllerRepository controllerRepository;
 
-    private PinRepository pinRepository;
+    private final PinRepository pinRepository;
 
     public GpioServiceImpl(ControllerRepository controllerRepository, PinRepository pinRepository) {
         this.controllerRepository = controllerRepository;

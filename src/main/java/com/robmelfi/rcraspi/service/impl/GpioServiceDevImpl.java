@@ -27,9 +27,9 @@ public class GpioServiceDevImpl implements GpioService {
 
     final private Map<String, String> gpioPinDigitalOutputs;
 
-    private ControllerRepository controllerRepository;
+    private final ControllerRepository controllerRepository;
 
-    private PinRepository pinRepository;
+    private final PinRepository pinRepository;
 
     private boolean status = false;
 

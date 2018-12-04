@@ -4,7 +4,7 @@
 
     <groupId>com.robmelfi.rcraspi</groupId>
     <artifactId>rcraspi</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Rcraspi</name>
 
