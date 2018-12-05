@@ -14,6 +14,9 @@ export const EntitiesMenu = props => (
     <DropdownItem tag={Link} to="/entity/pin">
       <FontAwesomeIcon icon="microchip" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.pin" />
     </DropdownItem>
+    <DropdownItem tag={Link} to="/entity/sensor">
+      <FontAwesomeIcon icon="asterisk" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.sensor" />
+    </DropdownItem>
     <DropdownItem tag={Link} to="/entity/temperature">
       <FontAwesomeIcon icon="asterisk" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.temperature" />
     </DropdownItem>

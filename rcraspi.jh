@@ -22,8 +22,15 @@ entity Humidity {
  timestamp ZonedDateTime required
 }
 
+entity Sensor {
+  name String
+  description String
+  image ImageBlob
+}
+
 relationship OneToOne {
   Controller{pin(name)} to Pin
+  Controller{sensor(name)} to Sensor
 }
 
 dto * with mapstruct

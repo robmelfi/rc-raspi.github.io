@@ -42,6 +42,7 @@ public class CacheConfiguration {
             cm.createCache(com.robmelfi.rcraspi.domain.Pin.class.getName(), jcacheConfiguration);
             cm.createCache(com.robmelfi.rcraspi.domain.Temperature.class.getName(), jcacheConfiguration);
             cm.createCache(com.robmelfi.rcraspi.domain.Humidity.class.getName(), jcacheConfiguration);
+            cm.createCache(com.robmelfi.rcraspi.domain.Sensor.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

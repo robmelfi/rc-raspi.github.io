@@ -29,6 +29,10 @@ import temperature, {
 import humidity, {
   HumidityState
 } from 'app/entities/humidity/humidity.reducer';
+// prettier-ignore
+import sensor, {
+  SensorState
+} from 'app/entities/sensor/sensor.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -47,6 +51,7 @@ export interface IRootState {
   readonly pin: PinState;
   readonly temperature: TemperatureState;
   readonly humidity: HumidityState;
+  readonly sensor: SensorState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -67,6 +72,7 @@ const rootReducer = combineReducers<IRootState>({
   pin,
   temperature,
   humidity,
+  sensor,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

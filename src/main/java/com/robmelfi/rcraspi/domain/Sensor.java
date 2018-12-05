@@ -8,15 +8,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.robmelfi.rcraspi.domain.enumeration.IO;
-
 /**
- * A Controller.
+ * A Sensor.
  */
 @Entity
-@Table(name = "controller")
+@Table(name = "sensor")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Controller implements Serializable {
+public class Sensor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,18 +25,15 @@ public class Controller implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "jhi_mode")
-    private IO mode;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "state")
-    private Boolean state;
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private Pin pin;
-
-    @OneToOne    @JoinColumn(unique = true)
-    private Sensor sensor;
+    @Column(name = "image_content_type")
+    private String imageContentType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -53,7 +48,7 @@ public class Controller implements Serializable {
         return name;
     }
 
-    public Controller name(String name) {
+    public Sensor name(String name) {
         this.name = name;
         return this;
     }
@@ -62,56 +57,43 @@ public class Controller implements Serializable {
         this.name = name;
     }
 
-    public IO getMode() {
-        return mode;
+    public String getDescription() {
+        return description;
     }
 
-    public Controller mode(IO mode) {
-        this.mode = mode;
+    public Sensor description(String description) {
+        this.description = description;
         return this;
     }
 
-    public void setMode(IO mode) {
-        this.mode = mode;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Boolean getState() {
-        return state;
+    public byte[] getImage() {
+        return image;
     }
 
-    public Controller state(Boolean state) {
-        this.state = state;
+    public Sensor image(byte[] image) {
+        this.image = image;
         return this;
     }
 
-    public void setState(Boolean state) {
-        this.state = state;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    public Pin getPin() {
-        return pin;
+    public String getImageContentType() {
+        return imageContentType;
     }
 
-    public Controller pin(Pin pin) {
-        this.pin = pin;
+    public Sensor imageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
         return this;
     }
 
-    public void setPin(Pin pin) {
-        this.pin = pin;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public Controller sensor(Sensor sensor) {
-        this.sensor = sensor;
-        return this;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -123,11 +105,11 @@ public class Controller implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Controller controller = (Controller) o;
-        if (controller.getId() == null || getId() == null) {
+        Sensor sensor = (Sensor) o;
+        if (sensor.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), controller.getId());
+        return Objects.equals(getId(), sensor.getId());
     }
 
     @Override
@@ -137,11 +119,12 @@ public class Controller implements Serializable {
 
     @Override
     public String toString() {
-        return "Controller{" +
+        return "Sensor{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", mode='" + getMode() + "'" +
-            ", state='" + getState() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + getImageContentType() + "'" +
             "}";
     }
 }

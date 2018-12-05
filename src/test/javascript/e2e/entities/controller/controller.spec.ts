@@ -58,6 +58,7 @@ describe('Controller e2e test', () => {
       expect(await controllerUpdatePage.getStateInput().isSelected()).to.be.true;
     }
     await controllerUpdatePage.pinSelectLastOption();
+    await controllerUpdatePage.sensorSelectLastOption();
     await waitUntilDisplayed(controllerUpdatePage.getSaveButton());
     await controllerUpdatePage.save();
     await waitUntilHidden(controllerUpdatePage.getSaveButton());

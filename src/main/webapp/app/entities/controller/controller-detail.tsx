@@ -50,6 +50,10 @@ export class ControllerDetail extends React.Component<IControllerDetailProps> {
               <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
             </dt>
             <dd>{controllerEntity.pinName ? controllerEntity.pinName : ''}</dd>
+            <dt>
+              <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
+            </dt>
+            <dd>{controllerEntity.sensorName ? controllerEntity.sensorName : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/controller" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

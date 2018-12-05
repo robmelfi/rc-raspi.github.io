@@ -51,6 +51,9 @@ export class Controller extends React.Component<IControllerProps> {
                 <th>
                   <Translate contentKey="rcraspiApp.controller.status">State</Translate>
                 </th>
+                <th>
+                  <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
+                </th>
                 <th />
               </tr>
             </thead>
@@ -68,6 +71,7 @@ export class Controller extends React.Component<IControllerProps> {
                   </td>
                   <td>{controller.pinName ? controller.pinName : ''}</td>
                   <td>{controller.state ? 'High' : 'Low'}</td>
+                  <td>{controller.sensorName ? <Link to={`sensor/${controller.sensorId}`}>{controller.sensorName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">

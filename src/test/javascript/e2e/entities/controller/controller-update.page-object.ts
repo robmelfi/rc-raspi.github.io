@@ -8,6 +8,7 @@ export default class ControllerUpdatePage {
   modeSelect: ElementFinder = element(by.css('select#controller-mode'));
   stateInput: ElementFinder = element(by.css('input#controller-state'));
   pinSelect: ElementFinder = element(by.css('select#controller-pin'));
+  sensorSelect: ElementFinder = element(by.css('select#controller-sensor'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -55,6 +56,25 @@ export default class ControllerUpdatePage {
 
   async getPinSelectedOption() {
     return this.pinSelect.element(by.css('option:checked')).getText();
+  }
+
+  async sensorSelectLastOption() {
+    await this.sensorSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async sensorSelectOption(option) {
+    await this.sensorSelect.sendKeys(option);
+  }
+
+  getSensorSelect() {
+    return this.sensorSelect;
+  }
+
+  async getSensorSelectedOption() {
+    return this.sensorSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {

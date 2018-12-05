@@ -10,6 +10,8 @@ import { IRootState } from 'app/shared/reducers';
 
 import { IPin } from 'app/shared/model/pin.model';
 import { getEntities as getPins } from 'app/entities/pin/pin.reducer';
+import { ISensor } from 'app/shared/model/sensor.model';
+import { getEntities as getSensors } from 'app/entities/sensor/sensor.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './controller.reducer';
 import { IController } from 'app/shared/model/controller.model';
 // tslint:disable-next-line:no-unused-variable
@@ -21,6 +23,7 @@ export interface IControllerUpdateProps extends StateProps, DispatchProps, Route
 export interface IControllerUpdateState {
   isNew: boolean;
   pinId: string;
+  sensorId: string;
 }
 
 export class ControllerUpdate extends React.Component<IControllerUpdateProps, IControllerUpdateState> {
@@ -28,6 +31,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
     super(props);
     this.state = {
       pinId: '0',
+      sensorId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -46,6 +50,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
     }
 
     this.props.getPins();
+    this.props.getSensors();
   }
 
   saveEntity = (event, errors, values) => {
@@ -69,7 +74,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
   };
 
   render() {
-    const { controllerEntity, pins, loading, updating } = this.props;
+    const { controllerEntity, pins, sensors, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -123,7 +128,6 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <Translate contentKey="rcraspiApp.IO.message" />
                   </FormText>
                 </AvGroup>
-
                 <AvGroup>
                   <Label id="stateLabel">
                     <Translate contentKey="rcraspiApp.controller.state">Initial State</Translate>
@@ -138,7 +142,6 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <option value="true">High</option>
                   </AvInput>
                 </AvGroup>
-
                 <AvGroup>
                   <Label for="pin.name">
                     <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
@@ -147,6 +150,21 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <option value="" key="0" />
                     {pins
                       ? pins.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="sensor.name">
+                    <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
+                  </Label>
+                  <AvInput id="controller-sensor" type="select" className="form-control" name="sensorId">
+                    <option value="" key="0" />
+                    {sensors
+                      ? sensors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>
@@ -176,6 +194,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
 
 const mapStateToProps = (storeState: IRootState) => ({
   pins: storeState.pin.entities,
+  sensors: storeState.sensor.entities,
   controllerEntity: storeState.controller.entity,
   loading: storeState.controller.loading,
   updating: storeState.controller.updating,
@@ -184,6 +203,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getPins,
+  getSensors,
   getEntity,
   updateEntity,
   createEntity,
