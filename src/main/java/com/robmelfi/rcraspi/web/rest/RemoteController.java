@@ -1,6 +1,5 @@
 package com.robmelfi.rcraspi.web.rest;
 
-import com.robmelfi.rcraspi.sensor.DHT11;
 import com.robmelfi.rcraspi.sensor.dto.DHT11DataDTO;
 import com.robmelfi.rcraspi.service.DHT11Service;
 import com.robmelfi.rcraspi.service.RemoteControllerService;

@@ -1,0 +1,26 @@
+{
+    "name": "Temperature",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181204200514",
+    "entityTableName": "temperature",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

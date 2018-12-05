@@ -12,9 +12,20 @@ enum IO {
   INPUT, OUTPUT
 }
 
+entity Temperature {
+  value Float
+  timestamp ZonedDateTime required
+}
+
+entity Humidity {
+ value Float
+ timestamp ZonedDateTime required
+}
+
 relationship OneToOne {
   Controller{pin(name)} to Pin
 }
 
 dto * with mapstruct
 service * with serviceClass
+paginate Temperature, Humidity with infinite-scroll

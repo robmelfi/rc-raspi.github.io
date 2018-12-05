@@ -1,0 +1,22 @@
+{
+  "rcraspiApp": {
+    "temperature": {
+      "home": {
+        "title": "Temperatures",
+        "createLabel": "Genera un nuovo Temperature",
+        "createOrEditLabel": "Genera o modifica un Temperature"
+      },
+      "created": "&Egrave; stato generato un nuovo Temperature con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Temperature identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Temperature con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Temperature {{ id }}?"
+      },
+      "detail": {
+        "title": "Temperature"
+      },
+      "value": "Value",
+      "timestamp": "Timestamp"
+    }
+  }
+}
