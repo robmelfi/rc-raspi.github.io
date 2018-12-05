@@ -20,7 +20,8 @@
       "state": "Initial State",
       "pin": "Pin",
       "status": "Status",
-      "sensor": "Sensor"
+      "sensor": "Sensor",
+      "preset": "Preset"
     }
   }
 }

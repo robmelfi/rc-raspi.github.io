@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label, FormText } from 'reactstrap';
+import { Button, Row, Col, Label, FormText, Collapse } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
@@ -24,6 +24,8 @@ export interface IControllerUpdateState {
   isNew: boolean;
   pinId: string;
   sensorId: string;
+  collapse: boolean;
+  sensorOption: string;
 }
 
 export class ControllerUpdate extends React.Component<IControllerUpdateProps, IControllerUpdateState> {
@@ -32,7 +34,9 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
     this.state = {
       pinId: '0',
       sensorId: '0',
-      isNew: !this.props.match.params || !this.props.match.params.id
+      isNew: !this.props.match.params || !this.props.match.params.id,
+      collapse: false,
+      sensorOption: null
     };
   }
 
@@ -73,6 +77,14 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
     this.props.history.push('/entity/controller');
   };
 
+  toggle = () => {
+    this.setState({ collapse: !this.state.collapse });
+  };
+
+  onChangeSensor = event => {
+    this.setState({ sensorOption: event.target.value });
+  };
+
   render() {
     const { controllerEntity, pins, sensors, loading, updating } = this.props;
     const { isNew } = this.state;
@@ -100,6 +112,29 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <AvInput id="controller-id" type="text" className="form-control" name="id" required readOnly />
                   </AvGroup>
                 ) : null}
+
+                <div className="mt-3">
+                  <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>
+                    <Translate contentKey="rcraspiApp.controller.preset">Preset</Translate>
+                  </Button>
+                  <Collapse isOpen={this.state.collapse}>
+                    <AvGroup>
+                      <Label for="sensor.name">
+                        <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
+                      </Label>
+                      <AvInput id="controller-sensor" type="select" className="form-control" name="sensorId" onChange={this.onChangeSensor.bind(event)}>
+                        <option value="" key="0" />
+                        {sensors
+                          ? sensors.map(otherEntity => (
+                            <option value={otherEntity.id} key={otherEntity.id}>
+                              {otherEntity.name}
+                            </option>
+                          ))
+                          : null}
+                      </AvInput>
+                    </AvGroup>
+                  </Collapse>
+                </div>
                 <AvGroup>
                   <Label id="nameLabel" for="name">
                     <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
@@ -115,11 +150,14 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="mode"
-                    value={(!isNew && controllerEntity.mode) || 'OUTPUT'}
+                    value={ (!isNew && controllerEntity.mode) || this.state.sensorOption ? 'INPUT' : 'OUTPUT' }
+                    disabled={ this.state.sensorOption ? true : false }
                   >
-                    {/*<option value="INPUT">*/}
-                      {/*<Translate contentKey="rcraspiApp.IO.INPUT" />*/}
-                    {/*</option>*/}
+                    {this.state.sensorOption ?
+                      <option value="INPUT">
+                        <Translate contentKey="rcraspiApp.IO.INPUT" />
+                      </option> : null
+                    }
                     <option value="OUTPUT">
                       <Translate contentKey="rcraspiApp.IO.OUTPUT" />
                     </option>
@@ -137,7 +175,8 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="state"
-                    value={'false'}>
+                    value={'false'}
+                    disabled={ this.state.sensorOption ? true : false }>
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>
@@ -150,21 +189,6 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <option value="" key="0" />
                     {pins
                       ? pins.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="sensor.name">
-                    <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
-                  </Label>
-                  <AvInput id="controller-sensor" type="select" className="form-control" name="sensorId">
-                    <option value="" key="0" />
-                    {sensors
-                      ? sensors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>

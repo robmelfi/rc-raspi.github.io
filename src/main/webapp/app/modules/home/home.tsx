@@ -12,6 +12,8 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { set } from 'app/shared/reducers/remote-controller';
 import { getEntities as getControllers } from 'app/entities/controller/controller.reducer';
 
+const DHT11 = 'DHT11';
+
 export interface IHomeProp extends StateProps, DispatchProps {}
 
 export class Home extends React.Component<IHomeProp> {
@@ -51,6 +53,7 @@ export class Home extends React.Component<IHomeProp> {
                 </Translate>
               </Alert>
               {controllerList.map((controller, i) => (
+                controller.mode === 'OUTPUT' &&
                 <Row key={`controller-${i}`}>
                   <Col className="border m-1 p-1">
                     <span className="align-middle ml-2">{controller.name}</span>
@@ -64,6 +67,9 @@ export class Home extends React.Component<IHomeProp> {
                   </Col>
                 </Row>
               ))}
+              {controllerList.filter(controller => controller.sensorName === DHT11)
+                .map((controller, index) =>
+                  <div key={index}>{controller.name} - dht11 is present</div>)}
             </div>
           ) : (
             <div>
