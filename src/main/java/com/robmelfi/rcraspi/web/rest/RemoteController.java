@@ -3,6 +3,7 @@ package com.robmelfi.rcraspi.web.rest;
 import com.robmelfi.rcraspi.sensor.dto.DHT11DataDTO;
 import com.robmelfi.rcraspi.service.DHT11Service;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
+import com.robmelfi.rcraspi.service.scheduled.ScheduleDHT11Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,12 @@ public class RemoteController {
 
     private final DHT11Service dht11Service;
 
-    public RemoteController(RemoteControllerService remoteControllerService, DHT11Service dht11Service) {
+    private final ScheduleDHT11Controller scheduleDHT11Controller;
+
+    public RemoteController(RemoteControllerService remoteControllerService, DHT11Service dht11Service, ScheduleDHT11Controller scheduleDHT11Controller) {
         this.remoteControllerService = remoteControllerService;
         this.dht11Service = dht11Service;
+        this.scheduleDHT11Controller = scheduleDHT11Controller;
     }
 
     /**
@@ -59,5 +63,15 @@ public class RemoteController {
     @GetMapping("/dht11/{pin}")
     public DHT11DataDTO getTemp(@PathVariable int pin) {
         return dht11Service.readTempHum(pin);
+    }
+
+    @GetMapping("/start")
+    public void start() {
+        scheduleDHT11Controller.start(6, 2000);
+    }
+
+    @GetMapping("/stop")
+    public void stop() {
+        scheduleDHT11Controller.stop();
     }
 }
