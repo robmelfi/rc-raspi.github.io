@@ -35,48 +35,6 @@ public class SensorResource {
     }
 
     /**
-     * POST  /sensors : Create a new sensor.
-     *
-     * @param sensorDTO the sensorDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new sensorDTO, or with status 400 (Bad Request) if the sensor has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PostMapping("/sensors")
-    @Timed
-    public ResponseEntity<SensorDTO> createSensor(@RequestBody SensorDTO sensorDTO) throws URISyntaxException {
-        log.debug("REST request to save Sensor : {}", sensorDTO);
-        if (sensorDTO.getId() != null) {
-            throw new BadRequestAlertException("A new sensor cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        SensorDTO result = sensorService.save(sensorDTO);
-        return ResponseEntity.created(new URI("/api/sensors/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * PUT  /sensors : Updates an existing sensor.
-     *
-     * @param sensorDTO the sensorDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated sensorDTO,
-     * or with status 400 (Bad Request) if the sensorDTO is not valid,
-     * or with status 500 (Internal Server Error) if the sensorDTO couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PutMapping("/sensors")
-    @Timed
-    public ResponseEntity<SensorDTO> updateSensor(@RequestBody SensorDTO sensorDTO) throws URISyntaxException {
-        log.debug("REST request to update Sensor : {}", sensorDTO);
-        if (sensorDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        SensorDTO result = sensorService.save(sensorDTO);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sensorDTO.getId().toString()))
-            .body(result);
-    }
-
-    /**
      * GET  /sensors : get all the sensors.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of sensors in body
@@ -100,19 +58,5 @@ public class SensorResource {
         log.debug("REST request to get Sensor : {}", id);
         Optional<SensorDTO> sensorDTO = sensorService.findOne(id);
         return ResponseUtil.wrapOrNotFound(sensorDTO);
-    }
-
-    /**
-     * DELETE  /sensors/:id : delete the "id" sensor.
-     *
-     * @param id the id of the sensorDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/sensors/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteSensor(@PathVariable Long id) {
-        log.debug("REST request to delete Sensor : {}", id);
-        sensorService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

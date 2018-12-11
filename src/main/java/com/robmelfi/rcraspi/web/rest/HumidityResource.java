@@ -68,7 +68,7 @@ public class HumidityResource {
      * or with status 400 (Bad Request) if the humidityDTO is not valid,
      * or with status 500 (Internal Server Error) if the humidityDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
+
     @PutMapping("/humidities")
     @Timed
     public ResponseEntity<HumidityDTO> updateHumidity(@Valid @RequestBody HumidityDTO humidityDTO) throws URISyntaxException {
@@ -81,7 +81,7 @@ public class HumidityResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, humidityDTO.getId().toString()))
             .body(result);
     }
-
+    */
     /**
      * GET  /humidities : get all the humidities.
      *
