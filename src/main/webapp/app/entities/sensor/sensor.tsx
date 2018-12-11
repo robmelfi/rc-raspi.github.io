@@ -25,10 +25,6 @@ export class Sensor extends React.Component<ISensorProps> {
       <div>
         <h2 id="sensor-heading">
           <Translate contentKey="rcraspiApp.sensor.home.title">Sensors</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
-            <Translate contentKey="rcraspiApp.sensor.home.createLabel">Create new Sensor</Translate>
-          </Link>
         </h2>
         <div className="table-responsive">
           <Table responsive>
@@ -75,18 +71,6 @@ export class Sensor extends React.Component<ISensorProps> {
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${sensor.id}/edit`} color="primary" size="sm">
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${sensor.id}/delete`} color="danger" size="sm">
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
                         </span>
                       </Button>
                     </div>

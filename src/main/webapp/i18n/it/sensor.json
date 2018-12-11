@@ -2,7 +2,7 @@
   "rcraspiApp": {
     "sensor": {
       "home": {
-        "title": "Sensors",
+        "title": "Sensori",
         "createLabel": "Genera un nuovo Sensor",
         "createOrEditLabel": "Genera o modifica un Sensor"
       },
@@ -13,11 +13,11 @@
         "question": "Sei sicuro di volere eliminare Sensor {{ id }}?"
       },
       "detail": {
-        "title": "Sensor"
+        "title": "Sensore"
       },
-      "name": "Name",
-      "description": "Description",
-      "image": "Image"
+      "name": "Nome",
+      "description": "Descrizione",
+      "image": "Immagine"
     }
   }
 }

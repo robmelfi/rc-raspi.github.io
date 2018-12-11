@@ -37,9 +37,6 @@ export class Controller extends React.Component<IControllerProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
                 </th>
                 <th>
@@ -60,11 +57,6 @@ export class Controller extends React.Component<IControllerProps> {
             <tbody>
               {controllerList.map((controller, i) => (
                 <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${controller.id}`} color="link" size="sm">
-                      {controller.id}
-                    </Button>
-                  </td>
                   <td>{controller.name}</td>
                   <td>
                     <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />

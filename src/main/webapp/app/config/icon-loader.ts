@@ -33,6 +33,7 @@ import { faDesktop } from '@fortawesome/free-solid-svg-icons/faDesktop';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { faThermometerHalf } from '@fortawesome/free-solid-svg-icons/faThermometerHalf';
+import { faBroadcastTower } from '@fortawesome/free-solid-svg-icons/faBroadcastTower';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -72,6 +73,7 @@ export const loadIcons = () => {
     faDesktop,
     faCogs,
     faTint,
-    faThermometerHalf
+    faThermometerHalf,
+    faBroadcastTower
   );
 };

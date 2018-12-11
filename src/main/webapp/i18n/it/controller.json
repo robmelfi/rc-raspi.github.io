@@ -2,7 +2,7 @@
   "rcraspiApp": {
     "controller": {
       "home": {
-        "title": "Controllers",
+        "title": "Controller",
         "createLabel": "Aggiungi un Controller",
         "createOrEditLabel": "Aggiungi un Controller"
       },
@@ -15,12 +15,12 @@
       "detail": {
         "title": "Controller"
       },
-      "name": "Name",
-      "mode": "Mode",
+      "name": "Nome",
+      "mode": "Modalità",
       "state": "Stato iniziale",
       "pin": "Pin",
       "status": "Stato",
-      "sensor": "Sensor",
+      "sensor": "Sensore",
       "preset": "Preset"
     }
   }
