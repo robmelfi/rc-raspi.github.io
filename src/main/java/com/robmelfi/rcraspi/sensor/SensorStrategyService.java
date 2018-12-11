@@ -17,14 +17,14 @@ public class SensorStrategyService {
     }
 
     public void enableSensor(String sensorName, int pin) {
-        log.info("SensorStrategyService.enableSensor({}, {})", sensorName, pin);
+        log.info("SensorStrategyService.enableSensor({}, {}) - type of sensor {}", sensorName, pin, getSensorType(sensorName).toString());
         SensorStrategy sensorStrategy = sensorStrategyFactory.getStrategy(getSensorType(sensorName));
         sensorStrategy.setPin(pin);
         sensorStrategy.enable();
     }
 
     public void disableSensor(String sensorName, int pin) {
-        log.info("SensorStrategyService.disableSensor({}, {})", sensorName, pin);
+        log.info("SensorStrategyService.disableSensor({}, {} - type of sensor {})", sensorName, pin, getSensorType(sensorName).toString());
         SensorStrategy sensorStrategy = sensorStrategyFactory.getStrategy(getSensorType(sensorName));
         sensorStrategy.disable();
     }
