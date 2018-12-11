@@ -13,7 +13,7 @@
         "question": "Sei sicuro di volere eliminare Temperature {{ id }}?"
       },
       "detail": {
-        "title": "Temperature"
+        "title": "Temperatura"
       },
       "value": "Value",
       "timestamp": "Timestamp"

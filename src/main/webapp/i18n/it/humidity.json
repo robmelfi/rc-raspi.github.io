@@ -13,7 +13,7 @@
         "question": "Sei sicuro di volere eliminare Humidity {{ id }}?"
       },
       "detail": {
-        "title": "Humidity"
+        "title": "Umidità"
       },
       "value": "Value",
       "timestamp": "Timestamp"
