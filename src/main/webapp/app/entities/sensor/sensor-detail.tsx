@@ -19,13 +19,17 @@ export class SensorDetail extends React.Component<ISensorDetailProps> {
     this.props.getEntity(this.props.match.params.id);
   }
 
+  handleBack = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { sensorEntity } = this.props;
     return (
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="rcraspiApp.sensor.detail.title">Sensor</Translate> [<b>{sensorEntity.id}</b>]
+            <Translate contentKey="rcraspiApp.sensor.detail.title">Sensor</Translate> [<b>{sensorEntity.name}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
@@ -40,34 +44,20 @@ export class SensorDetail extends React.Component<ISensorDetailProps> {
               </span>
             </dt>
             <dd>{sensorEntity.description}</dd>
-            <dt>
-              <span id="image">
-                <Translate contentKey="rcraspiApp.sensor.image">Image</Translate>
-              </span>
-            </dt>
             <dd>
               {sensorEntity.image ? (
                 <div>
                   <a onClick={openFile(sensorEntity.imageContentType, sensorEntity.image)}>
-                    <img src={`data:${sensorEntity.imageContentType};base64,${sensorEntity.image}`} style={{ maxHeight: '30px' }} />
+                    <img src={`data:${sensorEntity.imageContentType};base64,${sensorEntity.image}`} style={{ maxHeight: '200px' }} />
                   </a>
-                  <span>
-                    {sensorEntity.imageContentType}, {byteSize(sensorEntity.image)}
-                  </span>
                 </div>
               ) : null}
             </dd>
           </dl>
-          <Button tag={Link} to="/entity/sensor" replace color="info">
+          <Button onClick={this.handleBack} replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
-            </span>
-          </Button>&nbsp;
-          <Button tag={Link} to={`/entity/sensor/${sensorEntity.id}/edit`} replace color="primary">
-            <FontAwesomeIcon icon="pencil-alt" />{' '}
-            <span className="d-none d-md-inline">
-              <Translate contentKey="entity.action.edit">Edit</Translate>
             </span>
           </Button>
         </Col>

@@ -3,7 +3,8 @@
     "title": "Benvenuto!",
     "subtitle": "Questa è la tua home page",
     "logged": {
-      "message": "Autenticato come \"{{username}}\"."
+      "message": "Autenticato come \"{{username}}\".",
+      "configuring": "Inizia a configurare il tuo raspberry"
     },
     "question": "In caso di domande su JHipster:",
     "link": {

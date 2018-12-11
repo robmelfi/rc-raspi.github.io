@@ -63,12 +63,9 @@ export class Sensor extends React.Component<ISensorProps> {
                     {sensor.image ? (
                       <div>
                         <a onClick={openFile(sensor.imageContentType, sensor.image)}>
-                          <img src={`data:${sensor.imageContentType};base64,${sensor.image}`} style={{ maxHeight: '30px' }} />
+                          <img src={`data:${sensor.imageContentType};base64,${sensor.image}`} style={{ maxHeight: '80px' }} />
                           &nbsp;
                         </a>
-                        <span>
-                          {sensor.imageContentType}, {byteSize(sensor.image)}
-                        </span>
                       </div>
                     ) : null}
                   </td>
