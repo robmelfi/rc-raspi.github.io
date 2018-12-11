@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label, FormText, Collapse } from 'reactstrap';
+import { Button, Row, Col, Label, FormText, Collapse, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
@@ -25,6 +25,7 @@ export interface IControllerUpdateState {
   pinId: string;
   sensorId: string;
   collapse: boolean;
+  modal: boolean;
   sensorOption: string;
 }
 
@@ -36,6 +37,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
       sensorId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id,
       collapse: false,
+      modal: false,
       sensorOption: null
     };
   }
@@ -80,6 +82,10 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
   };
+
+  toggleModal = () => {
+    this.setState({ modal: !this.state.modal });
+  }
 
   onChangeSensor = event => {
     this.setState({ sensorOption: event.target.value });
@@ -181,21 +187,40 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <option value="true">High</option>
                   </AvInput>
                 </AvGroup>
-                <AvGroup>
-                  <Label for="pin.name">
-                    <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
-                  </Label>
-                  <AvInput id="controller-pin" type="select" className="form-control" name="pinId">
-                    <option value="" key="0" />
-                    {pins
-                      ? pins.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
+                <Row>
+                  <Col xs="6" sm="6">
+                    <AvGroup>
+                      <Label for="pin.name">
+                        <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
+                      </Label>
+                      <AvInput id="controller-pin" type="select" className="form-control" name="pinId">
+                        <option value="" key="0" />
+                        {pins
+                          ? pins.map(otherEntity => (
+                              <option value={otherEntity.id} key={otherEntity.id}>
+                                {otherEntity.name}
+                              </option>
+                            ))
+                          : null}
+                      </AvInput>
+                    </AvGroup>
+                  </Col>
+                  <Col xs="6" sm="6">
+                      <div className="mt-4"></div>
+                      <Button color="info" onClick={this.toggleModal} className="mt-2">
+                        Show Pin Header
+                      </Button>
+                      <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.toggleModal}>Pin Numbering - Raspberry Pi 3 Model B</ModalHeader>
+                        <ModalBody>
+                          <span className="pin-header rounded" />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                        </ModalFooter>
+                      </Modal>
+                  </Col>
+                </Row>
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">
