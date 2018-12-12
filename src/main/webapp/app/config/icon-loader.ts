@@ -31,6 +31,9 @@ import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 import { faMicrochip } from '@fortawesome/free-solid-svg-icons/faMicrochip';
 import { faDesktop } from '@fortawesome/free-solid-svg-icons/faDesktop';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
+import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
+import { faThermometerHalf } from '@fortawesome/free-solid-svg-icons/faThermometerHalf';
+import { faBroadcastTower } from '@fortawesome/free-solid-svg-icons/faBroadcastTower';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -68,6 +71,9 @@ export const loadIcons = () => {
     faSearch,
     faMicrochip,
     faDesktop,
-    faCogs
+    faCogs,
+    faTint,
+    faThermometerHalf,
+    faBroadcastTower
   );
 };

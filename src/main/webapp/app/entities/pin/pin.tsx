@@ -1,3 +1,5 @@
+import './pin.scss';
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -27,31 +29,29 @@ export class Pin extends React.Component<IPinProps> {
           <Translate contentKey="rcraspiApp.pin.home.title">Pins</Translate>
         </h2>
         <div className="table-responsive">
-          <Table responsive>
-            <thead>
-              <tr>
-                <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="rcraspiApp.pin.name">Name</Translate>
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {pinList.map((pin, i) => (
-                <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${pin.id}`} color="link" size="sm">
-                      {pin.id}
-                    </Button>
-                  </td>
-                  <td>{pin.name}</td>
+          <Row>
+            <Col xs="12" sm="8">
+              <span className="pin-header rounded" />
+            </Col>
+            <Col xs="12" sm="4">
+              <Table responsive striped size="sm">
+                <thead>
+                <tr>
+                  <th>
+                    <Translate contentKey="rcraspiApp.pin.name">Name</Translate>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+                </thead>
+                <tbody>
+                {pinList.map((pin, i) => (
+                  <tr key={`entity-${i}`}>
+                    <td>{pin.name}</td>
+                  </tr>
+                ))}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
         </div>
       </div>
     );

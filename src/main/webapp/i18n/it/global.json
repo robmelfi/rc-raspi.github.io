@@ -10,6 +10,9 @@
         "main": "Raspberry",
         "controller": "Controller",
         "pin": "Pin",
+        "temperature": "Temperatura",
+        "humidity": "Umidità",
+        "sensor": "Sensori",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

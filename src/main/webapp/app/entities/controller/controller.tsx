@@ -1,3 +1,5 @@
+import './controller.scss';
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -37,9 +39,6 @@ export class Controller extends React.Component<IControllerProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
                 </th>
                 <th>
@@ -51,23 +50,22 @@ export class Controller extends React.Component<IControllerProps> {
                 <th>
                   <Translate contentKey="rcraspiApp.controller.status">State</Translate>
                 </th>
+                <th>
+                  <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
+                </th>
                 <th />
               </tr>
             </thead>
             <tbody>
               {controllerList.map((controller, i) => (
                 <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${controller.id}`} color="link" size="sm">
-                      {controller.id}
-                    </Button>
-                  </td>
                   <td>{controller.name}</td>
                   <td>
                     <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />
                   </td>
                   <td>{controller.pinName ? controller.pinName : ''}</td>
                   <td>{controller.state ? 'High' : 'Low'}</td>
+                  <td>{controller.sensorName ? <Link to={`sensor/${controller.sensorId}`}>{controller.sensorName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">

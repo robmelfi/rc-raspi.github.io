@@ -10,6 +10,8 @@ export interface IController {
   state?: boolean;
   pinName?: string;
   pinId?: number;
+  sensorName?: string;
+  sensorId?: number;
 }
 
 export const defaultValue: Readonly<IController> = {

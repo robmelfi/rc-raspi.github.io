@@ -37,6 +37,9 @@ public class Controller implements Serializable {
     @OneToOne    @JoinColumn(unique = true)
     private Pin pin;
 
+    @OneToOne    @JoinColumn(unique = true)
+    private Sensor sensor;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -96,6 +99,19 @@ public class Controller implements Serializable {
 
     public void setPin(Pin pin) {
         this.pin = pin;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public Controller sensor(Sensor sensor) {
+        this.sensor = sensor;
+        return this;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

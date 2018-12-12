@@ -30,10 +30,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="pin_id" type="bigint">
+            <column name="state" type="bit">
                 <constraints nullable="true" />
             </column>
-
+            <column name="pin_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_controller_pin_id" />
+            </column>
+            <column name="sensor_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_controller_sensor_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

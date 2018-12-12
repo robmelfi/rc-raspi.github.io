@@ -1,9 +1,12 @@
 package com.robmelfi.rcraspi.service.impl;
 
 import com.robmelfi.rcraspi.domain.Controller;
+import com.robmelfi.rcraspi.domain.Sensor;
 import com.robmelfi.rcraspi.domain.enumeration.IO;
 import com.robmelfi.rcraspi.repository.ControllerRepository;
 import com.robmelfi.rcraspi.repository.PinRepository;
+import com.robmelfi.rcraspi.repository.SensorRepository;
+import com.robmelfi.rcraspi.sensor.SensorStrategyService;
 import com.robmelfi.rcraspi.service.GpioService;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
@@ -31,11 +34,17 @@ public class GpioServiceDevImpl implements GpioService {
 
     private final PinRepository pinRepository;
 
+    private final SensorRepository sensorRepository;
+
+    private final SensorStrategyService sensorStrategyService;
+
     private boolean status = false;
 
-    public GpioServiceDevImpl(ControllerRepository controllerRepository, PinRepository pinRepository) {
+    public GpioServiceDevImpl(ControllerRepository controllerRepository, PinRepository pinRepository, SensorRepository sensorRepository, SensorStrategyService sensorStrategyService) {
         this.controllerRepository = controllerRepository;
         this.pinRepository = pinRepository;
+        this.sensorRepository = sensorRepository;
+        this.sensorStrategyService = sensorStrategyService;
 
         log.info("GpioFactory.getInstance()");
         gpioPinDigitalOutputs = new HashMap<>();
@@ -81,14 +90,20 @@ public class GpioServiceDevImpl implements GpioService {
                 String gpioPin = getRaspiPin(pin.getName());
                 gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
         } else {
-            // TODO INPUT
+            Sensor sensor = sensorRepository.findById(c.getSensor().getId()).get();
+            sensorStrategyService.enableSensor(sensor.getName(), 0);
         }
     }
 
     @Override
     public void removeController(Long id) {
         com.robmelfi.rcraspi.domain.Controller controller = controllerRepository.findById(id).get();
-        gpioPinDigitalOutputs.remove(controller.getPin().getName());
+        if (controller.getMode().equals(IO.OUTPUT)) {
+            gpioPinDigitalOutputs.remove(controller.getPin().getName());
+        } else {
+            Sensor sensor = sensorRepository.findById(controller.getSensor().getId()).get();
+            sensorStrategyService.disableSensor(sensor.getName(), 0);
+        }
     }
 
     private void loadController() {

@@ -19,7 +19,9 @@
       "mode": "Mode",
       "state": "Initial State",
       "pin": "Pin",
-      "status": "Status"
+      "status": "Status",
+      "sensor": "Sensor",
+      "preset": "Preset"
     }
   }
 }

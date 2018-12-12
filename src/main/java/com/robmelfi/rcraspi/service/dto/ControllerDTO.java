@@ -21,6 +21,10 @@ public class ControllerDTO implements Serializable {
 
     private String pinName;
 
+    private Long sensorId;
+
+    private String sensorName;
+
     public Long getId() {
         return id;
     }
@@ -45,7 +49,7 @@ public class ControllerDTO implements Serializable {
         this.mode = mode;
     }
 
-    public Boolean getState() {
+    public Boolean isState() {
         return state;
     }
 
@@ -67,6 +71,22 @@ public class ControllerDTO implements Serializable {
 
     public void setPinName(String pinName) {
         this.pinName = pinName;
+    }
+
+    public Long getSensorId() {
+        return sensorId;
+    }
+
+    public void setSensorId(Long sensorId) {
+        this.sensorId = sensorId;
+    }
+
+    public String getSensorName() {
+        return sensorName;
+    }
+
+    public void setSensorName(String sensorName) {
+        this.sensorName = sensorName;
     }
 
     @Override
@@ -96,9 +116,11 @@ public class ControllerDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", mode='" + getMode() + "'" +
-            ", state='" + getState() + "'" +
+            ", state='" + isState() + "'" +
             ", pin=" + getPinId() +
             ", pin='" + getPinName() + "'" +
+            ", sensor=" + getSensorId() +
+            ", sensor='" + getSensorName() + "'" +
             "}";
     }
 }

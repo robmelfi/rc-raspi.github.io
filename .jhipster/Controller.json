@@ -23,6 +23,14 @@
             "otherEntityField": "name",
             "ownerSide": true,
             "otherEntityRelationshipName": "controller"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "sensor",
+            "otherEntityName": "sensor",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "controller"
         }
     ],
     "changelogDate": "20181122132944",
