@@ -78,6 +78,19 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
     this.props.set(type, pin);
   };
 
+  checkTimestamp = entity => {
+      const FIVE_MINUTES = 5 * 60 * 1000;
+      const fiveMinutesAgo = new Date(Date.now() - FIVE_MINUTES);
+      if (entity === '') {
+        return '-';
+      }
+      if (new Date(entity.timestamp) > fiveMinutesAgo) {
+        return entity.value.toFixed(1);
+      } else {
+        return 'np';
+      }
+  };
+
   render() {
     const { account, controllerList, temperature, humidity } = this.props;
     return (
@@ -107,8 +120,8 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                     <Col key={index} xs="12" sm="6" className="m-2">
                       <Row>
                         <TempHumWidget
-                          temperature={temperature ? temperature.toFixed(1) : '-'}
-                          humidity={humidity ? humidity.toFixed(1) : '-'}/>
+                          temperature={this.checkTimestamp(temperature)}
+                          humidity={this.checkTimestamp(humidity)}/>
                       </Row>
                     </Col>
                 )}
@@ -161,8 +174,8 @@ const mapStateToProps = storeState => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
   controllerList: storeState.controller.entities,
-  temperature: storeState.temperature.lastTemperature.value,
-  humidity: storeState.humidity.lastHumidity.value
+  temperature: storeState.temperature.lastTemperature,
+  humidity: storeState.humidity.lastHumidity
 });
 
 const mapDispatchToProps = {
