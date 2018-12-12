@@ -59,7 +59,6 @@ public class HumidityService {
             .map(humidityMapper::toDto);
     }
 
-
     /**
      * Get one humidity by id.
      *
@@ -71,6 +70,17 @@ public class HumidityService {
         log.debug("Request to get Humidity : {}", id);
         return humidityRepository.findById(id)
             .map(humidityMapper::toDto);
+    }
+
+    /**
+     * Get last humidity.
+     *
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public HumidityDTO getLast() {
+        log.debug("Request to get last Humidity");
+        return humidityMapper.toDto(humidityRepository.findTop1ByOrderByTimestampDesc());
     }
 
     /**

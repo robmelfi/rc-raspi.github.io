@@ -74,6 +74,17 @@ public class TemperatureService {
     }
 
     /**
+     * Get last temperature.
+     *
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public TemperatureDTO getLast() {
+        log.debug("Request to get last Temperature");
+        return temperatureMapper.toDto(temperatureRepository.findTop1ByOrderByTimestampDesc());
+    }
+
+    /**
      * Delete the temperature by id.
      *
      * @param id the id of the entity

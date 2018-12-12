@@ -206,7 +206,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     </AvGroup>
                   </Col>
                   <Col xs="6" sm="6">
-                      <div className="mt-4"></div>
+                      <div className="mt-4" />
                       <Button color="info" onClick={this.toggleModal} className="mt-2">
                         Show Pin Header
                       </Button>

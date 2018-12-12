@@ -12,6 +12,8 @@ import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import { set } from 'app/shared/reducers/remote-controller';
 import { getEntities as getControllers } from 'app/entities/controller/controller.reducer';
+import { getLastEntity as getTemperature } from 'app/entities/temperature/temperature.reducer';
+import { getLastEntity as getHumidity } from 'app/entities/humidity/humidity.reducer';
 
 const DHT11 = 'DHT11';
 
@@ -21,22 +23,28 @@ export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
     this.props.getSession();
     if (this.props.isAuthenticated) {
-      this.props.getControllers();
+      this.fetchData();
     }
   }
 
   componentDidUpdate(prevProps: IHomeProp, prevState) {
     if (this.props.account !== prevProps.account) {
-      this.props.getControllers();
+      this.fetchData();
     }
   }
+
+  fetchData = () => {
+    this.props.getControllers();
+    this.props.getTemperature();
+    this.props.getHumidity();
+  };
 
   set = (type, pin) => {
     this.props.set(type, pin);
   };
 
   render() {
-    const { account, controllerList } = this.props;
+    const { account, controllerList, temperature, humidity } = this.props;
     return (
       <Row>
         <Col md="12">
@@ -64,8 +72,8 @@ export class Home extends React.Component<IHomeProp> {
                     <Col key={index} xs="12" sm="6" className="m-2">
                       <Row>
                         <TempHumWidget
-                          temperature={20}
-                          humidity={50}/>
+                          temperature={temperature ? temperature.toFixed(1) : '-'}
+                          humidity={humidity ? humidity.toFixed(1) : '-'}/>
                       </Row>
                     </Col>
                 )}
@@ -117,13 +125,17 @@ export class Home extends React.Component<IHomeProp> {
 const mapStateToProps = storeState => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
-  controllerList: storeState.controller.entities
+  controllerList: storeState.controller.entities,
+  temperature: storeState.temperature.lastTemperature.value,
+  humidity: storeState.humidity.lastHumidity.value
 });
 
 const mapDispatchToProps = {
   getSession,
   set,
-  getControllers
+  getControllers,
+  getTemperature,
+  getHumidity
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -16,6 +16,7 @@ import { ITemperature, defaultValue } from 'app/shared/model/temperature.model';
 export const ACTION_TYPES = {
   FETCH_TEMPERATURE_LIST: 'temperature/FETCH_TEMPERATURE_LIST',
   FETCH_TEMPERATURE: 'temperature/FETCH_TEMPERATURE',
+  FETCH_LAST_TEMPERATURE: 'temperature/FETCH_LAST_TEMPERATURE',
   CREATE_TEMPERATURE: 'temperature/CREATE_TEMPERATURE',
   UPDATE_TEMPERATURE: 'temperature/UPDATE_TEMPERATURE',
   DELETE_TEMPERATURE: 'temperature/DELETE_TEMPERATURE',
@@ -30,7 +31,8 @@ const initialState = {
   links: { next: 0 },
   updating: false,
   totalItems: 0,
-  updateSuccess: false
+  updateSuccess: false,
+  lastTemperature: NaN
 };
 
 export type TemperatureState = Readonly<typeof initialState>;
@@ -41,6 +43,7 @@ export default (state: TemperatureState = initialState, action): TemperatureStat
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_TEMPERATURE_LIST):
     case REQUEST(ACTION_TYPES.FETCH_TEMPERATURE):
+    case REQUEST(ACTION_TYPES.FETCH_LAST_TEMPERATURE):
       return {
         ...state,
         errorMessage: null,
@@ -58,6 +61,7 @@ export default (state: TemperatureState = initialState, action): TemperatureStat
       };
     case FAILURE(ACTION_TYPES.FETCH_TEMPERATURE_LIST):
     case FAILURE(ACTION_TYPES.FETCH_TEMPERATURE):
+    case FAILURE(ACTION_TYPES.FETCH_LAST_TEMPERATURE):
     case FAILURE(ACTION_TYPES.CREATE_TEMPERATURE):
     case FAILURE(ACTION_TYPES.UPDATE_TEMPERATURE):
     case FAILURE(ACTION_TYPES.DELETE_TEMPERATURE):
@@ -82,6 +86,12 @@ export default (state: TemperatureState = initialState, action): TemperatureStat
         ...state,
         loading: false,
         entity: action.payload.data
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_LAST_TEMPERATURE):
+      return {
+        ...state,
+        loading: false,
+        lastTemperature: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.CREATE_TEMPERATURE):
     case SUCCESS(ACTION_TYPES.UPDATE_TEMPERATURE):
@@ -123,6 +133,14 @@ export const getEntity: ICrudGetAction<ITemperature> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
     type: ACTION_TYPES.FETCH_TEMPERATURE,
+    payload: axios.get<ITemperature>(requestUrl)
+  };
+};
+
+export const getLastEntity = () => {
+  const requestUrl = `${apiUrl}/last`;
+  return {
+    type: ACTION_TYPES.FETCH_LAST_TEMPERATURE,
     payload: axios.get<ITemperature>(requestUrl)
   };
 };

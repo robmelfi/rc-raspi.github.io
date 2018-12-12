@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -95,6 +94,18 @@ public class TemperatureResource {
         Page<TemperatureDTO> page = temperatureService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/temperatures");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * GET  /temperatures/last : get the last temperature.
+     *
+     * @return the entity
+     */
+    @GetMapping("/temperatures/last")
+    @Timed
+    public TemperatureDTO getLastTemperature() {
+        log.debug("REST request to get Last Temperature : {}");
+        return temperatureService.getLast();
     }
 
     /**

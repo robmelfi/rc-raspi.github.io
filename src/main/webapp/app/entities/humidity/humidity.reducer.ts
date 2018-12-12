@@ -16,6 +16,7 @@ import { IHumidity, defaultValue } from 'app/shared/model/humidity.model';
 export const ACTION_TYPES = {
   FETCH_HUMIDITY_LIST: 'humidity/FETCH_HUMIDITY_LIST',
   FETCH_HUMIDITY: 'humidity/FETCH_HUMIDITY',
+  FETCH_LAST_HUMIDITY: 'humidity/FETCH_LAST_HUMIDITY',
   CREATE_HUMIDITY: 'humidity/CREATE_HUMIDITY',
   UPDATE_HUMIDITY: 'humidity/UPDATE_HUMIDITY',
   DELETE_HUMIDITY: 'humidity/DELETE_HUMIDITY',
@@ -30,7 +31,8 @@ const initialState = {
   links: { next: 0 },
   updating: false,
   totalItems: 0,
-  updateSuccess: false
+  updateSuccess: false,
+  lastHumidity: NaN
 };
 
 export type HumidityState = Readonly<typeof initialState>;
@@ -41,6 +43,7 @@ export default (state: HumidityState = initialState, action): HumidityState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_HUMIDITY_LIST):
     case REQUEST(ACTION_TYPES.FETCH_HUMIDITY):
+    case REQUEST(ACTION_TYPES.FETCH_LAST_HUMIDITY):
       return {
         ...state,
         errorMessage: null,
@@ -58,6 +61,7 @@ export default (state: HumidityState = initialState, action): HumidityState => {
       };
     case FAILURE(ACTION_TYPES.FETCH_HUMIDITY_LIST):
     case FAILURE(ACTION_TYPES.FETCH_HUMIDITY):
+    case FAILURE(ACTION_TYPES.FETCH_LAST_HUMIDITY):
     case FAILURE(ACTION_TYPES.CREATE_HUMIDITY):
     case FAILURE(ACTION_TYPES.UPDATE_HUMIDITY):
     case FAILURE(ACTION_TYPES.DELETE_HUMIDITY):
@@ -82,6 +86,12 @@ export default (state: HumidityState = initialState, action): HumidityState => {
         ...state,
         loading: false,
         entity: action.payload.data
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_LAST_HUMIDITY):
+      return {
+        ...state,
+        loading: false,
+        lastHumidity: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.CREATE_HUMIDITY):
     case SUCCESS(ACTION_TYPES.UPDATE_HUMIDITY):
@@ -123,6 +133,14 @@ export const getEntity: ICrudGetAction<IHumidity> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
     type: ACTION_TYPES.FETCH_HUMIDITY,
+    payload: axios.get<IHumidity>(requestUrl)
+  };
+};
+
+export const getLastEntity = () => {
+  const requestUrl = `${apiUrl}/last`;
+  return {
+    type: ACTION_TYPES.FETCH_LAST_HUMIDITY,
     payload: axios.get<IHumidity>(requestUrl)
   };
 };

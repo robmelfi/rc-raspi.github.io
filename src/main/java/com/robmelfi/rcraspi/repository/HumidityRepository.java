@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HumidityRepository extends JpaRepository<Humidity, Long> {
 
+    Humidity findTop1ByOrderByTimestampDesc();
 }
