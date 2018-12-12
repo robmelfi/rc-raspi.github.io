@@ -6,7 +6,7 @@ import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert, Button, ButtonGroup, Card } from 'reactstrap';
 import ToggleSwitch from './toggle-switch';
-import TempHumWidget from './TempHumWidget';
+import TempHumWidget from './temphum-widget';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
@@ -19,22 +19,57 @@ const DHT11 = 'DHT11';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
-export class Home extends React.Component<IHomeProp> {
+export interface IHomeState {
+  intervalID: number;
+}
+
+export class Home extends React.Component<IHomeProp, IHomeState> {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      intervalID: null
+    };
+  }
+
   componentDidMount() {
     this.props.getSession();
     if (this.props.isAuthenticated) {
       this.fetchData();
+      if (this.state.intervalID === null) {
+        this.setState({ intervalID: this.startInterval() });
+      }
     }
   }
 
   componentDidUpdate(prevProps: IHomeProp, prevState) {
     if (this.props.account !== prevProps.account) {
+      this.props.getControllers();
+    }
+
+    if (this.props.isAuthenticated !== prevProps.isAuthenticated) {
       this.fetchData();
+      this.props.getControllers();
+      if (this.state.intervalID === null) {
+        this.setState({ intervalID: this.startInterval() });
+      }
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.intervalID);
+    this.setState({ intervalID: null });
+  }
+
+  startInterval = () => {
+    const id = window.setInterval(
+      () => this.fetchData(),
+      1000 * 60
+    );
+    return id;
+  };
+
   fetchData = () => {
-    this.props.getControllers();
     this.props.getTemperature();
     this.props.getHumidity();
   };
