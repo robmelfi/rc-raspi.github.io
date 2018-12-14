@@ -6,7 +6,7 @@ export default class SensorUpdatePage {
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   nameInput: ElementFinder = element(by.css('input#sensor-name'));
   descriptionInput: ElementFinder = element(by.css('input#sensor-description'));
-  imageInput: ElementFinder = element(by.css('input#file_image'));
+  imagePathInput: ElementFinder = element(by.css('input#sensor-imagePath'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -28,12 +28,12 @@ export default class SensorUpdatePage {
     return this.descriptionInput.getAttribute('value');
   }
 
-  async setImageInput(image) {
-    await this.imageInput.sendKeys(image);
+  async setImagePathInput(imagePath) {
+    await this.imagePathInput.sendKeys(imagePath);
   }
 
-  async getImageInput() {
-    return this.imageInput.getAttribute('value');
+  async getImagePathInput() {
+    return this.imagePathInput.getAttribute('value');
   }
 
   async save() {

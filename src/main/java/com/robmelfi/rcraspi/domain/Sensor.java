@@ -28,12 +28,8 @@ public class Sensor implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
-
-    @Column(name = "image_content_type")
-    private String imageContentType;
+    @Column(name = "image_path")
+    private String imagePath;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -70,30 +66,17 @@ public class Sensor implements Serializable {
         this.description = description;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public Sensor image(byte[] image) {
-        this.image = image;
+    public Sensor imagePath(String imagePath) {
+        this.imagePath = imagePath;
         return this;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public String getImageContentType() {
-        return imageContentType;
-    }
-
-    public Sensor imageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
-        return this;
-    }
-
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -123,8 +106,7 @@ public class Sensor implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
-            ", image='" + getImage() + "'" +
-            ", imageContentType='" + getImageContentType() + "'" +
+            ", imagePath='" + getImagePath() + "'" +
             "}";
     }
 }

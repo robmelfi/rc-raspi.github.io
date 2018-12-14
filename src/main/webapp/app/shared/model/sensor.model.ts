@@ -2,8 +2,7 @@ export interface ISensor {
   id?: number;
   name?: string;
   description?: string;
-  imageContentType?: string;
-  image?: any;
+  imagePath?: string;
 }
 
 export const defaultValue: Readonly<ISensor> = {};

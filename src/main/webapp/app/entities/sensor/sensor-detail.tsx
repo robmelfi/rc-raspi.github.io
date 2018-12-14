@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAction, openFile, byteSize } from 'react-jhipster';
+import { Translate, ICrudGetAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -45,10 +45,10 @@ export class SensorDetail extends React.Component<ISensorDetailProps> {
             </dt>
             <dd>{sensorEntity.description}</dd>
             <dd>
-              {sensorEntity.image ? (
+              {sensorEntity.imagePath ? (
                 <div>
-                  <a onClick={openFile(sensorEntity.imageContentType, sensorEntity.image)}>
-                    <img src={`data:${sensorEntity.imageContentType};base64,${sensorEntity.image}`} style={{ maxHeight: '200px' }} />
+                  <a href={sensorEntity.imagePath}>
+                    <img src={sensorEntity.imagePath} style={{ maxHeight: '200px' }} />
                   </a>
                 </div>
               ) : null}

@@ -10,9 +10,8 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "image",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldName": "imagePath",
+            "fieldType": "String"
         }
     ],
     "relationships": [],

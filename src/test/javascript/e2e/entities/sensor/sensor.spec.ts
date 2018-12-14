@@ -7,7 +7,6 @@ import SensorComponentsPage from './sensor.page-object';
 import { SensorDeleteDialog } from './sensor.page-object';
 import SensorUpdatePage from './sensor-update.page-object';
 import { waitUntilDisplayed, waitUntilHidden } from '../../util/utils';
-import path from 'path';
 
 const expect = chai.expect;
 
@@ -17,8 +16,6 @@ describe('Sensor e2e test', () => {
   let sensorUpdatePage: SensorUpdatePage;
   let sensorComponentsPage: SensorComponentsPage;
   let sensorDeleteDialog: SensorDeleteDialog;
-  const fileToUpload = '../../../../../main/webapp/static/images/logo-jhipster.png';
-  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -53,7 +50,8 @@ describe('Sensor e2e test', () => {
     expect(await sensorUpdatePage.getNameInput()).to.match(/name/);
     await sensorUpdatePage.setDescriptionInput('description');
     expect(await sensorUpdatePage.getDescriptionInput()).to.match(/description/);
-    await sensorUpdatePage.setImageInput(absolutePath);
+    await sensorUpdatePage.setImagePathInput('imagePath');
+    expect(await sensorUpdatePage.getImagePathInput()).to.match(/imagePath/);
     await waitUntilDisplayed(sensorUpdatePage.getSaveButton());
     await sensorUpdatePage.save();
     await waitUntilHidden(sensorUpdatePage.getSaveButton());

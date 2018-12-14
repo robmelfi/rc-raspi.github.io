@@ -25,7 +25,7 @@ entity Humidity {
 entity Sensor {
   name String
   description String
-  image ImageBlob
+  imagePath String
 }
 
 relationship OneToOne {

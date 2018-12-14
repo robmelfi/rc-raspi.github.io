@@ -2,7 +2,6 @@ package com.robmelfi.rcraspi.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the Sensor entity.
@@ -15,9 +14,7 @@ public class SensorDTO implements Serializable {
 
     private String description;
 
-    @Lob
-    private byte[] image;
-    private String imageContentType;
+    private String imagePath;
 
     public Long getId() {
         return id;
@@ -43,20 +40,12 @@ public class SensorDTO implements Serializable {
         this.description = description;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public String getImageContentType() {
-        return imageContentType;
-    }
-
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override
@@ -86,7 +75,7 @@ public class SensorDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
-            ", image='" + getImage() + "'" +
+            ", imagePath='" + getImagePath() + "'" +
             "}";
     }
 }

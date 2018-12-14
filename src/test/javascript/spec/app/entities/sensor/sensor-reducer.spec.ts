@@ -286,23 +286,4 @@ describe('Entities reducer tests', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
-
-  describe('blobFields', () => {
-    it('should properly set a blob in state.', () => {
-      const payload = { name: 'fancyBlobName', data: 'fake data', contentType: 'fake dataType' };
-      expect(
-        reducer(undefined, {
-          type: ACTION_TYPES.SET_BLOB,
-          payload
-        })
-      ).toEqual({
-        ...initialState,
-        entity: {
-          ...initialState.entity,
-          fancyBlobName: payload.data,
-          fancyBlobNameContentType: payload.contentType
-        }
-      });
-    });
-  });
 });

@@ -4,11 +4,11 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, translate, ICrudGetAction, ICrudGetAllAction, setFileData, openFile, byteSize, ICrudPutAction } from 'react-jhipster';
+import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { getEntity, updateEntity, createEntity, setBlob, reset } from './sensor.reducer';
+import { getEntity, updateEntity, createEntity, reset } from './sensor.reducer';
 import { ISensor } from 'app/shared/model/sensor.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
@@ -42,14 +42,6 @@ export class SensorUpdate extends React.Component<ISensorUpdateProps, ISensorUpd
     }
   }
 
-  onBlobChange = (isAnImage, name) => event => {
-    setFileData(event, (contentType, data) => this.props.setBlob(name, data, contentType), isAnImage);
-  };
-
-  clearBlob = name => () => {
-    this.props.setBlob(name, undefined, undefined);
-  };
-
   saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const { sensorEntity } = this.props;
@@ -73,8 +65,6 @@ export class SensorUpdate extends React.Component<ISensorUpdateProps, ISensorUpd
   render() {
     const { sensorEntity, loading, updating } = this.props;
     const { isNew } = this.state;
-
-    const { image, imageContentType } = sensorEntity;
 
     return (
       <div>
@@ -112,34 +102,10 @@ export class SensorUpdate extends React.Component<ISensorUpdateProps, ISensorUpd
                   <AvField id="sensor-description" type="text" name="description" />
                 </AvGroup>
                 <AvGroup>
-                  <AvGroup>
-                    <Label id="imageLabel" for="image">
-                      <Translate contentKey="rcraspiApp.sensor.image">Image</Translate>
-                    </Label>
-                    <br />
-                    {image ? (
-                      <div>
-                        <a onClick={openFile(imageContentType, image)}>
-                          <img src={`data:${imageContentType};base64,${image}`} style={{ maxHeight: '100px' }} />
-                        </a>
-                        <br />
-                        <Row>
-                          <Col md="11">
-                            <span>
-                              {imageContentType}, {byteSize(image)}
-                            </span>
-                          </Col>
-                          <Col md="1">
-                            <Button color="danger" onClick={this.clearBlob('image')}>
-                              <FontAwesomeIcon icon="times-circle" />
-                            </Button>
-                          </Col>
-                        </Row>
-                      </div>
-                    ) : null}
-                    <input id="file_image" type="file" onChange={this.onBlobChange(true, 'image')} accept="image/*" />
-                    <AvInput type="hidden" name="image" value={image} />
-                  </AvGroup>
+                  <Label id="imagePathLabel" for="imagePath">
+                    <Translate contentKey="rcraspiApp.sensor.imagePath">Image Path</Translate>
+                  </Label>
+                  <AvField id="sensor-imagePath" type="text" name="imagePath" />
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/sensor" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
@@ -171,7 +137,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getEntity,
   updateEntity,
-  setBlob,
   createEntity,
   reset
 };

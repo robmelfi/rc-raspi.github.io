@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { openFile, byteSize, Translate, ICrudGetAllAction } from 'react-jhipster';
+import { Translate, ICrudGetAllAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -40,7 +40,7 @@ export class Sensor extends React.Component<ISensorProps> {
                   <Translate contentKey="rcraspiApp.sensor.description">Description</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.sensor.image">Image</Translate>
+                  <Translate contentKey="rcraspiApp.sensor.imagePath">Image Path</Translate>
                 </th>
                 <th />
               </tr>
@@ -56,10 +56,10 @@ export class Sensor extends React.Component<ISensorProps> {
                   <td>{sensor.name}</td>
                   <td>{sensor.description}</td>
                   <td>
-                    {sensor.image ? (
+                    {sensor.imagePath ? (
                       <div>
-                        <a onClick={openFile(sensor.imageContentType, sensor.image)}>
-                          <img src={`data:${sensor.imageContentType};base64,${sensor.image}`} style={{ maxHeight: '80px' }} />
+                        <a href={sensor.imagePath}>
+                          <img src={sensor.imagePath} style={{ maxHeight: '80px' }} />
                           &nbsp;
                         </a>
                       </div>

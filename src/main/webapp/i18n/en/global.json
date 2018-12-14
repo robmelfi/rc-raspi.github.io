@@ -12,7 +12,7 @@
         "pin": "Pin",
         "temperature": "Temperature",
         "humidity": "Humidity",
-        "sensor": "Sensors",
+        "sensor": "Sensor",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
