@@ -18,16 +18,16 @@ The software was designed with the following requirements in mind:
 
 ## Release notes
 
+### Release 1.1
+- Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
+- Auto select INPUT mode when sensor DHT11 is added
+
 ### Release 1.0
 
 - Add a contoller for GPIO pin
 - Select mode (for this version only OUTPUT)
 - Select initial state (High or Low)
 - Control GPIO pin remotely
-
-### Release 1.1
-- Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
-- Auto select INPUT mode when sensor DHT11 is added
 
 ### Nice to have (wishlist)
 
