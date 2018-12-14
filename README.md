@@ -1,9 +1,9 @@
 # rcraspi
 Controlling Raspberry GPIO for home automation with a web/mobile app.
 
-**Click [here](http://www.youtube.com/watch?v=EWZKmvhpyBQ) or on the image below to view youtube video.**
+**Click [here](https://www.youtube.com/watch?v=b8VcnN9qe1E) or on the image below to view youtube video.**
 
-[![](http://img.youtube.com/vi/EWZKmvhpyBQ/0.jpg)](http://www.youtube.com/watch?v=EWZKmvhpyBQ "rcraspi")
+[![](http://img.youtube.com/vi/b8VcnN9qe1E/0.jpg)](https://www.youtube.com/watch?v=b8VcnN9qe1E "rcraspi")
 
 This application was generated using JHipster 5.7.0, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
 
@@ -27,11 +27,11 @@ The software was designed with the following requirements in mind:
 
 ### Release 1.1
 - Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
-- Auto select INPUT mode when sensors like DHT11 is added
+- Auto select INPUT mode when sensor DHT11 is added
 
 ### Nice to have (wishlist)
 
-- Programmable timers for GPIO actions
+- Programmable timers for GPIO output actions
 - Add preset configuration for other many types of sensors
 
 ## Development
