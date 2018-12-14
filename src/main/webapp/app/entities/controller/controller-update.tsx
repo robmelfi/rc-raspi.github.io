@@ -12,6 +12,8 @@ import { IPin } from 'app/shared/model/pin.model';
 import { getEntities as getPins } from 'app/entities/pin/pin.reducer';
 import { ISensor } from 'app/shared/model/sensor.model';
 import { getEntities as getSensors } from 'app/entities/sensor/sensor.reducer';
+import { ITimer } from 'app/shared/model/timer.model';
+import { getEntities as getTimers } from 'app/entities/timer/timer.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './controller.reducer';
 import { IController } from 'app/shared/model/controller.model';
 // tslint:disable-next-line:no-unused-variable
@@ -27,6 +29,7 @@ export interface IControllerUpdateState {
   collapse: boolean;
   modal: boolean;
   sensorOption: string;
+  timerId: string;
 }
 
 export class ControllerUpdate extends React.Component<IControllerUpdateProps, IControllerUpdateState> {
@@ -35,6 +38,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
     this.state = {
       pinId: '0',
       sensorId: '0',
+      timerId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id,
       collapse: false,
       modal: false,
@@ -57,6 +61,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
 
     this.props.getPins();
     this.props.getSensors();
+    this.props.getTimers();
   }
 
   saveEntity = (event, errors, values) => {
@@ -92,7 +97,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
   };
 
   render() {
-    const { controllerEntity, pins, sensors, loading, updating } = this.props;
+    const { controllerEntity, pins, sensors, timers, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -221,6 +226,21 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       </Modal>
                   </Col>
                 </Row>
+                <AvGroup>
+                  <Label for="timer.name">
+                    <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
+                  </Label>
+                  <AvInput id="controller-timer" type="select" className="form-control" name="timerId">
+                    <option value="" key="0" />
+                    {timers
+                      ? timers.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.name}
+                        </option>
+                      ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">
@@ -244,6 +264,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
 const mapStateToProps = (storeState: IRootState) => ({
   pins: storeState.pin.entities,
   sensors: storeState.sensor.entities,
+  timers: storeState.timer.entities,
   controllerEntity: storeState.controller.entity,
   loading: storeState.controller.loading,
   updating: storeState.controller.updating,
@@ -253,6 +274,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getPins,
   getSensors,
+  getTimers,
   getEntity,
   updateEntity,
   createEntity,

@@ -21,7 +21,8 @@
       "pin": "Pin",
       "status": "Stato",
       "sensor": "Sensore",
-      "preset": "Preset"
+      "preset": "Preset",
+      "timer": "Timer"
     }
   }
 }

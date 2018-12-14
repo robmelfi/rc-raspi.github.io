@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -39,6 +40,10 @@ public class Controller implements Serializable {
 
     @OneToOne    @JoinColumn(unique = true)
     private Sensor sensor;
+
+    @ManyToOne
+    @JsonIgnoreProperties("controllers")
+    private Timer timer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -112,6 +117,19 @@ public class Controller implements Serializable {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public Controller timer(Timer timer) {
+        this.timer = timer;
+        return this;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -13,6 +13,7 @@
         "temperature": "Temperature",
         "humidity": "Humidity",
         "sensor": "Sensor",
+        "timer": "Timer",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

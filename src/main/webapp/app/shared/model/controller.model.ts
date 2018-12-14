@@ -12,6 +12,8 @@ export interface IController {
   pinId?: number;
   sensorName?: string;
   sensorId?: number;
+  timerName?: string;
+  timerId?: number;
 }
 
 export const defaultValue: Readonly<IController> = {

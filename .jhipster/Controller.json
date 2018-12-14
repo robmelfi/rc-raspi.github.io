@@ -31,6 +31,12 @@
             "otherEntityField": "name",
             "ownerSide": true,
             "otherEntityRelationshipName": "controller"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "timer",
+            "otherEntityName": "timer",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20181122132944",

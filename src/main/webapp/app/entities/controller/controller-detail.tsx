@@ -54,6 +54,10 @@ export class ControllerDetail extends React.Component<IControllerDetailProps> {
               <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
             </dt>
             <dd>{controllerEntity.sensorName ? controllerEntity.sensorName : ''}</dd>
+            <dt>
+              <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
+            </dt>
+            <dd>{controllerEntity.timerName ? controllerEntity.timerName : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/controller" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

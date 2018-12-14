@@ -25,6 +25,10 @@ public class ControllerDTO implements Serializable {
 
     private String sensorName;
 
+    private Long timerId;
+
+    private String timerName;
+
     public Long getId() {
         return id;
     }
@@ -89,6 +93,22 @@ public class ControllerDTO implements Serializable {
         this.sensorName = sensorName;
     }
 
+    public Long getTimerId() {
+        return timerId;
+    }
+
+    public void setTimerId(Long timerId) {
+        this.timerId = timerId;
+    }
+
+    public String getTimerName() {
+        return timerName;
+    }
+
+    public void setTimerName(String timerName) {
+        this.timerName = timerName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,6 +141,8 @@ public class ControllerDTO implements Serializable {
             ", pin='" + getPinName() + "'" +
             ", sensor=" + getSensorId() +
             ", sensor='" + getSensorName() + "'" +
+            ", timer=" + getTimerId() +
+            ", timer='" + getTimerName() + "'" +
             "}";
     }
 }

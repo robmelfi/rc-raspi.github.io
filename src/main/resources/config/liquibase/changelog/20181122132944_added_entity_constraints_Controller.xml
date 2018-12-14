@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="sensor"/>
 
+        <addForeignKeyConstraint baseColumnNames="timer_id"
+                                 baseTableName="controller"
+                                 constraintName="fk_controller_timer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="timer"/>
+
     </changeSet>
 </databaseChangeLog>

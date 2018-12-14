@@ -9,6 +9,7 @@ export default class ControllerUpdatePage {
   stateInput: ElementFinder = element(by.css('input#controller-state'));
   pinSelect: ElementFinder = element(by.css('select#controller-pin'));
   sensorSelect: ElementFinder = element(by.css('select#controller-sensor'));
+  timerSelect: ElementFinder = element(by.css('select#controller-timer'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -75,6 +76,25 @@ export default class ControllerUpdatePage {
 
   async getSensorSelectedOption() {
     return this.sensorSelect.element(by.css('option:checked')).getText();
+  }
+
+  async timerSelectLastOption() {
+    await this.timerSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async timerSelectOption(option) {
+    await this.timerSelect.sendKeys(option);
+  }
+
+  getTimerSelect() {
+    return this.timerSelect;
+  }
+
+  async getTimerSelectedOption() {
+    return this.timerSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {

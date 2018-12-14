@@ -28,9 +28,24 @@ entity Sensor {
   imagePath String
 }
 
+entity Timer {
+  name String
+  start ZonedDateTime,
+  stop ZonedDateTime,
+  repeat Repeat
+}
+
+enum Repeat {
+  DAY, WEEK, MONTH, YEAR
+}
+
 relationship OneToOne {
   Controller{pin(name)} to Pin
   Controller{sensor(name)} to Sensor
+}
+
+relationship OneToMany {
+  Timer{controller} to Controller{timer(name)}
 }
 
 dto * with mapstruct

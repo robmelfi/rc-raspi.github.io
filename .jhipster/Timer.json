@@ -1,0 +1,39 @@
+{
+    "name": "Timer",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "start",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "stop",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "repeat",
+            "fieldType": "Repeat",
+            "fieldValues": "DAY,WEEK,MONTH,YEAR"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "controller",
+            "otherEntityName": "controller",
+            "otherEntityRelationshipName": "timer"
+        }
+    ],
+    "changelogDate": "20181214180908",
+    "entityTableName": "timer",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
