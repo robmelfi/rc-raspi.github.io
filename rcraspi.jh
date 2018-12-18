@@ -36,7 +36,7 @@ entity Timer {
 }
 
 enum Repeat {
-  DAY, WEEK, MONTH, YEAR
+  ONCE, DAY, WEEK, MONTH, YEAR
 }
 
 relationship OneToOne {

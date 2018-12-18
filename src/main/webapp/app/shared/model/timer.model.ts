@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IController } from 'app/shared/model//controller.model';
 
 export const enum Repeat {
+  ONCE = 'ONCE',
   DAY = 'DAY',
   WEEK = 'WEEK',
   MONTH = 'MONTH',

@@ -131,8 +131,11 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     type="select"
                     className="form-control"
                     name="repeat"
-                    value={(!isNew && timerEntity.repeat) || 'DAY'}
+                    value={(!isNew && timerEntity.repeat) || 'ONCE'}
                   >
+                    <option value="ONCE">
+                      <Translate contentKey="rcraspiApp.Repeat.ONCE" />
+                    </option>
                     <option value="DAY">
                       <Translate contentKey="rcraspiApp.Repeat.DAY" />
                     </option>

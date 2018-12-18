@@ -2,6 +2,7 @@
   "rcraspiApp": {
     "Repeat": {
       "null": "",
+      "ONCE": "ONCE",
       "DAY": "DAY",
       "WEEK": "WEEK",
       "MONTH": "MONTH",

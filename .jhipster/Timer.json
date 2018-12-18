@@ -16,7 +16,7 @@
         {
             "fieldName": "repeat",
             "fieldType": "Repeat",
-            "fieldValues": "DAY,WEEK,MONTH,YEAR"
+            "fieldValues": "ONCE,DAY,WEEK,MONTH,YEAR"
         }
     ],
     "relationships": [

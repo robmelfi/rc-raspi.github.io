@@ -57,8 +57,8 @@ public class TimerResourceIntTest {
     private static final ZonedDateTime DEFAULT_STOP = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_STOP = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Repeat DEFAULT_REPEAT = Repeat.DAY;
-    private static final Repeat UPDATED_REPEAT = Repeat.WEEK;
+    private static final Repeat DEFAULT_REPEAT = Repeat.ONCE;
+    private static final Repeat UPDATED_REPEAT = Repeat.DAY;
 
     @Autowired
     private TimerRepository timerRepository;
