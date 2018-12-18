@@ -4,6 +4,7 @@ import com.robmelfi.rcraspi.domain.Controller;
 import com.robmelfi.rcraspi.repository.ControllerRepository;
 import com.robmelfi.rcraspi.service.dto.ControllerDTO;
 import com.robmelfi.rcraspi.service.mapper.ControllerMapper;
+import com.robmelfi.rcraspi.timer.TimerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,12 +29,15 @@ public class ControllerService {
 
     private final GpioService gpioService;
 
+    private final TimerManager timerManager;
+
     private final ControllerMapper controllerMapper;
 
-    public ControllerService(ControllerRepository controllerRepository, ControllerMapper controllerMapper, GpioService gpioService) {
+    public ControllerService(ControllerRepository controllerRepository, ControllerMapper controllerMapper, GpioService gpioService, TimerManager timerManager) {
         this.controllerRepository = controllerRepository;
         this.controllerMapper = controllerMapper;
         this.gpioService = gpioService;
+        this.timerManager = timerManager;
     }
 
     /**
@@ -48,6 +52,7 @@ public class ControllerService {
         Controller controller = controllerMapper.toEntity(controllerDTO);
         controller = controllerRepository.save(controller);
         gpioService.addController(controller);
+        timerManager.addTimer(controller);
         return controllerMapper.toDto(controller);
     }
 
@@ -86,6 +91,7 @@ public class ControllerService {
     public void delete(Long id) {
         log.debug("Request to delete Controller : {}", id);
         gpioService.removeController(id);
+        timerManager.removeTimer(id);
         controllerRepository.deleteById(id);
     }
 }
