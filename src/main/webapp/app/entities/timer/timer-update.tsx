@@ -14,7 +14,7 @@ import { ITimer } from 'app/shared/model/timer.model';
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface ITimerUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface ITimerUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ cid: string, id: string }> {}
 
 export interface ITimerUpdateState {
   isNew: boolean;

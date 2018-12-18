@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert, Button, ButtonGroup, Card } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ToggleSwitch from './toggle-switch';
 import TempHumWidget from './temphum-widget';
+import TimerModal from './timer-modal';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
@@ -21,6 +23,7 @@ export interface IHomeProp extends StateProps, DispatchProps {}
 
 export interface IHomeState {
   intervalID: number;
+  modal: boolean;
 }
 
 export class Home extends React.Component<IHomeProp, IHomeState> {
@@ -28,7 +31,8 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   constructor(props) {
     super(props);
     this.state = {
-      intervalID: null
+      intervalID: null,
+      modal: false
     };
   }
 
@@ -49,7 +53,6 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
     if (this.props.isAuthenticated !== prevProps.isAuthenticated) {
       this.fetchData();
-      this.props.getControllers();
       if (this.state.intervalID === null) {
         this.setState({ intervalID: this.startInterval() });
       }
@@ -76,6 +79,12 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
   set = (type, pin) => {
     this.props.set(type, pin);
+  };
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
   };
 
   checkTimestamp = entity => {
@@ -139,9 +148,13 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                             status={controller.state}
                           />
                         </span>
+                        <span className="align-middle float-right mt-1">
+                          <Button tag={Link} to={`/entity/timer/new`} color="link" size="lg"><FontAwesomeIcon icon="stopwatch" fixedWidth /></Button>
+                        </span>
                       </Col>
                     </Row>
                   ))}
+                  <TimerModal isOpen={this.state.modal} toggle={this.toggle}/>
                   </Col>
                 }
               </Row>
