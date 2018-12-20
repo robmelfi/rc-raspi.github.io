@@ -28,7 +28,7 @@ export interface IControllerUpdateState {
   sensorId: string;
   collapse: boolean;
   modal: boolean;
-  sensorOption: string;
+  isInputSensor: boolean;
   timerId: string;
 }
 
@@ -42,7 +42,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
       isNew: !this.props.match.params || !this.props.match.params.id,
       collapse: false,
       modal: false,
-      sensorOption: null
+      isInputSensor: false
     };
   }
 
@@ -57,6 +57,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
       this.props.reset();
     } else {
       this.props.getEntity(this.props.match.params.id);
+      this.setState({ isInputSensor: !this.props.controllerEntity.sensorId });
     }
 
     this.props.getPins();
@@ -90,10 +91,10 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
 
   toggleModal = () => {
     this.setState({ modal: !this.state.modal });
-  }
+  };
 
   onChangeSensor = event => {
-    this.setState({ sensorOption: event.target.value });
+    this.setState({ isInputSensor: event.target.value });
   };
 
   render() {
@@ -115,17 +116,8 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
               <p>Loading...</p>
             ) : (
               <AvForm model={isNew ? {} : controllerEntity} onSubmit={this.saveEntity}>
-                {!isNew ? (
-                  <AvGroup>
-                    <Label for="id">
-                      <Translate contentKey="global.field.id">ID</Translate>
-                    </Label>
-                    <AvInput id="controller-id" type="text" className="form-control" name="id" required readOnly />
-                  </AvGroup>
-                ) : null}
-
                 <div className="mt-3">
-                  <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>
+                  <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} disabled={!isNew}>
                     <Translate contentKey="rcraspiApp.controller.preset">Preset</Translate>
                   </Button>
                   <Collapse isOpen={this.state.collapse}>
@@ -161,22 +153,22 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="mode"
-                    value={ (!isNew && controllerEntity.mode) || this.state.sensorOption ? 'INPUT' : 'OUTPUT' }
-                    disabled={ this.state.sensorOption ? true : false }
+                    value={(!isNew && controllerEntity.mode) || (this.state.isInputSensor ? 'INPUT' : 'OUTPUT')}
+                    disabled={this.state.isInputSensor}
                   >
-                    {this.state.sensorOption ?
-                      <option value="INPUT">
-                        <Translate contentKey="rcraspiApp.IO.INPUT" />
-                      </option> : null
-                    }
+                    <option value="INPUT" disabled={!this.state.isInputSensor}>
+                      <Translate contentKey="rcraspiApp.IO.INPUT" />
+                    </option>
                     <option value="OUTPUT">
                       <Translate contentKey="rcraspiApp.IO.OUTPUT" />
                     </option>
                   </AvInput>
+                  { isNew ? !this.state.isInputSensor : !controllerEntity.sensorId &&
                   <FormText color="muted">
                     <Translate contentKey="rcraspiApp.IO.message" />
-                  </FormText>
+                  </FormText> }
                 </AvGroup>
+                {isNew ? !this.state.isInputSensor : !controllerEntity.sensorId &&
                 <AvGroup>
                   <Label id="stateLabel">
                     <Translate contentKey="rcraspiApp.controller.state">Initial State</Translate>
@@ -187,11 +179,11 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     className="form-control"
                     name="state"
                     value={'false'}
-                    disabled={ this.state.sensorOption ? true : false }>
+                    disabled={this.state.isInputSensor}>
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>
-                </AvGroup>
+                </AvGroup> }
                 <Row>
                   <Col xs="6" sm="6">
                     <AvGroup>
@@ -199,7 +191,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                         <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
                       </Label>
                       <AvInput id="controller-pin" type="select" className="form-control" name="pinId">
-                        <option value="" key="0" />
+                        <option value={controllerEntity.pinId} key={controllerEntity.pinId}>{controllerEntity.pinName}</option>
                         {pins
                           ? pins.map(otherEntity => (
                               <option value={otherEntity.id} key={otherEntity.id}>
@@ -226,6 +218,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       </Modal>
                   </Col>
                 </Row>
+                { (isNew ? !this.state.isInputSensor : !controllerEntity.sensorId) &&
                 <AvGroup>
                   <Label for="timer.name">
                     <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
@@ -240,7 +233,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       ))
                       : null}
                   </AvInput>
-                </AvGroup>
+                </AvGroup> }
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">

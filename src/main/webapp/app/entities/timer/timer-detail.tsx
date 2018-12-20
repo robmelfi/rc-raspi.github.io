@@ -19,6 +19,10 @@ export class TimerDetail extends React.Component<ITimerDetailProps> {
     this.props.getEntity(this.props.match.params.id);
   }
 
+  handleClose = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { timerEntity } = this.props;
     return (
@@ -57,7 +61,7 @@ export class TimerDetail extends React.Component<ITimerDetailProps> {
             </dt>
             <dd>{timerEntity.repeat}</dd>
           </dl>
-          <Button tag={Link} to="/entity/timer" replace color="info">
+          <Button onClick={this.handleClose} replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>

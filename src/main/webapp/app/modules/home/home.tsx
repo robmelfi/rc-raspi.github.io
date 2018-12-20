@@ -75,6 +75,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   fetchData = () => {
     this.props.getTemperature();
     this.props.getHumidity();
+    this.props.getControllers();
   };
 
   set = (type, pin) => {
@@ -148,9 +149,10 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                             status={controller.state}
                           />
                         </span>
+                        { controller.timerId &&
                         <span className="align-middle float-right mt-1">
-                          <Button tag={Link} to={`/entity/timer/new`} color="link" size="lg"><FontAwesomeIcon icon="stopwatch" fixedWidth /></Button>
-                        </span>
+                          <Button tag={Link} to={`/entity/timer/${controller.timerId}`} color="link" size="lg"><FontAwesomeIcon icon="stopwatch" fixedWidth /></Button>
+                        </span>}
                       </Col>
                     </Row>
                   ))}

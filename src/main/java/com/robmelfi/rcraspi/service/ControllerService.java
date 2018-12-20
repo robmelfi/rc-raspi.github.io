@@ -51,7 +51,11 @@ public class ControllerService {
 
         Controller controller = controllerMapper.toEntity(controllerDTO);
         controller = controllerRepository.save(controller);
-        gpioService.addController(controller);
+        if(controllerDTO.getPinName() == null) {
+            gpioService.addController(controller, false, null);
+        } else {
+            gpioService.addController(controller, true, controllerDTO.getPinName());
+        }
         timerManager.addTimer(controller);
         return controllerMapper.toDto(controller);
     }

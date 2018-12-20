@@ -4,6 +4,7 @@ import com.robmelfi.rcraspi.domain.Timer;
 import com.robmelfi.rcraspi.repository.TimerRepository;
 import com.robmelfi.rcraspi.service.dto.TimerDTO;
 import com.robmelfi.rcraspi.service.mapper.TimerMapper;
+import com.robmelfi.rcraspi.timer.TimerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +27,13 @@ public class TimerService {
 
     private final TimerRepository timerRepository;
 
+    private final TimerManager timerManager;
+
     private final TimerMapper timerMapper;
 
-    public TimerService(TimerRepository timerRepository, TimerMapper timerMapper) {
+    public TimerService(TimerRepository timerRepository, TimerManager timerManager, TimerMapper timerMapper) {
         this.timerRepository = timerRepository;
+        this.timerManager = timerManager;
         this.timerMapper = timerMapper;
     }
 
@@ -43,6 +47,9 @@ public class TimerService {
         log.debug("Request to save Timer : {}", timerDTO);
 
         Timer timer = timerMapper.toEntity(timerDTO);
+        if(timerDTO.getId() != null) {
+            this.timerManager.updateTimer(timer);
+        }
         timer = timerRepository.save(timer);
         return timerMapper.toDto(timer);
     }

@@ -70,6 +70,13 @@ export class Controller extends React.Component<IControllerProps> {
                   <td>{controller.timerName ? <Link to={`timer/${controller.timerId}`}>{controller.timerName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
+                      { !controller.sensorId &&
+                      <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
+                      </Button>}
                       <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">
                         <FontAwesomeIcon icon="trash" />{' '}
                         <span className="d-none d-md-inline">

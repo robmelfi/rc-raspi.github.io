@@ -1,8 +1,10 @@
 package com.robmelfi.rcraspi.timer;
 
 import com.robmelfi.rcraspi.domain.Controller;
+import com.robmelfi.rcraspi.domain.Pin;
 import com.robmelfi.rcraspi.domain.Timer;
 import com.robmelfi.rcraspi.repository.ControllerRepository;
+import com.robmelfi.rcraspi.repository.PinRepository;
 import com.robmelfi.rcraspi.repository.TimerRepository;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
 import org.springframework.scheduling.TaskScheduler;
@@ -20,15 +22,18 @@ public class TimerManager {
 
     private final TimerRepository timerRepository;
 
+    private final PinRepository pinRepository;
+
     private final TaskScheduler taskScheduler;
 
     private final Map<String, ScheduledFuture> scheduledFutureMap;
 
     private final RemoteControllerService remoteControllerService;
 
-    public TimerManager(ControllerRepository controllerRepository, TimerRepository timerRepository, TaskScheduler taskScheduler, RemoteControllerService remoteControllerService) {
+    public TimerManager(ControllerRepository controllerRepository, TimerRepository timerRepository, PinRepository pinRepository, TaskScheduler taskScheduler, RemoteControllerService remoteControllerService) {
         this.controllerRepository = controllerRepository;
         this.timerRepository = timerRepository;
+        this.pinRepository = pinRepository;
         this.taskScheduler = taskScheduler;
         this.remoteControllerService = remoteControllerService;
 
@@ -36,9 +41,21 @@ public class TimerManager {
         this.getTimer();
     }
 
+    public void updateTimer(Timer timer) {
+        List<Controller> controllers = this.controllerRepository.findByTimerId(timer.getId());
+        for (Controller c: controllers) {
+            removeTimer(c.getId());
+            addTimer(timer, c);
+        }
+    }
+
     public void addTimer(Controller controller) {
         if (controller.getTimer() != null) {
             Timer timer = this.timerRepository.findById(controller.getTimer().getId()).get();
+            if (controller.getPin().getName() == null) {
+                Pin pin = this.pinRepository.findById(controller.getPin().getId()).get();
+                controller.getPin().setName(pin.getName());
+            }
             this.addTimer(timer, controller);
         }
     }

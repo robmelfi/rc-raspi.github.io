@@ -62,7 +62,7 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
   };
 
   handleClose = () => {
-    this.props.history.push('/entity/timer');
+    this.props.history.goBack();
   };
 
   render() {
@@ -150,7 +150,7 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     </option>
                   </AvInput>
                 </AvGroup>
-                <Button tag={Link} id="cancel-save" to="/entity/timer" replace color="info">
+                <Button onClick={this.handleClose} id="cancel-save" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>

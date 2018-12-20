@@ -84,11 +84,17 @@ public class GpioServiceDevImpl implements GpioService {
     }
 
     @Override
-    public void addController(Controller c) {
+    public void addController(Controller c, boolean update, String oldPinName) {
         com.robmelfi.rcraspi.domain.Pin pin = pinRepository.findById(c.getPin().getId()).get();
         if (c.getMode().equals(IO.OUTPUT)) {
+            if(!update) {
                 String gpioPin = getRaspiPin(pin.getName());
                 gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
+            } else {
+                gpioPinDigitalOutputs.remove(oldPinName);
+                String gpioPin = getRaspiPin(pin.getName());
+                gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
+            }
         } else {
             Sensor sensor = sensorRepository.findById(c.getSensor().getId()).get();
             sensorStrategyService.enableSensor(sensor.getName(), 0);
@@ -109,7 +115,7 @@ public class GpioServiceDevImpl implements GpioService {
     private void loadController() {
         List<Controller> controllers = controllerRepository.findAll();
         for (Controller c: controllers) {
-            addController(c);
+            addController(c, false, null);
         }
     }
 

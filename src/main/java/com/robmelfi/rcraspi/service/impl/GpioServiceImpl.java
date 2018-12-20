@@ -81,12 +81,19 @@ public class GpioServiceImpl implements GpioService {
     }
 
     @Override
-    public void addController(Controller c) {
+    public void addController(Controller c, boolean update, String oldPinName) {
         com.robmelfi.rcraspi.domain.Pin pin = pinRepository.findById(c.getPin().getId()).get();
         PinState state = c.getState() ? PinState.HIGH : PinState.LOW;
         if (c.getMode().equals(IO.OUTPUT)) {
-            GpioPinDigitalOutput gpioPin = gpio.provisionDigitalOutputPin(getRaspiPin(pin.getName()), state);
-            gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
+            if(!update) {
+                GpioPinDigitalOutput gpioPin = gpio.provisionDigitalOutputPin(getRaspiPin(pin.getName()), state);
+                gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
+            } else {
+                GpioPinDigitalOutput p = gpioPinDigitalOutputs.remove(oldPinName);
+                gpio.unprovisionPin(p);
+                GpioPinDigitalOutput gpioPin = gpio.provisionDigitalOutputPin(getRaspiPin(pin.getName()), state);
+                gpioPinDigitalOutputs.put(pin.getName(), gpioPin);
+            }
         } else {
             Sensor sensor = sensorRepository.findById(c.getSensor().getId()).get();
             sensorStrategyService.enableSensor(sensor.getName(), getRaspiPin(pin.getName()).getAddress());
@@ -111,7 +118,7 @@ public class GpioServiceImpl implements GpioService {
     private void loadController() {
         List<Controller> controllers = controllerRepository.findAll();
         for (Controller c: controllers) {
-            addController(c);
+            addController(c, false, null);
         }
     }
 

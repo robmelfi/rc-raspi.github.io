@@ -12,7 +12,7 @@ public interface GpioService {
 
     boolean getState(String pinName);
 
-    void addController(Controller c);
+    void addController(Controller c, boolean update, String oldPinName);
 
     void removeController(Long id);
 }
