@@ -71,7 +71,9 @@ public class TimerManager {
     private void getTimer() {
         List<Controller> controllerList = this.controllerRepository.findAll();
         for (Controller controller: controllerList) {
-            addTimer(controller.getTimer(), controller);
+            if (controller.getTimer() != null) {
+                addTimer(controller.getTimer(), controller);
+            }
         }
     }
 
