@@ -30,7 +30,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="state" type="bit">
+            <column name="state" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="pin_id" type="bigint">

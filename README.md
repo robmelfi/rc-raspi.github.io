@@ -5,7 +5,7 @@ Controlling Raspberry GPIO for home automation with a web/mobile app.
 
 [![](http://img.youtube.com/vi/b8VcnN9qe1E/0.jpg)](https://www.youtube.com/watch?v=b8VcnN9qe1E "rcraspi")
 
-This application was generated using JHipster 5.7.0, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
+This application was generated using JHipster 5.7.1, you can find documentation and help at [JHipster Homepage and latest documentation][].
 
 ## About
 
@@ -36,33 +36,69 @@ The software was designed with the following requirements in mind:
 
 ## Development
 
-To start your application in the dev profile, simply run:
+Before you can build this project, you must install and configure the following dependencies on your machine:
 
-```./mvnw``` (on Mac OS X/Linux) or ```mvnw```(on Windows)
+1.  [Node.js][]: We use Node to run a development web server and build the project.
+    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
 
-The application will be available on http://localhost:8080
+After installing Node, you should be able to run the following command to install development tools.
+You will only need to run this command when dependencies change in [package.json](package.json).
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+    npm install
+
+We use npm scripts and [Webpack][] as our build system.
+
+Run the following commands in two separate terminals to create a blissful development experience where your browser
+auto-refreshes when files change on your hard drive.
+
+    ./mvnw
+    npm start
+
+Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
+specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
+Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
+
+The `npm run` command will list all of the scripts available to run for this project.
+
+### Service workers
+
+Service workers are commented by default, to enable them please uncomment the following code.
+
+- The service worker registering script in index.html
+
+```html
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+        .register('./service-worker.js')
+        .then(function() { console.log('Service Worker Registered'); });
+    }
+</script>
+```
+
+Note: workbox creates the respective service worker and dynamically generate the `service-worker.js`
 
 ## Building for production
 
-Create database on raspberry pi (mysql)
+create database on raspberry pi (mysql)
 
     create user 'rcraspi'@'%' identified by 'rcraspi';  
     create database rcraspi;
     GRANT ALL PRIVILEGES ON rcraspi.* TO 'rcraspi'@'%';
 
-Building for production
+To optimize the rcraspi application for production, run:
 
     ./mvnw -Pprod package -DskipTests
 
 Copy the package on raspberry pi
 
-    scp target/rcraspi-1.0.war pi@piaddress:/home/pi/rcraspi
+    scp target/rcraspi-version.war pi@piaddress:/home/pi/rcraspi
 
 To ensure everything worked, run:
 
-    sudo ./rcraspi-1.0.war
+    sudo ./rcraspi-version.war
+
+Then navigate to http://piaddress:8081 in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
@@ -70,16 +106,18 @@ Refer to [Using JHipster in production][] for more details.
 
 To launch your application's tests, run:
 
-    ./mvnw test
+    ./mvnw clean test
+
+### Client tests
+
+Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
+
+    npm test
 
 For more information, refer to the [Running tests page][].
 
 [JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[JHipster 5.7.0 archive]: https://www.jhipster.tech/documentation-archive/v5.7.0
-
-[Using JHipster in development]: https://www.jhipster.tech/development/
-[Using Docker and Docker-Compose]: https://www.jhipster.tech/docker-compose
 [Using JHipster in production]: https://www.jhipster.tech/production/
 [Running tests page]: https://www.jhipster.tech/running-tests/
-
-
+[node.js]: https://nodejs.org/
+[webpack]: https://webpack.github.io/
