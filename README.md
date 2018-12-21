@@ -5,7 +5,7 @@ Controlling Raspberry GPIO for home automation with a web/mobile app.
 
 [![](http://img.youtube.com/vi/b8VcnN9qe1E/0.jpg)](https://www.youtube.com/watch?v=b8VcnN9qe1E "rcraspi")
 
-This application was generated using JHipster 5.7.1, you can find documentation and help at [JHipster Homepage and latest documentation][].
+This application was generated using JHipster 5.7.2, you can find documentation and help at [JHipster Homepage and latest documentation][].
 
 ## About
 
