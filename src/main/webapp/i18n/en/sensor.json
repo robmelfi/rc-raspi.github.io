@@ -1,0 +1,23 @@
+{
+  "rcraspiApp": {
+    "sensor": {
+      "home": {
+        "title": "Sensors",
+        "createLabel": "Create a new Sensor",
+        "createOrEditLabel": "Create or edit a Sensor"
+      },
+      "created": "A new Sensor is created with identifier {{ param }}",
+      "updated": "A Sensor is updated with identifier {{ param }}",
+      "deleted": "A Sensor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sensor {{ id }}?"
+      },
+      "detail": {
+        "title": "Sensor"
+      },
+      "name": "Name",
+      "description": "Description",
+      "imagePath": "Image Path"
+    }
+  }
+}
