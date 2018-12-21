@@ -1,0 +1,51 @@
+{
+    "name": "Controller",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mode",
+            "fieldType": "IO",
+            "fieldValues": "INPUT,OUTPUT"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pin",
+            "otherEntityName": "pin",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "controller"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "sensor",
+            "otherEntityName": "sensor",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "controller"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "timer",
+            "otherEntityName": "timer",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20181122132944",
+    "entityTableName": "controller",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

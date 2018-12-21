@@ -1,0 +1,26 @@
+{
+  "rcraspiApp": {
+    "controller": {
+      "home": {
+        "title": "Controllers",
+        "createLabel": "Genera un nuovo Controller",
+        "createOrEditLabel": "Genera o modifica un Controller"
+      },
+      "created": "&Egrave; stato generato un nuovo Controller con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Controller identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Controller con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Controller {{ id }}?"
+      },
+      "detail": {
+        "title": "Controller"
+      },
+      "name": "Name",
+      "mode": "Mode",
+      "state": "State",
+      "pin": "Pin",
+      "sensor": "Sensor",
+      "timer": "Timer"
+    }
+  }
+}

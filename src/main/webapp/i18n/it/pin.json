@@ -1,0 +1,21 @@
+{
+  "rcraspiApp": {
+    "pin": {
+      "home": {
+        "title": "Pins",
+        "createLabel": "Genera un nuovo Pin",
+        "createOrEditLabel": "Genera o modifica un Pin"
+      },
+      "created": "&Egrave; stato generato un nuovo Pin con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Pin identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Pin con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Pin {{ id }}?"
+      },
+      "detail": {
+        "title": "Pin"
+      },
+      "name": "Name"
+    }
+  }
+}

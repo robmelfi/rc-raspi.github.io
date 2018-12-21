@@ -1,0 +1,25 @@
+{
+  "rcraspiApp": {
+    "timer": {
+      "home": {
+        "title": "Timers",
+        "createLabel": "Genera un nuovo Timer",
+        "createOrEditLabel": "Genera o modifica un Timer"
+      },
+      "created": "&Egrave; stato generato un nuovo Timer con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Timer identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Timer con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Timer {{ id }}?"
+      },
+      "detail": {
+        "title": "Timer"
+      },
+      "name": "Name",
+      "start": "Start",
+      "stop": "Stop",
+      "repeat": "Repeat",
+      "controller": "Controller"
+    }
+  }
+}

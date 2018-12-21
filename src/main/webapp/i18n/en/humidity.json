@@ -1,0 +1,22 @@
+{
+  "rcraspiApp": {
+    "humidity": {
+      "home": {
+        "title": "Humidities",
+        "createLabel": "Create a new Humidity",
+        "createOrEditLabel": "Create or edit a Humidity"
+      },
+      "created": "A new Humidity is created with identifier {{ param }}",
+      "updated": "A Humidity is updated with identifier {{ param }}",
+      "deleted": "A Humidity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Humidity {{ id }}?"
+      },
+      "detail": {
+        "title": "Humidity"
+      },
+      "value": "Value",
+      "timestamp": "Timestamp"
+    }
+  }
+}
