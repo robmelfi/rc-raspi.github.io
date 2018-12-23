@@ -3,7 +3,7 @@
     "timer": {
       "home": {
         "title": "Timers",
-        "createLabel": "Create a new Timer",
+        "createLabel": "Add a Timer",
         "createOrEditLabel": "Create or edit a Timer"
       },
       "created": "A new Timer is created with identifier {{ param }}",

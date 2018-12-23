@@ -22,7 +22,8 @@
       "status": "Stato",
       "sensor": "Sensore",
       "preset": "Preset",
-      "timer": "Timer"
+      "timer": "Timer",
+      "pinHeaderModal": "Mostra Pin"
     }
   }
 }

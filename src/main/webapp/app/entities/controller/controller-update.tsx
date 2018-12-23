@@ -98,7 +98,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
   };
 
   render() {
-    const { controllerEntity, pins, sensors, timers, loading, updating } = this.props;
+    const { controllerEntity, pins, sensors, timers, timer, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -163,12 +163,11 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       <Translate contentKey="rcraspiApp.IO.OUTPUT" />
                     </option>
                   </AvInput>
-                  { isNew ? !this.state.isInputSensor : !controllerEntity.sensorId &&
+                  { isNew && !this.state.isInputSensor &&
                   <FormText color="muted">
                     <Translate contentKey="rcraspiApp.IO.message" />
                   </FormText> }
                 </AvGroup>
-                {isNew ? !this.state.isInputSensor : !controllerEntity.sensorId &&
                 <AvGroup>
                   <Label id="stateLabel">
                     <Translate contentKey="rcraspiApp.controller.state">Initial State</Translate>
@@ -183,7 +182,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>
-                </AvGroup> }
+                </AvGroup>
                 <Row>
                   <Col xs="6" sm="6">
                     <AvGroup>
@@ -205,7 +204,10 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                   <Col xs="6" sm="6">
                       <div className="mt-4" />
                       <Button color="info" onClick={this.toggleModal} className="mt-2">
-                        Show Pin Header
+                        <FontAwesomeIcon icon="eye" />
+                        <span className="d-none d-md-inline">
+                          &nbsp;<Translate contentKey="rcraspiApp.controller.pinHeaderModal">Show Pin Header</Translate>
+                        </span>
                       </Button>
                       <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Pin Numbering - Raspberry Pi 3 Model B</ModalHeader>
@@ -219,21 +221,40 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                   </Col>
                 </Row>
                 { (isNew ? !this.state.isInputSensor : !controllerEntity.sensorId) &&
-                <AvGroup>
-                  <Label for="timer.name">
-                    <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
-                  </Label>
-                  <AvInput id="controller-timer" type="select" className="form-control" name="timerId">
-                    <option value="" key="0" />
-                    {timers
-                      ? timers.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.name}
-                        </option>
-                      ))
-                      : null}
-                  </AvInput>
-                </AvGroup> }
+                <Row>
+                    <Col xs="6" sm="6">
+                        <AvGroup>
+                            <Label for="timer.name">
+                                <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
+                            </Label>
+                            <AvInput
+                                id="controller-timer"
+                                type="select"
+                                className="form-control"
+                                name="timerId"
+                                value={timer.id}
+                                label={timer.name}>
+                                <option value="" key="0" />
+                                {timers
+                                    ? timers.map(otherEntity => (
+                                        <option value={otherEntity.id} key={otherEntity.id}>
+                                            {otherEntity.name}
+                                        </option>
+                                    ))
+                                    : null}
+                            </AvInput>
+                        </AvGroup>
+                    </Col>
+                    <Col xs="6" sm="6">
+                        <div className="mt-4" />
+                        <Link to={`/entity/timer/new`} className="btn btn-primary jh-create-entity mt-2" id="jh-create-entity">
+                            <FontAwesomeIcon icon="plus" />
+                            <span className="d-none d-md-inline">
+                              &nbsp;<Translate contentKey="rcraspiApp.timer.home.createLabel">Add a timer</Translate>
+                            </span>
+                        </Link>
+                    </Col>
+                </Row>}
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">
@@ -258,6 +279,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   pins: storeState.pin.entities,
   sensors: storeState.sensor.entities,
   timers: storeState.timer.entities,
+  timer: storeState.timer.entity,
   controllerEntity: storeState.controller.entity,
   loading: storeState.controller.loading,
   updating: storeState.controller.updating,

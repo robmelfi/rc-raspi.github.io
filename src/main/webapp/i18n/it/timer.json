@@ -2,13 +2,13 @@
   "rcraspiApp": {
     "timer": {
       "home": {
-        "title": "Timers",
-        "createLabel": "Genera un nuovo Timer",
-        "createOrEditLabel": "Genera o modifica un Timer"
+        "title": "Timer",
+        "createLabel": "Aggiungi un Timer",
+        "createOrEditLabel": "Aggiungi un Timer"
       },
-      "created": "&Egrave; stato generato un nuovo Timer con identificatore {{ param }}",
-      "updated": "&Egrave; stato aggiornato Timer identificato da {{ param }}",
-      "deleted": "&Egrave; stato eliminato Timer con identificatore {{ param }}",
+      "created": "E' stato aggiunto un nuovo Timer",
+      "updated": "E' stato aggiornato il Timer",
+      "deleted": "E' stato eliminato il Timer",
       "delete": {
         "question": "Sei sicuro di volere eliminare Timer {{ id }}?"
       },
