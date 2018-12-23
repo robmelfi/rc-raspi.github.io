@@ -2,11 +2,11 @@
   "rcraspiApp": {
     "Repeat": {
       "null": "",
-      "ONCE": "ONCE",
-      "DAY": "DAY",
-      "WEEK": "WEEK",
-      "MONTH": "MONTH",
-      "YEAR": "YEAR"
+      "ONCE": "Una Volta",
+      "DAY": "Giornaliera",
+      "WEEK": "Settimanale",
+      "MONTH": "Mensile",
+      "YEAR": "Annuale"
     }
   }
 }

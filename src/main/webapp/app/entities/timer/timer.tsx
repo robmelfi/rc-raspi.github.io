@@ -35,9 +35,6 @@ export class Timer extends React.Component<ITimerProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="rcraspiApp.timer.name">Name</Translate>
                 </th>
                 <th>
@@ -55,11 +52,6 @@ export class Timer extends React.Component<ITimerProps> {
             <tbody>
               {timerList.map((timer, i) => (
                 <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${timer.id}`} color="link" size="sm">
-                      {timer.id}
-                    </Button>
-                  </td>
                   <td>{timer.name}</td>
                   <td>
                     <TextFormat type="date" value={timer.start} format={APP_DATE_FORMAT} />

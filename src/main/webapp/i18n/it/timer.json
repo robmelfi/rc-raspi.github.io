@@ -15,10 +15,10 @@
       "detail": {
         "title": "Timer"
       },
-      "name": "Name",
+      "name": "Nome",
       "start": "Start",
       "stop": "Stop",
-      "repeat": "Repeat",
+      "repeat": "Ripetizione",
       "controller": "Controller"
     }
   }

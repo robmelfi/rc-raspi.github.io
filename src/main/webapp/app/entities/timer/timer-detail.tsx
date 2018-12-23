@@ -29,7 +29,7 @@ export class TimerDetail extends React.Component<ITimerDetailProps> {
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="rcraspiApp.timer.detail.title">Timer</Translate> [<b>{timerEntity.id}</b>]
+            <Translate contentKey="rcraspiApp.timer.detail.title">Timer</Translate>
           </h2>
           <dl className="jh-entity-details">
             <dt>

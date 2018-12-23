@@ -31,9 +31,6 @@ export class Sensor extends React.Component<ISensorProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="rcraspiApp.sensor.name">Name</Translate>
                 </th>
                 <th>
@@ -48,11 +45,6 @@ export class Sensor extends React.Component<ISensorProps> {
             <tbody>
               {sensorList.map((sensor, i) => (
                 <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${sensor.id}`} color="link" size="sm">
-                      {sensor.id}
-                    </Button>
-                  </td>
                   <td>{sensor.name}</td>
                   <td>{sensor.description}</td>
                   <td>
