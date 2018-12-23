@@ -84,14 +84,6 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
               <p>Loading...</p>
             ) : (
               <AvForm model={isNew ? {} : timerEntity} onSubmit={this.saveEntity}>
-                {!isNew ? (
-                  <AvGroup>
-                    <Label for="id">
-                      <Translate contentKey="global.field.id">ID</Translate>
-                    </Label>
-                    <AvInput id="timer-id" type="text" className="form-control" name="id" required readOnly />
-                  </AvGroup>
-                ) : null}
                 <AvGroup>
                   <Label id="nameLabel" for="name">
                     <Translate contentKey="rcraspiApp.timer.name">Name</Translate>
