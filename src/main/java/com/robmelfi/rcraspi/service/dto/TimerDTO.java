@@ -1,6 +1,7 @@
 package com.robmelfi.rcraspi.service.dto;
 
 import java.time.ZonedDateTime;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import com.robmelfi.rcraspi.domain.enumeration.Repeat;
@@ -12,10 +13,13 @@ public class TimerDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private ZonedDateTime start;
 
+    @NotNull
     private ZonedDateTime stop;
 
     private Repeat repeat;

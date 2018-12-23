@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import com.robmelfi.rcraspi.domain.enumeration.IO;
@@ -11,6 +12,7 @@ public class ControllerDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String name;
 
     private IO mode;

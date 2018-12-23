@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -28,13 +29,16 @@ public class Timer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "jhi_start")
+    @NotNull
+    @Column(name = "jhi_start", nullable = false)
     private ZonedDateTime start;
 
-    @Column(name = "jhi_stop")
+    @NotNull
+    @Column(name = "jhi_stop", nullable = false)
     private ZonedDateTime stop;
 
     @Enumerated(EnumType.STRING)

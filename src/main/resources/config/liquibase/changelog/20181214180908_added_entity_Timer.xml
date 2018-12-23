@@ -23,15 +23,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_timer_name" />
             </column>
 
             <column name="jhi_start" type="datetime">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="jhi_stop" type="datetime">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="jhi_repeat" type="varchar(255)">

@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_controller_name" />
             </column>
 
             <column name="jhi_mode" type="varchar(255)">
@@ -34,7 +34,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="pin_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_controller_pin_id" />
+                <constraints unique="true" nullable="false" uniqueConstraintName="ux_controller_pin_id" />
             </column>
             <column name="sensor_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_controller_sensor_id" />

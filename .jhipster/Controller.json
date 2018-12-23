@@ -3,7 +3,11 @@
     "fields": [
         {
             "fieldName": "name",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
         },
         {
             "fieldName": "mode",
@@ -18,6 +22,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
+            "relationshipValidateRules": "required",
             "relationshipName": "pin",
             "otherEntityName": "pin",
             "otherEntityField": "name",

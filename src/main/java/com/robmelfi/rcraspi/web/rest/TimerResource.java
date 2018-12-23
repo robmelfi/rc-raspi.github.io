@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -43,7 +44,7 @@ public class TimerResource {
      */
     @PostMapping("/timers")
     @Timed
-    public ResponseEntity<TimerDTO> createTimer(@RequestBody TimerDTO timerDTO) throws URISyntaxException {
+    public ResponseEntity<TimerDTO> createTimer(@Valid @RequestBody TimerDTO timerDTO) throws URISyntaxException {
         log.debug("REST request to save Timer : {}", timerDTO);
         if (timerDTO.getId() != null) {
             throw new BadRequestAlertException("A new timer cannot already have an ID", ENTITY_NAME, "idexists");
@@ -65,7 +66,7 @@ public class TimerResource {
      */
     @PutMapping("/timers")
     @Timed
-    public ResponseEntity<TimerDTO> updateTimer(@RequestBody TimerDTO timerDTO) throws URISyntaxException {
+    public ResponseEntity<TimerDTO> updateTimer(@Valid @RequestBody TimerDTO timerDTO) throws URISyntaxException {
         log.debug("REST request to update Timer : {}", timerDTO);
         if (timerDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

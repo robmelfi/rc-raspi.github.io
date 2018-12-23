@@ -3,6 +3,7 @@ package com.robmelfi.rcraspi.web.rest;
 import com.robmelfi.rcraspi.RcraspiApp;
 
 import com.robmelfi.rcraspi.domain.Controller;
+import com.robmelfi.rcraspi.domain.Pin;
 import com.robmelfi.rcraspi.repository.ControllerRepository;
 import com.robmelfi.rcraspi.service.ControllerService;
 import com.robmelfi.rcraspi.service.dto.ControllerDTO;
@@ -104,6 +105,11 @@ public class ControllerResourceIntTest {
             .name(DEFAULT_NAME)
             .mode(DEFAULT_MODE)
             .state(DEFAULT_STATE);
+        // Add required entity
+        Pin pin = PinResourceIntTest.createEntity(em);
+        em.persist(pin);
+        em.flush();
+        controller.setPin(pin);
         return controller;
     }
 
@@ -151,6 +157,25 @@ public class ControllerResourceIntTest {
         // Validate the Controller in the database
         List<Controller> controllerList = controllerRepository.findAll();
         assertThat(controllerList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = controllerRepository.findAll().size();
+        // set the field null
+        controller.setName(null);
+
+        // Create the Controller, which fails.
+        ControllerDTO controllerDTO = controllerMapper.toDto(controller);
+
+        restControllerMockMvc.perform(post("/api/controllers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(controllerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Controller> controllerList = controllerRepository.findAll();
+        assertThat(controllerList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test

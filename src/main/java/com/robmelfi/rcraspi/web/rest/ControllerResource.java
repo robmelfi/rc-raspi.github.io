@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -43,7 +44,7 @@ public class ControllerResource {
      */
     @PostMapping("/controllers")
     @Timed
-    public ResponseEntity<ControllerDTO> createController(@RequestBody ControllerDTO controllerDTO) throws URISyntaxException {
+    public ResponseEntity<ControllerDTO> createController(@Valid @RequestBody ControllerDTO controllerDTO) throws URISyntaxException {
         log.debug("REST request to save Controller : {}", controllerDTO);
         if (controllerDTO.getId() != null) {
             throw new BadRequestAlertException("A new controller cannot already have an ID", ENTITY_NAME, "idexists");
@@ -65,7 +66,7 @@ public class ControllerResource {
      */
     @PutMapping("/controllers")
     @Timed
-    public ResponseEntity<ControllerDTO> updateController(@RequestBody ControllerDTO controllerDTO) throws URISyntaxException {
+    public ResponseEntity<ControllerDTO> updateController(@Valid @RequestBody ControllerDTO controllerDTO) throws URISyntaxException {
         log.debug("REST request to update Controller : {}", controllerDTO);
         if (controllerDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

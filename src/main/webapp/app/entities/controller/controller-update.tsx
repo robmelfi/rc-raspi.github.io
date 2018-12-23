@@ -142,7 +142,14 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                   <Label id="nameLabel" for="name">
                     <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
                   </Label>
-                  <AvField id="controller-name" type="text" name="name" />
+                  <AvField
+                    id="controller-name"
+                    type="text"
+                    name="name"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
+                  />
                 </AvGroup>
                 <AvGroup>
                   <Label id="modeLabel">
@@ -189,7 +196,12 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       <Label for="pin.name">
                         <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
                       </Label>
-                      <AvInput id="controller-pin" type="select" className="form-control" name="pinId">
+                      <AvInput
+                          id="controller-pin"
+                          type="select"
+                          className="form-control"
+                          name="pinId"
+                          required>
                         <option value={controllerEntity.pinId} key={controllerEntity.pinId}>{controllerEntity.pinName}</option>
                         {pins
                           ? pins.map(otherEntity => (

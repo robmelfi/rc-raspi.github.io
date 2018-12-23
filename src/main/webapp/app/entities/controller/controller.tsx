@@ -26,16 +26,17 @@ export class Controller extends React.Component<IControllerProps> {
         <h2 id="controller-heading">
           <Translate contentKey="rcraspiApp.controller.home.title">Controllers</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
-            <span className="d-none d-md-inline">
-              &nbsp;<Translate contentKey="rcraspiApp.controller.home.createLabel">Create new Controller</Translate>
-            </span>
+            <FontAwesomeIcon icon="plus" />&nbsp;
+            <Translate contentKey="rcraspiApp.controller.home.createLabel">Create new Controller</Translate>
           </Link>
         </h2>
         <div className="table-responsive">
           <Table responsive>
             <thead>
               <tr>
+                <th>
+                  <Translate contentKey="global.field.id">ID</Translate>
+                </th>
                 <th>
                   <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
                 </th>

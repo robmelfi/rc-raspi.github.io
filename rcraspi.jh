@@ -1,5 +1,5 @@
 entity Controller {
-  name String
+  name String required unique
   mode IO
   state Boolean
 }
@@ -29,9 +29,9 @@ entity Sensor {
 }
 
 entity Timer {
-  name String
-  start ZonedDateTime,
-  stop ZonedDateTime,
+  name String required unique
+  start ZonedDateTime required,
+  stop ZonedDateTime required,
   repeat Repeat
 }
 
@@ -40,7 +40,7 @@ enum Repeat {
 }
 
 relationship OneToOne {
-  Controller{pin(name)} to Pin
+  Controller{pin(name) required} to Pin
   Controller{sensor(name)} to Sensor
 }
 

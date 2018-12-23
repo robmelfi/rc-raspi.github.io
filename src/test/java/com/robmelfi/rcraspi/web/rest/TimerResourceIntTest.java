@@ -165,6 +165,63 @@ public class TimerResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = timerRepository.findAll().size();
+        // set the field null
+        timer.setName(null);
+
+        // Create the Timer, which fails.
+        TimerDTO timerDTO = timerMapper.toDto(timer);
+
+        restTimerMockMvc.perform(post("/api/timers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(timerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Timer> timerList = timerRepository.findAll();
+        assertThat(timerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStartIsRequired() throws Exception {
+        int databaseSizeBeforeTest = timerRepository.findAll().size();
+        // set the field null
+        timer.setStart(null);
+
+        // Create the Timer, which fails.
+        TimerDTO timerDTO = timerMapper.toDto(timer);
+
+        restTimerMockMvc.perform(post("/api/timers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(timerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Timer> timerList = timerRepository.findAll();
+        assertThat(timerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStopIsRequired() throws Exception {
+        int databaseSizeBeforeTest = timerRepository.findAll().size();
+        // set the field null
+        timer.setStop(null);
+
+        // Create the Timer, which fails.
+        TimerDTO timerDTO = timerMapper.toDto(timer);
+
+        restTimerMockMvc.perform(post("/api/timers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(timerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Timer> timerList = timerRepository.findAll();
+        assertThat(timerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTimers() throws Exception {
         // Initialize the database
         timerRepository.saveAndFlush(timer);

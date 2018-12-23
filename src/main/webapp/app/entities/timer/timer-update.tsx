@@ -14,7 +14,7 @@ import { ITimer } from 'app/shared/model/timer.model';
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface ITimerUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ cid: string, id: string }> {}
+export interface ITimerUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export interface ITimerUpdateState {
   isNew: boolean;
@@ -88,7 +88,14 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                   <Label id="nameLabel" for="name">
                     <Translate contentKey="rcraspiApp.timer.name">Name</Translate>
                   </Label>
-                  <AvField id="timer-name" type="text" name="name" />
+                  <AvField
+                    id="timer-name"
+                    type="text"
+                    name="name"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
+                  />
                 </AvGroup>
                 <AvGroup>
                   <Label id="startLabel" for="start">
@@ -100,6 +107,9 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     className="form-control"
                     name="start"
                     value={isNew ? null : convertDateTimeFromServer(this.props.timerEntity.start)}
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
                   />
                 </AvGroup>
                 <AvGroup>
@@ -112,6 +122,9 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     className="form-control"
                     name="stop"
                     value={isNew ? null : convertDateTimeFromServer(this.props.timerEntity.stop)}
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
                   />
                 </AvGroup>
                 <AvGroup>
