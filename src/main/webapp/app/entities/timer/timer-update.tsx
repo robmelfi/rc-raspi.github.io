@@ -106,7 +106,7 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     type="datetime-local"
                     className="form-control"
                     name="start"
-                    value={isNew ? null : convertDateTimeFromServer(this.props.timerEntity.start)}
+                    value={isNew ? convertDateTimeFromServer(new Date()) : convertDateTimeFromServer(this.props.timerEntity.start)}
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
@@ -121,7 +121,7 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     type="datetime-local"
                     className="form-control"
                     name="stop"
-                    value={isNew ? null : convertDateTimeFromServer(this.props.timerEntity.stop)}
+                    value={isNew ? convertDateTimeFromServer(new Date()) : convertDateTimeFromServer(this.props.timerEntity.stop)}
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
