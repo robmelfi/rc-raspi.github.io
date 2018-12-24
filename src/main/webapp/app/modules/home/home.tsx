@@ -74,15 +74,15 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
   fetchData = () => {
     let found = false;
-    for(let i = 0; i < this.props.controllerList.length; i++) {
-      if (this.props.controllerList[i].sensorName === 'DHT11') {
+    for (const c of this.props.controllerList.length) {
+      if (c.sensorName === 'DHT11') {
           found = true;
           break;
       }
     }
-    if ( found ) {
-        this.props.getTemperature();
-        this.props.getHumidity();
+    if (found) {
+       this.props.getTemperature();
+       this.props.getHumidity();
     }
     this.props.getControllers();
   };
