@@ -67,14 +67,23 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   startInterval = () => {
     const id = window.setInterval(
       () => this.fetchData(),
-      1000 * 60
+      1000
     );
     return id;
   };
 
   fetchData = () => {
-    this.props.getTemperature();
-    this.props.getHumidity();
+    let found = false;
+    for(let i = 0; i < this.props.controllerList.length; i++) {
+      if (this.props.controllerList[i].sensorName === 'DHT11') {
+          found = true;
+          break;
+      }
+    }
+    if ( found ) {
+        this.props.getTemperature();
+        this.props.getHumidity();
+    }
     this.props.getControllers();
   };
 
