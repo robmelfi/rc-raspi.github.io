@@ -3,13 +3,20 @@ package com.robmelfi.rcraspi.timer;
 import com.robmelfi.rcraspi.domain.Controller;
 import com.robmelfi.rcraspi.domain.Pin;
 import com.robmelfi.rcraspi.domain.Timer;
+import com.robmelfi.rcraspi.domain.enumeration.Repeat;
 import com.robmelfi.rcraspi.repository.ControllerRepository;
 import com.robmelfi.rcraspi.repository.PinRepository;
 import com.robmelfi.rcraspi.repository.TimerRepository;
 import com.robmelfi.rcraspi.service.RemoteControllerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +24,8 @@ import java.util.concurrent.ScheduledFuture;
 
 @Component
 public class TimerManager {
+
+    private final Logger log = LoggerFactory.getLogger(TimerManager.class);
 
     private final ControllerRepository controllerRepository;
 
@@ -70,10 +79,44 @@ public class TimerManager {
     }
 
     private void addTimer(Timer timer, Controller controller) {
-        ScheduledFuture scheduledFutureStart = this.taskScheduler.schedule(this.start(controller.getPin().getName()), timer.getStart().toInstant());
+        ScheduledFuture scheduledFutureStart;
+        ScheduledFuture scheduledFutureStop;
+        Repeat repeat = timer.getRepeat();
+        if (repeat.equals(Repeat.ONCE)) {
+            scheduledFutureStart = this.taskScheduler.schedule(this.start(controller.getPin().getName()), timer.getStart().toInstant());
+            scheduledFutureStop = this.taskScheduler.schedule(this.stop(controller.getPin().getName()), timer.getStop().toInstant());
+        } else {
+            String cronExpressionStart = getCronExpression(timer.getStart(), timer.getRepeat());
+            String cronExpressionStop = getCronExpression(timer.getStop(), timer.getRepeat());
+            log.debug("START -> {} - {}", timer.getStart(), cronExpressionStart);
+            log.debug("STOP  -> {} - {}", timer.getStop(), cronExpressionStop);
+            scheduledFutureStart = this.taskScheduler.schedule(this.start(controller.getPin().getName()), new CronTrigger(cronExpressionStart));
+            scheduledFutureStop = this.taskScheduler.schedule(this.stop(controller.getPin().getName()), new CronTrigger(cronExpressionStop));
+        }
         this.scheduledFutureMap.put(getStartKey(controller.getId().toString(), timer.getId().toString()), scheduledFutureStart);
-        ScheduledFuture scheduledFutureStop = this.taskScheduler.schedule(this.stop(controller.getPin().getName()), timer.getStop().toInstant());
         this.scheduledFutureMap.put(getStopKey(controller.getId().toString(), timer.getId().toString()), scheduledFutureStop);
+    }
+
+    private String getCronExpression(ZonedDateTime datetime, Repeat repeat) {
+        LocalDateTime localDateTime = datetime.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+        int hour = localDateTime.getHour();
+        int minute = localDateTime.getMinute();
+        int dayOfWeek = localDateTime.getDayOfWeek().getValue();
+        int dayOfMonth = localDateTime.getDayOfMonth();
+        int month = localDateTime.getMonthValue();
+        int year = localDateTime.getYear();
+        switch (repeat) {
+            case DAY:
+                return "0 " + minute + " " + hour + " ? * *";
+            case WEEK:
+                return "0 " + minute + " " + hour + " ? * " + dayOfWeek;
+            case MONTH:
+                return "0 " + minute + " " + hour + " " + dayOfMonth + " * ?";
+            case YEAR:
+                return "0 " + minute + " " + hour + " " + dayOfMonth + " " + month + " ?";
+            default:
+                return "0 " + minute + " " + hour + " " + dayOfMonth + " " + month + " ?";
+        }
     }
 
     private void removeTimer(Timer timer, Controller controller) {

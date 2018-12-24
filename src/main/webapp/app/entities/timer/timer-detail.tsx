@@ -59,7 +59,7 @@ export class TimerDetail extends React.Component<ITimerDetailProps> {
                 <Translate contentKey="rcraspiApp.timer.repeat">Repeat</Translate>
               </span>
             </dt>
-            <dd>{timerEntity.repeat}</dd>
+            <dd><Translate contentKey={`rcraspiApp.Repeat.${timerEntity.repeat}`}>Repeat</Translate></dd>
           </dl>
           <Button onClick={this.handleClose} replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

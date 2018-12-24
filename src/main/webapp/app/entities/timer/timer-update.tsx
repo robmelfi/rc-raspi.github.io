@@ -141,7 +141,6 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     <option value="ONCE">
                       <Translate contentKey="rcraspiApp.Repeat.ONCE" />
                     </option>
-                    { /*
                     <option value="DAY">
                       <Translate contentKey="rcraspiApp.Repeat.DAY" />
                     </option>
@@ -154,7 +153,6 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
                     <option value="YEAR">
                       <Translate contentKey="rcraspiApp.Repeat.YEAR" />
                     </option>
-                    */}
                   </AvInput>
                 </AvGroup>
                 <Button onClick={this.handleClose} id="cancel-save" replace color="info">
