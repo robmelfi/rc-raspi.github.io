@@ -67,23 +67,26 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   startInterval = () => {
     const id = window.setInterval(
       () => this.fetchData(),
-      1000
+      1000 * 60
     );
     return id;
   };
 
   fetchData = () => {
-    let found = false;
-    for (const c of this.props.controllerList.length) {
-      if (c.sensorName === 'DHT11') {
-          found = true;
-          break;
-      }
-    }
-    if (found) {
-       this.props.getTemperature();
-       this.props.getHumidity();
-    }
+    // TODO FIX - fetch temperature and humidity only if sensor is present
+    // let found = false;
+    // for (const c of this.props.controllerList) {
+    //   if (c.sensorName === 'DHT11') {
+    //       found = true;
+    //       break;
+    //   }
+    // }
+    // if (found) {
+    //    this.props.getTemperature();
+    //    this.props.getHumidity();
+    // }
+    this.props.getTemperature();
+    this.props.getHumidity();
     this.props.getControllers();
   };
 
