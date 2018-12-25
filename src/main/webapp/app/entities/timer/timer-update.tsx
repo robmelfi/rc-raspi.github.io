@@ -11,7 +11,7 @@ import { IRootState } from 'app/shared/reducers';
 import { getEntity, updateEntity, createEntity, reset } from './timer.reducer';
 import { ITimer } from 'app/shared/model/timer.model';
 // tslint:disable-next-line:no-unused-variable
-import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
+import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
 export interface ITimerUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
@@ -43,9 +43,8 @@ export class TimerUpdate extends React.Component<ITimerUpdateProps, ITimerUpdate
   }
 
   saveEntity = (event, errors, values) => {
-    values.start = new Date(values.start);
-    values.stop = new Date(values.stop);
-
+    values.start = convertDateTimeToServer(values.start);
+    values.stop = convertDateTimeToServer(values.stop);
     if (errors.length === 0) {
       const { timerEntity } = this.props;
       const entity = {
