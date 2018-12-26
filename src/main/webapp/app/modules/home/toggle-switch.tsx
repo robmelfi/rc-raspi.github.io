@@ -5,11 +5,11 @@ const toggleSwitch = props =>
   <ButtonGroup>
     <Button
       color="primary"
-      onClick={props.on}
-      disabled={props.status}>ON</Button>
+      onClick={props.off}
+      disabled={!props.status}>ON</Button>
     <Button
       color="primary"
-      onClick={props.off}
-      disabled={!props.status}>OFF</Button>
+      onClick={props.on}
+      disabled={props.status}>OFF</Button>
   </ButtonGroup>;
 export default toggleSwitch;
