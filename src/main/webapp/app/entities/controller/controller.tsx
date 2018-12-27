@@ -35,9 +35,6 @@ export class Controller extends React.Component<IControllerProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="global.field.id">ID</Translate>
-                </th>
-                <th>
                   <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
                 </th>
                 <th>
