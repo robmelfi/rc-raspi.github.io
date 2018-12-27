@@ -184,8 +184,7 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="state"
-                    value={'false'}
-                    disabled={this.state.isInputSensor}>
+                    value={isNew ? 'false' : controllerEntity.state}>
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>

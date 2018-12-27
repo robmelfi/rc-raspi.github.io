@@ -145,11 +145,11 @@ public class TimerManager {
         return "STOP" + controllerID + "_" + timerID;
     }
 
-    private Runnable start(String pin) {
+    private Runnable stop(String pin) {
         return () -> this.remoteControllerService.setHigh(pin);
     }
 
-    private Runnable stop(String pin) {
+    private Runnable start(String pin) {
         return () -> this.remoteControllerService.setLow(pin);
     }
 }
