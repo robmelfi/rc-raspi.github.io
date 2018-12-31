@@ -266,6 +266,12 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                         </Link>
                     </Col>
                 </Row>}
+                <AvGroup>
+                  <Label id="netatmoLabel" check>
+                      <AvInput id="controller-netatmo" type="checkbox" className="form-control" name="netatmo" />
+                      <Translate contentKey="rcraspiApp.controller.netatmo">Netatmo</Translate>
+                  </Label>
+                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">

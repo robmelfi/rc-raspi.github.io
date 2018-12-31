@@ -19,6 +19,8 @@ public class ControllerDTO implements Serializable {
 
     private Boolean state;
 
+    private Boolean netatmo;
+
     private Long pinId;
 
     private String pinName;
@@ -61,6 +63,14 @@ public class ControllerDTO implements Serializable {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    public Boolean isNetatmo() {
+        return netatmo;
+    }
+
+    public void setNetatmo(Boolean netatmo) {
+        this.netatmo = netatmo;
     }
 
     public Long getPinId() {
@@ -139,6 +149,7 @@ public class ControllerDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", mode='" + getMode() + "'" +
             ", state='" + isState() + "'" +
+            ", netatmo='" + isNetatmo() + "'" +
             ", pin=" + getPinId() +
             ", pin='" + getPinName() + "'" +
             ", sensor=" + getSensorId() +

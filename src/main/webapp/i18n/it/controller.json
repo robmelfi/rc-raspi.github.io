@@ -18,6 +18,7 @@
       "name": "Nome",
       "mode": "Modalità",
       "state": "Stato iniziale",
+      "netatmo": "Netatmo",
       "pin": "Pin",
       "status": "Stato",
       "sensor": "Sensore",

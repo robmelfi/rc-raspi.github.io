@@ -2,6 +2,7 @@ entity Controller {
   name String required unique
   mode IO
   state Boolean
+  netatmo Boolean
 }
 
 entity Pin {
@@ -37,6 +38,14 @@ entity Timer {
 
 enum Repeat {
   ONCE, DAY, WEEK, MONTH, YEAR
+}
+
+entity Netatmo {
+  clientId String required
+  clientSecret String required
+  email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+  password String required
+  enabled Boolean
 }
 
 relationship OneToOne {

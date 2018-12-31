@@ -57,6 +57,14 @@ describe('Controller e2e test', () => {
             await controllerUpdatePage.getStateInput().click();
             expect(await controllerUpdatePage.getStateInput().isSelected()).to.be.true;
         }
+        const selectedNetatmo = await controllerUpdatePage.getNetatmoInput().isSelected();
+        if (selectedNetatmo) {
+            await controllerUpdatePage.getNetatmoInput().click();
+            expect(await controllerUpdatePage.getNetatmoInput().isSelected()).to.be.false;
+        } else {
+            await controllerUpdatePage.getNetatmoInput().click();
+            expect(await controllerUpdatePage.getNetatmoInput().isSelected()).to.be.true;
+        }
         await controllerUpdatePage.pinSelectLastOption();
         await controllerUpdatePage.sensorSelectLastOption();
         await controllerUpdatePage.timerSelectLastOption();

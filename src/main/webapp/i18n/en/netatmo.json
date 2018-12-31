@@ -1,0 +1,25 @@
+{
+  "rcraspiApp": {
+    "netatmo": {
+      "home": {
+        "title": "Netatmos",
+        "createLabel": "Create a new Netatmo",
+        "createOrEditLabel": "Create or edit a Netatmo"
+      },
+      "created": "A new Netatmo is created with identifier {{ param }}",
+      "updated": "A Netatmo is updated with identifier {{ param }}",
+      "deleted": "A Netatmo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Netatmo {{ id }}?"
+      },
+      "detail": {
+        "title": "Netatmo"
+      },
+      "clientId": "Client Id",
+      "clientSecret": "Client Secret",
+      "email": "Email",
+      "password": "Password",
+      "enabled": "Enabled"
+    }
+  }
+}

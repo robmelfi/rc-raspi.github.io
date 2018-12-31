@@ -7,6 +7,7 @@ export default class ControllerUpdatePage {
   nameInput: ElementFinder = element(by.css('input#controller-name'));
   modeSelect: ElementFinder = element(by.css('select#controller-mode'));
   stateInput: ElementFinder = element(by.css('input#controller-state'));
+  netatmoInput: ElementFinder = element(by.css('input#controller-netatmo'));
   pinSelect: ElementFinder = element(by.css('select#controller-pin'));
   sensorSelect: ElementFinder = element(by.css('select#controller-sensor'));
   timerSelect: ElementFinder = element(by.css('select#controller-timer'));
@@ -39,6 +40,9 @@ export default class ControllerUpdatePage {
   }
   getStateInput() {
     return this.stateInput;
+  }
+  getNetatmoInput() {
+    return this.netatmoInput;
   }
   async pinSelectLastOption() {
     await this.pinSelect

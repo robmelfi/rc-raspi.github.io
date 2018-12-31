@@ -37,6 +37,9 @@ public class Controller implements Serializable {
     @Column(name = "state")
     private Boolean state;
 
+    @Column(name = "netatmo")
+    private Boolean netatmo;
+
     @OneToOne(optional = false)    @NotNull
     @JoinColumn(unique = true)
     private Pin pin;
@@ -94,6 +97,19 @@ public class Controller implements Serializable {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    public Boolean isNetatmo() {
+        return netatmo;
+    }
+
+    public Controller netatmo(Boolean netatmo) {
+        this.netatmo = netatmo;
+        return this;
+    }
+
+    public void setNetatmo(Boolean netatmo) {
+        this.netatmo = netatmo;
     }
 
     public Pin getPin() {
@@ -163,6 +179,7 @@ public class Controller implements Serializable {
             ", name='" + getName() + "'" +
             ", mode='" + getMode() + "'" +
             ", state='" + getState() + "'" +
+            ", netatmo='" + isNetatmo() + "'" +
             "}";
     }
 }

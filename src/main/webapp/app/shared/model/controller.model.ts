@@ -8,6 +8,7 @@ export interface IController {
   name?: string;
   mode?: IO;
   state?: boolean;
+  netatmo?: boolean;
   pinName?: string;
   pinId?: number;
   sensorName?: string;
@@ -17,5 +18,6 @@ export interface IController {
 }
 
 export const defaultValue: Readonly<IController> = {
-  state: false
+  state: false,
+  netatmo: false
 };

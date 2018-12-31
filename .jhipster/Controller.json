@@ -17,6 +17,10 @@
         {
             "fieldName": "state",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "netatmo",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [

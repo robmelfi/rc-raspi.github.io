@@ -45,6 +45,7 @@ public class CacheConfiguration {
             cm.createCache(com.robmelfi.rcraspi.domain.Sensor.class.getName(), jcacheConfiguration);
             cm.createCache(com.robmelfi.rcraspi.domain.Timer.class.getName(), jcacheConfiguration);
             cm.createCache(com.robmelfi.rcraspi.domain.Timer.class.getName() + ".controllers", jcacheConfiguration);
+            cm.createCache(com.robmelfi.rcraspi.domain.Netatmo.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

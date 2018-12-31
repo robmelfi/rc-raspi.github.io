@@ -54,6 +54,9 @@ public class ControllerResourceIntTest {
     private static final Boolean DEFAULT_STATE = false;
     private static final Boolean UPDATED_STATE = true;
 
+    private static final Boolean DEFAULT_NETATMO = false;
+    private static final Boolean UPDATED_NETATMO = true;
+
     @Autowired
     private ControllerRepository controllerRepository;
 
@@ -104,7 +107,8 @@ public class ControllerResourceIntTest {
         Controller controller = new Controller()
             .name(DEFAULT_NAME)
             .mode(DEFAULT_MODE)
-            .state(DEFAULT_STATE);
+            .state(DEFAULT_STATE)
+            .netatmo(DEFAULT_NETATMO);
         // Add required entity
         Pin pin = PinResourceIntTest.createEntity(em);
         em.persist(pin);
@@ -137,6 +141,7 @@ public class ControllerResourceIntTest {
         assertThat(testController.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testController.getMode()).isEqualTo(DEFAULT_MODE);
         assertThat(testController.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testController.isNetatmo()).isEqualTo(DEFAULT_NETATMO);
     }
 
     @Test
@@ -191,7 +196,8 @@ public class ControllerResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(controller.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].mode").value(hasItem(DEFAULT_MODE.toString())))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.booleanValue())));
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.booleanValue())))
+            .andExpect(jsonPath("$.[*].netatmo").value(hasItem(DEFAULT_NETATMO.booleanValue())));
     }
     
     @Test
@@ -207,7 +213,8 @@ public class ControllerResourceIntTest {
             .andExpect(jsonPath("$.id").value(controller.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.mode").value(DEFAULT_MODE.toString()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.booleanValue()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.booleanValue()))
+            .andExpect(jsonPath("$.netatmo").value(DEFAULT_NETATMO.booleanValue()));
     }
 
     @Test
@@ -233,7 +240,8 @@ public class ControllerResourceIntTest {
         updatedController
             .name(UPDATED_NAME)
             .mode(UPDATED_MODE)
-            .state(UPDATED_STATE);
+            .state(UPDATED_STATE)
+            .netatmo(UPDATED_NETATMO);
         ControllerDTO controllerDTO = controllerMapper.toDto(updatedController);
 
         restControllerMockMvc.perform(put("/api/controllers")
@@ -248,6 +256,7 @@ public class ControllerResourceIntTest {
         assertThat(testController.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testController.getMode()).isEqualTo(UPDATED_MODE);
         assertThat(testController.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testController.isNetatmo()).isEqualTo(UPDATED_NETATMO);
     }
 
     @Test

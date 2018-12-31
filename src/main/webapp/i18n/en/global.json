@@ -14,6 +14,7 @@
         "humidity": "Humidity",
         "sensor": "Sensor",
         "timer": "Timer",
+        "netatmo": "Netatmo",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

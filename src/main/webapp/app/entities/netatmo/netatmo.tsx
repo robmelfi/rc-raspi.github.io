@@ -7,27 +7,27 @@ import { Translate, ICrudGetAllAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from './controller.reducer';
-import { IController } from 'app/shared/model/controller.model';
+import { getEntities } from './netatmo.reducer';
+import { INetatmo } from 'app/shared/model/netatmo.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface IControllerProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+export interface INetatmoProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export class Controller extends React.Component<IControllerProps> {
+export class Netatmo extends React.Component<INetatmoProps> {
   componentDidMount() {
     this.props.getEntities();
   }
 
   render() {
-    const { controllerList, match } = this.props;
+    const { netatmoList, match } = this.props;
     return (
       <div>
-        <h2 id="controller-heading">
-          <Translate contentKey="rcraspiApp.controller.home.title">Controllers</Translate>
+        <h2 id="netatmo-heading">
+          <Translate contentKey="rcraspiApp.netatmo.home.title">Netatmos</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
             <FontAwesomeIcon icon="plus" />&nbsp;
-            <Translate contentKey="rcraspiApp.controller.home.createLabel">Create new Controller</Translate>
+            <Translate contentKey="rcraspiApp.netatmo.home.createLabel">Create new Netatmo</Translate>
           </Link>
         </h2>
         <div className="table-responsive">
@@ -35,51 +35,54 @@ export class Controller extends React.Component<IControllerProps> {
             <thead>
               <tr>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.name">Name</Translate>
+                  <Translate contentKey="global.field.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.mode">Mode</Translate>
+                  <Translate contentKey="rcraspiApp.netatmo.clientId">Client Id</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
+                  <Translate contentKey="rcraspiApp.netatmo.clientSecret">Client Secret</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.status">State</Translate>
+                  <Translate contentKey="rcraspiApp.netatmo.email">Email</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.netatmo">Netatmo</Translate>
+                  <Translate contentKey="rcraspiApp.netatmo.password">Password</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
-                </th>
-                <th>
-                  <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
+                  <Translate contentKey="rcraspiApp.netatmo.enabled">Enabled</Translate>
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {controllerList.map((controller, i) => (
+              {netatmoList.map((netatmo, i) => (
                 <tr key={`entity-${i}`}>
-                  <td>{controller.name}</td>
                   <td>
-                    <Translate contentKey={`rcraspiApp.IO.${controller.mode}`} />
+                    <Button tag={Link} to={`${match.url}/${netatmo.id}`} color="link" size="sm">
+                      {netatmo.id}
+                    </Button>
                   </td>
-                  <td>{controller.pinName ? controller.pinName : ''}</td>
-                  <td>{controller.state ? 'High' : 'Low'}</td>
-                  <td>{controller.netatmo ? 'true' : 'false'}</td>
-                  <td>{controller.sensorName ? <Link to={`sensor/${controller.sensorId}`}>{controller.sensorName}</Link> : ''}</td>
-                  <td>{controller.timerName ? <Link to={`timer/${controller.timerId}`}>{controller.timerName}</Link> : ''}</td>
+                  <td>{netatmo.clientId}</td>
+                  <td>{netatmo.clientSecret}</td>
+                  <td>{netatmo.email}</td>
+                  <td>{netatmo.password}</td>
+                  <td>{netatmo.enabled ? 'true' : 'false'}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      { !controller.sensorId &&
-                      <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
+                      <Button tag={Link} to={`${match.url}/${netatmo.id}`} color="info" size="sm">
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
+                      </Button>
+                      <Button tag={Link} to={`${match.url}/${netatmo.id}/edit`} color="primary" size="sm">
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
-                      </Button>}
-                      <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">
+                      </Button>
+                      <Button tag={Link} to={`${match.url}/${netatmo.id}/delete`} color="danger" size="sm">
                         <FontAwesomeIcon icon="trash" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>
@@ -97,8 +100,8 @@ export class Controller extends React.Component<IControllerProps> {
   }
 }
 
-const mapStateToProps = ({ controller }: IRootState) => ({
-  controllerList: controller.entities
+const mapStateToProps = ({ netatmo }: IRootState) => ({
+  netatmoList: netatmo.entities
 });
 
 const mapDispatchToProps = {
@@ -111,4 +114,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Controller);
+)(Netatmo);
