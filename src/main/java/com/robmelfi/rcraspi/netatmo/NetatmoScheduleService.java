@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// TODO improve this service
 @Service
 public class NetatmoScheduleService {
 
@@ -34,24 +35,24 @@ public class NetatmoScheduleService {
         this.netatmoService = netatmoService;
     }
 
-    @Scheduled(fixedDelay = 1000 * 60)
+    @Scheduled(fixedDelay = 1000 * 60 * 5) // every five minutes
     public void getNetatmoStatus() throws OAuthSystemException, OAuthProblemException {
 
         NetatmoDTO netatmoDTO = getNetatmoCredentials();
         if (netatmoDTO != null) {
+            if (netatmoDTO.isEnabled()){
+                List<ControllerDTO> conrtrollerList = controllerService.findAll();
 
-            List<ControllerDTO> conrtrollerList = controllerService.findAll();
-
-            for (ControllerDTO controllerDTO : conrtrollerList) {
-                if (controllerDTO.isNetatmo()) {
-                    log.debug(" ------> {}, {}", controllerDTO.getPinName());
-                    boolean boilerStatus = getBoilerStatus(netatmoDTO) == 1;
-                    if (boilerStatus) {
-                        if (controllerDTO.isState())
-                            this.remoteControllerService.setLow(controllerDTO.getPinName());
-                    } else {
-                        if (!controllerDTO.isState())
-                            this.remoteControllerService.setHigh(controllerDTO.getPinName());
+                for (ControllerDTO controllerDTO : conrtrollerList) {
+                    if (controllerDTO.isNetatmo()) {
+                        boolean boilerStatus = getBoilerStatus(netatmoDTO) == 1;
+                        if (boilerStatus) {
+                            if (controllerDTO.isState())
+                                this.remoteControllerService.setLow(controllerDTO.getPinName());
+                        } else {
+                            if (!controllerDTO.isState())
+                                this.remoteControllerService.setHigh(controllerDTO.getPinName());
+                        }
                     }
                 }
             }
@@ -81,5 +82,9 @@ public class NetatmoScheduleService {
             }
         }
         return 0;
+    }
+
+    private OAuthJSONAccessTokenResponse getToken(NetatmoDTO netatmoDTO) {
+        return null;
     }
 }
