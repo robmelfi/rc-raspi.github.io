@@ -18,6 +18,9 @@ The software was designed with the following requirements in mind:
 
 ## Release notes
 
+### Release 1.3
+- Programmable timers for GPIO output actions
+
 ### Release 1.1
 - Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
 - Auto select INPUT mode when sensor DHT11 is added
@@ -29,9 +32,9 @@ The software was designed with the following requirements in mind:
 - Select initial state (High or Low)
 - Control GPIO pin remotely
 
-### Nice to have (wishlist)
+## Nice to have (wish list)
 
-- Programmable timers for GPIO output actions
+- Push refresh when timer change GPIO status (in v1.3 the status is update with pull request every minute)
 - Add preset configuration for other many types of sensors
 
 ## Development
