@@ -2,15 +2,15 @@
   "rcraspiApp": {
     "netatmo": {
       "home": {
-        "title": "Netatmos",
-        "createLabel": "Genera un nuovo Netatmo",
-        "createOrEditLabel": "Genera o modifica un Netatmo"
+        "title": "Coollega un termostato Netatmo",
+        "createLabel": "Impostazioni",
+        "createOrEditLabel": "Impostazioni"
       },
-      "created": "&Egrave; stato generato un nuovo Netatmo con identificatore {{ param }}",
-      "updated": "&Egrave; stato aggiornato Netatmo identificato da {{ param }}",
-      "deleted": "&Egrave; stato eliminato Netatmo con identificatore {{ param }}",
+      "created": "&Egrave; stato impostato un termostato Netatmo",
+      "updated": "&Egrave; stato aggiornato il termostato Netatmo",
+      "deleted": "&Egrave; stata eliminata l'impostazione del termostato",
       "delete": {
-        "question": "Sei sicuro di volere eliminare Netatmo {{ id }}?"
+        "question": "Sei sicuro di volere eliminare Netatmo?"
       },
       "detail": {
         "title": "Netatmo"
@@ -19,7 +19,7 @@
       "clientSecret": "Client Secret",
       "email": "Email",
       "password": "Password",
-      "enabled": "Enabled"
+      "enabled": "Abilitato"
     }
   }
 }

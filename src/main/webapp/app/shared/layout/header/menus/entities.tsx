@@ -9,13 +9,19 @@ export const EntitiesMenu = props => (
   // tslint:disable-next-line:jsx-self-close
   <NavDropdown icon="cogs" name={translate('global.menu.entities.main')} id="entity-menu">
     <DropdownItem tag={Link} to="/entity/controller">
-      <FontAwesomeIcon icon="desktop" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.controller" />
+      <FontAwesomeIcon icon="desktop" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.controller" />
     </DropdownItem>
     <DropdownItem tag={Link} to="/entity/pin">
-      <FontAwesomeIcon icon="microchip" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.pin" />
+      <FontAwesomeIcon icon="microchip" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.pin" />
     </DropdownItem>
     <DropdownItem tag={Link} to="/entity/sensor">
-      <FontAwesomeIcon icon="broadcast-tower" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.sensor" />
+      <FontAwesomeIcon icon="broadcast-tower" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.sensor" />
     </DropdownItem>
     {/*
     <DropdownItem tag={Link} to="/entity/temperature">
@@ -26,10 +32,14 @@ export const EntitiesMenu = props => (
     </DropdownItem>
     */}
     <DropdownItem tag={Link} to="/entity/timer">
-      <FontAwesomeIcon icon="clock" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.timer" />
+      <FontAwesomeIcon icon="clock" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.timer" />
     </DropdownItem>
     <DropdownItem tag={Link} to="/entity/netatmo">
-      <FontAwesomeIcon icon="asterisk" fixedWidth />&nbsp;<Translate contentKey="global.menu.entities.netatmo" />
+      <FontAwesomeIcon icon="handshake" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.entities.netatmo" />
     </DropdownItem>
     {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
   </NavDropdown>

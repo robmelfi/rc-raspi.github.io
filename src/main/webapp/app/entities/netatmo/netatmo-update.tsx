@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label } from 'reactstrap';
+import { Button, Row, Col, Label, FormGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
@@ -125,9 +125,9 @@ export class NetatmoUpdate extends React.Component<INetatmoUpdateProps, INetatmo
                     name="email"
                     placeholder={translate('global.form.email.placeholder')}
                     validate={{
-                        required: { value: true, errorMessage: translate('global.messages.validate.email.required') },
-                        minLength: { value: 5, errorMessage: translate('global.messages.validate.email.minlength') },
-                        maxLength: { value: 254, errorMessage: translate('global.messages.validate.email.maxlength') }
+                      required: { value: true, errorMessage: translate('global.messages.validate.email.required') },
+                      minLength: { value: 5, errorMessage: translate('global.messages.validate.email.minlength') },
+                      maxLength: { value: 254, errorMessage: translate('global.messages.validate.email.maxlength') }
                     }}
                   />
                 </AvGroup>
@@ -137,28 +137,32 @@ export class NetatmoUpdate extends React.Component<INetatmoUpdateProps, INetatmo
                   </Label>
                   <AvField
                     id="netatmo-password"
-                    type="text"
+                    type="password"
                     name="password"
                     validate={{
                       required: { value: true, errorMessage: translate('entity.validation.required') }
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label id="enabledLabel" check>
-                    <AvInput default={'true'} id="netatmo-enabled" type="checkbox" className="form-control" name="enabled" />
-                    <Translate contentKey="rcraspiApp.netatmo.enabled">Enabled</Translate>
-                  </Label>
-                </AvGroup>
+                <FormGroup>
+                  <AvGroup check>
+                    <AvInput id="netatmo-enabled" type="checkbox" name="enabled" style={{ marginTop: '4px' }} />
+                    <Label check id="enabledLabel">
+                      <Translate contentKey="rcraspiApp.netatmo.enabled">Enabled</Translate>
+                    </Label>
+                  </AvGroup>
+                </FormGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/netatmo" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" id="save-entity" type="submit" disabled={updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>

@@ -26,7 +26,8 @@ export class Controller extends React.Component<IControllerProps> {
         <h2 id="controller-heading">
           <Translate contentKey="rcraspiApp.controller.home.title">Controllers</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="rcraspiApp.controller.home.createLabel">Create new Controller</Translate>
           </Link>
         </h2>
@@ -67,18 +68,19 @@ export class Controller extends React.Component<IControllerProps> {
                   </td>
                   <td>{controller.pinName ? controller.pinName : ''}</td>
                   <td>{controller.state ? 'High' : 'Low'}</td>
-                  <td>{controller.netatmo ? 'true' : 'false'}</td>
+                  <td>{controller.netatmo ? <FontAwesomeIcon icon="check" /> : <FontAwesomeIcon icon="times" />}</td>
                   <td>{controller.sensorName ? <Link to={`sensor/${controller.sensorId}`}>{controller.sensorName}</Link> : ''}</td>
                   <td>{controller.timerName ? <Link to={`timer/${controller.timerId}`}>{controller.timerName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      { !controller.sensorId &&
-                      <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>}
+                      {!controller.sensorId && (
+                        <Button tag={Link} to={`${match.url}/${controller.id}/edit`} color="primary" size="sm">
+                          <FontAwesomeIcon icon="pencil-alt" />{' '}
+                          <span className="d-none d-md-inline">
+                            <Translate contentKey="entity.action.edit">Edit</Translate>
+                          </span>
+                        </Button>
+                      )}
                       <Button tag={Link} to={`${match.url}/${controller.id}/delete`} color="danger" size="sm">
                         <FontAwesomeIcon icon="trash" />{' '}
                         <span className="d-none d-md-inline">

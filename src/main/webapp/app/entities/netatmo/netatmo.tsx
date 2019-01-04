@@ -24,11 +24,14 @@ export class Netatmo extends React.Component<INetatmoProps> {
     return (
       <div>
         <h2 id="netatmo-heading">
-          <Translate contentKey="rcraspiApp.netatmo.home.title">Netatmos</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
-            <Translate contentKey="rcraspiApp.netatmo.home.createLabel">Create new Netatmo</Translate>
-          </Link>
+          <Translate contentKey="rcraspiApp.netatmo.home.title">Netatmo</Translate>
+          {netatmoList.length === 0 && (
+            <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+              <FontAwesomeIcon icon="plus" />
+              &nbsp;
+              <Translate contentKey="rcraspiApp.netatmo.home.createLabel">Create new Netatmo</Translate>
+            </Link>
+          )}
         </h2>
         <div className="table-responsive">
           <Table responsive>
@@ -66,8 +69,8 @@ export class Netatmo extends React.Component<INetatmoProps> {
                   <td>{netatmo.clientId}</td>
                   <td>{netatmo.clientSecret}</td>
                   <td>{netatmo.email}</td>
-                  <td>{netatmo.password}</td>
-                  <td>{netatmo.enabled ? 'true' : 'false'}</td>
+                  <td>********</td>
+                  <td>{netatmo.enabled ? <FontAwesomeIcon icon="check" /> : <FontAwesomeIcon icon="times" />}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${netatmo.id}`} color="info" size="sm">

@@ -35,6 +35,9 @@ import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { faThermometerHalf } from '@fortawesome/free-solid-svg-icons/faThermometerHalf';
 import { faBroadcastTower } from '@fortawesome/free-solid-svg-icons/faBroadcastTower';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons/faStopwatch';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -76,6 +79,9 @@ export const loadIcons = () => {
     faTint,
     faThermometerHalf,
     faBroadcastTower,
-    faStopwatch
+    faStopwatch,
+    faCheck,
+    faTimes,
+    faHandshake
   );
 };

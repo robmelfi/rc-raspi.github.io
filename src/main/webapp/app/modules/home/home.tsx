@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
-import { Row, Col, Alert, Button, ButtonGroup, Card } from 'reactstrap';
+import { Row, Col, Alert, Button, ButtonGroup, Card, Badge } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ToggleSwitch from './toggle-switch';
 import TempHumWidget from './temphum-widget';
@@ -27,7 +27,6 @@ export interface IHomeState {
 }
 
 export class Home extends React.Component<IHomeProp, IHomeState> {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -65,10 +64,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   }
 
   startInterval = () => {
-    const id = window.setInterval(
-      () => this.fetchData(),
-      1000 * 60
-    );
+    const id = window.setInterval(() => this.fetchData(), 1000 * 60);
     return id;
   };
 
@@ -101,16 +97,16 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   };
 
   checkTimestamp = entity => {
-      const FIVE_MINUTES = 5 * 60 * 1000;
-      const fiveMinutesAgo = new Date(Date.now() - FIVE_MINUTES);
-      if (entity === '') {
-        return '-';
-      }
-      if (new Date(entity.timestamp) > fiveMinutesAgo) {
-        return entity.value.toFixed(1);
-      } else {
-        return 'np';
-      }
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    const fiveMinutesAgo = new Date(Date.now() - FIVE_MINUTES);
+    if (entity === '') {
+      return '-';
+    }
+    if (new Date(entity.timestamp) > fiveMinutesAgo) {
+      return entity.value.toFixed(1);
+    } else {
+      return 'np';
+    }
   };
 
   render() {
@@ -128,49 +124,56 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                   You are logged in as user {account.login}.
                 </Translate>
               </p>
-              {controllerList.length === 0 ?
+              {controllerList.length === 0 ? (
                 <p>
-                  <Translate contentKey="home.logged.configuring">
-                    Start configuring your raspberry
-                  </Translate>
+                  <Translate contentKey="home.logged.configuring">Start configuring your raspberry</Translate>
                 </p>
-                : null
-              }
+              ) : null}
               <Row className="m-1">
-                {controllerList.filter(controller => controller.sensorName === DHT11)
-                  .map((controller, index) =>
-                    <Col key={index} xs="12" sm="6" className="m-2">
-                      <Row>
-                        <TempHumWidget
-                          temperature={this.checkTimestamp(temperature)}
-                          humidity={this.checkTimestamp(humidity)}/>
-                      </Row>
-                    </Col>
-                )}
-                { controllerList.length !== 0 &&
-                  <Col xs="12" sm={{ size: 5, offset: 1 }} className="shadow-sm m-1" style={{ backgroundColor: '#eee' }}>
-                  {controllerList.map((controller, i) => (
-                    controller.mode === 'OUTPUT' &&
-                    <Row key={`controller-${i}`}>
-                      <Col className="mb-2">
-                        <span className="align-middle mt-3 m-2 float-left">{controller.name}</span>
-                        <span className="align-middle float-right mt-2">
-                          <ToggleSwitch
-                            on={this.set.bind(this, 'high', controller.pinName)}
-                            off={this.set.bind(this, 'low', controller.pinName)}
-                            status={controller.state}
-                          />
-                        </span>
-                        { controller.timerId &&
-                        <span className="align-middle float-right mt-1">
-                          <Button tag={Link} to={`/entity/timer/${controller.timerId}`} color="link" size="lg"><FontAwesomeIcon icon="stopwatch" fixedWidth /></Button>
-                        </span>}
-                      </Col>
+                {controllerList.filter(controller => controller.sensorName === DHT11).map((controller, index) => (
+                  <Col key={index} xs="12" sm="6" className="m-2">
+                    <Row>
+                      <TempHumWidget temperature={this.checkTimestamp(temperature)} humidity={this.checkTimestamp(humidity)} />
                     </Row>
-                  ))}
-                  <TimerModal isOpen={this.state.modal} toggle={this.toggle}/>
                   </Col>
-                }
+                ))}
+                {controllerList.length !== 0 && (
+                  <Col xs="12" sm={{ size: 5, offset: 1 }} className="shadow-sm m-1" style={{ backgroundColor: '#eee' }}>
+                    {controllerList.map(
+                      (controller, i) =>
+                        controller.mode === 'OUTPUT' && (
+                          <Row key={`controller-${i}`}>
+                            <Col className="mb-2">
+                              <span className="align-middle mt-3 m-2 float-left">
+                                {controller.name}
+                                &nbsp;
+                                {controller.netatmo && (
+                                  <Badge pill color="success">
+                                    <FontAwesomeIcon icon="handshake" />
+                                  </Badge>
+                                )}
+                              </span>
+                              <span className="align-middle float-right mt-2">
+                                <ToggleSwitch
+                                  on={this.set.bind(this, 'high', controller.pinName)}
+                                  off={this.set.bind(this, 'low', controller.pinName)}
+                                  status={controller.state}
+                                />
+                              </span>
+                              {controller.timerId && (
+                                <span className="align-middle float-right mt-1">
+                                  <Button tag={Link} to={`/entity/timer/${controller.timerId}`} color="link" size="lg">
+                                    <FontAwesomeIcon icon="stopwatch" fixedWidth />
+                                  </Button>
+                                </span>
+                              )}
+                            </Col>
+                          </Row>
+                        )
+                    )}
+                    <TimerModal isOpen={this.state.modal} toggle={this.toggle} />
+                  </Col>
+                )}
               </Row>
             </div>
           ) : (

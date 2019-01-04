@@ -2,15 +2,15 @@
   "rcraspiApp": {
     "netatmo": {
       "home": {
-        "title": "Netatmos",
-        "createLabel": "Create a new Netatmo",
+        "title": "Bind a Netatmo Thermostat",
+        "createLabel": "Settings",
         "createOrEditLabel": "Create or edit a Netatmo"
       },
-      "created": "A new Netatmo is created with identifier {{ param }}",
-      "updated": "A Netatmo is updated with identifier {{ param }}",
-      "deleted": "A Netatmo is deleted with identifier {{ param }}",
+      "created": "A new Netatmo is created",
+      "updated": "A Netatmo is updated",
+      "deleted": "A Netatmo is deleted",
       "delete": {
-        "question": "Are you sure you want to delete Netatmo {{ id }}?"
+        "question": "Are you sure you want to delete Netatmo?"
       },
       "detail": {
         "title": "Netatmo"

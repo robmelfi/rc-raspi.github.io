@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label, FormText, Collapse, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Row, Col, Label, FormText, Collapse, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
@@ -125,14 +125,20 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       <Label for="sensor.name">
                         <Translate contentKey="rcraspiApp.controller.sensor">Sensor</Translate>
                       </Label>
-                      <AvInput id="controller-sensor" type="select" className="form-control" name="sensorId" onChange={this.onChangeSensor.bind(event)}>
+                      <AvInput
+                        id="controller-sensor"
+                        type="select"
+                        className="form-control"
+                        name="sensorId"
+                        onChange={this.onChangeSensor.bind(event)}
+                      >
                         <option value="" key="0" />
                         {sensors
                           ? sensors.map(otherEntity => (
-                            <option value={otherEntity.id} key={otherEntity.id}>
-                              {otherEntity.name}
-                            </option>
-                          ))
+                              <option value={otherEntity.id} key={otherEntity.id}>
+                                {otherEntity.name}
+                              </option>
+                            ))
                           : null}
                       </AvInput>
                     </AvGroup>
@@ -170,10 +176,12 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       <Translate contentKey="rcraspiApp.IO.OUTPUT" />
                     </option>
                   </AvInput>
-                  { isNew && !this.state.isInputSensor &&
-                  <FormText color="muted">
-                    <Translate contentKey="rcraspiApp.IO.message" />
-                  </FormText> }
+                  {isNew &&
+                    !this.state.isInputSensor && (
+                      <FormText color="muted">
+                        <Translate contentKey="rcraspiApp.IO.message" />
+                      </FormText>
+                    )}
                 </AvGroup>
                 <AvGroup>
                   <Label id="stateLabel">
@@ -184,7 +192,8 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     type="select"
                     className="form-control"
                     name="state"
-                    value={isNew ? 'false' : controllerEntity.state}>
+                    value={isNew ? 'false' : controllerEntity.state}
+                  >
                     <option value="false">Low</option>
                     <option value="true">High</option>
                   </AvInput>
@@ -195,13 +204,10 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                       <Label for="pin.name">
                         <Translate contentKey="rcraspiApp.controller.pin">Pin</Translate>
                       </Label>
-                      <AvInput
-                          id="controller-pin"
-                          type="select"
-                          className="form-control"
-                          name="pinId"
-                          required>
-                        <option value={controllerEntity.pinId} key={controllerEntity.pinId}>{controllerEntity.pinName}</option>
+                      <AvInput id="controller-pin" type="select" className="form-control" name="pinId" required>
+                        <option value={controllerEntity.pinId} key={controllerEntity.pinId}>
+                          {controllerEntity.pinName}
+                        </option>
                         {pins
                           ? pins.map(otherEntity => (
                               <option value={otherEntity.id} key={otherEntity.id}>
@@ -213,74 +219,84 @@ export class ControllerUpdate extends React.Component<IControllerUpdateProps, IC
                     </AvGroup>
                   </Col>
                   <Col xs="6" sm="6">
-                      <div className="mt-4" />
-                      <Button color="info" onClick={this.toggleModal} className="mt-2">
-                        <FontAwesomeIcon icon="eye" />
-                        <span className="d-none d-md-inline">
-                          &nbsp;<Translate contentKey="rcraspiApp.controller.pinHeaderModal">Show Pin Header</Translate>
-                        </span>
-                      </Button>
-                      <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                        <ModalHeader toggle={this.toggleModal}>Pin Numbering - Raspberry Pi 3 Model B</ModalHeader>
-                        <ModalBody>
-                          <span className="pin-header rounded" />
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-                        </ModalFooter>
-                      </Modal>
+                    <div className="mt-4" />
+                    <Button color="info" onClick={this.toggleModal} className="mt-2">
+                      <FontAwesomeIcon icon="eye" />
+                      <span className="d-none d-md-inline">
+                        &nbsp;
+                        <Translate contentKey="rcraspiApp.controller.pinHeaderModal">Show Pin Header</Translate>
+                      </span>
+                    </Button>
+                    <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                      <ModalHeader toggle={this.toggleModal}>Pin Numbering - Raspberry Pi 3 Model B</ModalHeader>
+                      <ModalBody>
+                        <span className="pin-header rounded" />
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button color="secondary" onClick={this.toggleModal}>
+                          Cancel
+                        </Button>
+                      </ModalFooter>
+                    </Modal>
                   </Col>
                 </Row>
-                { (isNew ? !this.state.isInputSensor : !controllerEntity.sensorId) &&
-                <Row>
+                {(isNew ? !this.state.isInputSensor : !controllerEntity.sensorId) && (
+                  <Row>
                     <Col xs="6" sm="6">
-                        <AvGroup>
-                            <Label for="timer.name">
-                                <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
-                            </Label>
-                            <AvInput
-                                id="controller-timer"
-                                type="select"
-                                className="form-control"
-                                name="timerId"
-                                value={timer.id}
-                                label={timer.name}>
-                                <option value="" key="0" />
-                                {timers
-                                    ? timers.map(otherEntity => (
-                                        <option value={otherEntity.id} key={otherEntity.id}>
-                                            {otherEntity.name}
-                                        </option>
-                                    ))
-                                    : null}
-                            </AvInput>
-                        </AvGroup>
+                      <AvGroup>
+                        <Label for="timer.name">
+                          <Translate contentKey="rcraspiApp.controller.timer">Timer</Translate>
+                        </Label>
+                        <AvInput
+                          id="controller-timer"
+                          type="select"
+                          className="form-control"
+                          name="timerId"
+                          value={timer.id}
+                          label={timer.name}
+                        >
+                          <option value="" key="0" />
+                          {timers
+                            ? timers.map(otherEntity => (
+                                <option value={otherEntity.id} key={otherEntity.id}>
+                                  {otherEntity.name}
+                                </option>
+                              ))
+                            : null}
+                        </AvInput>
+                      </AvGroup>
                     </Col>
                     <Col xs="6" sm="6">
-                        <div className="mt-4" />
-                        <Link to={`/entity/timer/new`} className="btn btn-primary jh-create-entity mt-2" id="jh-create-entity">
-                            <FontAwesomeIcon icon="plus" />
-                            <span className="d-none d-md-inline">
-                              &nbsp;<Translate contentKey="rcraspiApp.timer.home.createLabel">Add a timer</Translate>
-                            </span>
-                        </Link>
+                      <div className="mt-4" />
+                      <Link to={`/entity/timer/new`} className="btn btn-primary jh-create-entity mt-2" id="jh-create-entity">
+                        <FontAwesomeIcon icon="plus" />
+                        <span className="d-none d-md-inline">
+                          &nbsp;
+                          <Translate contentKey="rcraspiApp.timer.home.createLabel">Add a timer</Translate>
+                        </span>
+                      </Link>
                     </Col>
-                </Row>}
-                <AvGroup>
-                  <Label id="netatmoLabel" check>
-                      <AvInput id="controller-netatmo" type="checkbox" className="form-control" name="netatmo" />
+                  </Row>
+                )}
+                <FormGroup>
+                  <AvGroup check>
+                    <AvInput id="controller-netatmo" type="checkbox" name="netatmo" style={{ marginTop: '4px' }} />
+                    <Label id="netatmoLabel" check>
                       <Translate contentKey="rcraspiApp.controller.netatmo">Netatmo</Translate>
-                  </Label>
-                </AvGroup>
+                    </Label>
+                  </AvGroup>
+                </FormGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/controller" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" id="save-entity" type="submit" disabled={updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>
