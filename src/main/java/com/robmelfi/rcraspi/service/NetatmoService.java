@@ -1,6 +1,7 @@
 package com.robmelfi.rcraspi.service;
 
 import com.robmelfi.rcraspi.domain.Netatmo;
+import com.robmelfi.rcraspi.netatmo.NetatmoScheduleService;
 import com.robmelfi.rcraspi.repository.NetatmoRepository;
 import com.robmelfi.rcraspi.service.dto.NetatmoDTO;
 import com.robmelfi.rcraspi.service.mapper.NetatmoMapper;
@@ -25,12 +26,27 @@ public class NetatmoService {
     private final Logger log = LoggerFactory.getLogger(NetatmoService.class);
 
     private final NetatmoRepository netatmoRepository;
+    private final NetatmoScheduleService netatmoScheduleService;
 
     private final NetatmoMapper netatmoMapper;
 
-    public NetatmoService(NetatmoRepository netatmoRepository, NetatmoMapper netatmoMapper) {
+    public NetatmoService(NetatmoRepository netatmoRepository, NetatmoScheduleService netatmoScheduleService, NetatmoMapper netatmoMapper) {
         this.netatmoRepository = netatmoRepository;
+        this.netatmoScheduleService = netatmoScheduleService;
         this.netatmoMapper = netatmoMapper;
+        this.loadNetatmoCredentials();
+    }
+
+    private void loadNetatmoCredentials() {
+        NetatmoDTO result = null;
+        List<NetatmoDTO> netatmoDTOList = this.findAll();
+        if (netatmoDTOList.size() == 1) {
+            result = netatmoDTOList.get(0);
+        }
+        if (result != null) {
+            this.netatmoScheduleService.initNetatmoHttpClient(result);
+            this.netatmoScheduleService.startReadNetatmoStatus();
+        }
     }
 
     /**
@@ -44,6 +60,7 @@ public class NetatmoService {
 
         Netatmo netatmo = netatmoMapper.toEntity(netatmoDTO);
         netatmo = netatmoRepository.save(netatmo);
+        this.loadNetatmoCredentials();
         return netatmoMapper.toDto(netatmo);
     }
 
@@ -81,6 +98,7 @@ public class NetatmoService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Netatmo : {}", id);
+        this.netatmoScheduleService.resetNetatmoHttpClient();
         netatmoRepository.deleteById(id);
     }
 }

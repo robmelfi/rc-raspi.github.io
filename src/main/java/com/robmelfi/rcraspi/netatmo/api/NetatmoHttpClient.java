@@ -31,12 +31,14 @@ import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class NetatmoHttpClient {
 
 	// API URLs that will be used for requests, see:
@@ -54,12 +56,23 @@ public class NetatmoHttpClient {
 	private String clientId;
 	private String clientSecret;
 
-	public NetatmoHttpClient(final String clientId, final String clientSecret) {
-		this.clientId = clientId;
-		this.clientSecret = clientSecret;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	/**
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    /**
 	 * This is the first request you have to do before being able to use the
 	 * API. It allows you to retrieve an access token in one step, using your
 	 * application's credentials and the user's credentials.
