@@ -51,7 +51,7 @@ export class NetatmoDetail extends React.Component<INetatmoDetailProps> {
                 <Translate contentKey="rcraspiApp.netatmo.password">Password</Translate>
               </span>
             </dt>
-            <dd>{netatmoEntity.password}</dd>
+            <dd>*********</dd>
             <dt>
               <span id="enabled">
                 <Translate contentKey="rcraspiApp.netatmo.enabled">Enabled</Translate>
