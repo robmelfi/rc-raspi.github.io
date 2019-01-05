@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.sensor.impl;
 
+import com.pi4j.io.gpio.Pin;
 import com.robmelfi.rcraspi.sensor.SensorStrategy;
 import com.robmelfi.rcraspi.service.scheduled.ScheduleDHT11Controller;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,8 @@ public class DHT11Manager implements SensorStrategy {
     }
 
     @Override
-    public void setPin(int pin) {
-        this.pin = pin;
+    public void setPin(Pin pin) {
+        this.pin = pin.getAddress();
     }
 
     @Override
