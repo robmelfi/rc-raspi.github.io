@@ -27,7 +27,7 @@ public class FlameSensor {
     // return true if flame is detected
     public boolean flameDetected() {
         // if pin is low flame is detected
-        return !pin.isLow();
+        return pin.isLow();
     }
 
 }
