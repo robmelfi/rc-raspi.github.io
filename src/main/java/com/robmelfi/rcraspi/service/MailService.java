@@ -102,4 +102,10 @@ public class MailService {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
     }
+
+    @Async
+    public void sendAlertMail(User user) {
+        log.debug("Sending alert email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/alertEmail", "email.alert.title");
+    }
 }

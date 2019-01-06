@@ -1,12 +1,16 @@
 package com.robmelfi.rcraspi.service.scheduled;
 
 import com.pi4j.io.gpio.Pin;
+import com.robmelfi.rcraspi.domain.User;
+import com.robmelfi.rcraspi.repository.UserRepository;
 import com.robmelfi.rcraspi.service.FlameSensorService;
+import com.robmelfi.rcraspi.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 
 @Service
@@ -20,9 +24,15 @@ public class ScheduleFlameSensorController {
 
     private ScheduledFuture scheduledFuture;
 
-    public ScheduleFlameSensorController(FlameSensorService flameSensorService, TaskScheduler taskScheduler) {
+    private final MailService mailService;
+
+    private final UserRepository userRepository;
+
+    public ScheduleFlameSensorController(FlameSensorService flameSensorService, TaskScheduler taskScheduler, MailService mailService, UserRepository userRepository) {
         this.flameSensorService = flameSensorService;
         this.taskScheduler = taskScheduler;
+        this.mailService = mailService;
+        this.userRepository = userRepository;
     }
 
     public void setPin(Pin pin) {
@@ -43,7 +53,11 @@ public class ScheduleFlameSensorController {
 
     private void task() {
         boolean flame = this.flameSensorService.flameDetected();
-        // TODO TRIGGER ACTION
         log.info("Flame Detected: {}", flame);
+        if (flame) {
+            List<User> userList = this.userRepository.findAll();
+            for (User user : userList)
+                if (user.getActivated() && !user.getLogin().equals("anonymoususer")) this.mailService.sendAlertMail(user);
+        }
     }
 }
