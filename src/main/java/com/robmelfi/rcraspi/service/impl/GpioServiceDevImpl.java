@@ -1,5 +1,6 @@
 package com.robmelfi.rcraspi.service.impl;
 
+import com.pi4j.io.gpio.RaspiPin;
 import com.robmelfi.rcraspi.domain.Controller;
 import com.robmelfi.rcraspi.domain.Sensor;
 import com.robmelfi.rcraspi.domain.enumeration.IO;
@@ -97,7 +98,7 @@ public class GpioServiceDevImpl implements GpioService {
             }
         } else {
             Sensor sensor = sensorRepository.findById(c.getSensor().getId()).get();
-            sensorStrategyService.enableSensor(sensor.getName(), 0);
+            sensorStrategyService.enableSensor(sensor.getName(), RaspiPin.GPIO_00);
         }
     }
 
@@ -108,7 +109,7 @@ public class GpioServiceDevImpl implements GpioService {
             gpioPinDigitalOutputs.remove(controller.getPin().getName());
         } else {
             Sensor sensor = sensorRepository.findById(controller.getSensor().getId()).get();
-            sensorStrategyService.disableSensor(sensor.getName(), 0);
+            sensorStrategyService.disableSensor(sensor.getName());
         }
     }
 

@@ -96,7 +96,7 @@ public class GpioServiceImpl implements GpioService {
             }
         } else {
             Sensor sensor = sensorRepository.findById(c.getSensor().getId()).get();
-            sensorStrategyService.enableSensor(sensor.getName(), getRaspiPin(pin.getName()).getAddress());
+            sensorStrategyService.enableSensor(sensor.getName(), getRaspiPin(pin.getName()));
         }
     }
 
@@ -109,7 +109,7 @@ public class GpioServiceImpl implements GpioService {
             gpioPinDigitalOutputs.remove(controller.getPin().getName());
         } else {
             Sensor sensor = sensorRepository.findById(controller.getSensor().getId()).get();
-            sensorStrategyService.disableSensor(sensor.getName(), 0);
+            sensorStrategyService.disableSensor(sensor.getName());
         }
 
 

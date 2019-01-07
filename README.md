@@ -1,24 +1,31 @@
 # rcraspi
+
 Controlling Raspberry GPIO for home automation with a web/mobile app.
 
 **Click [here](https://www.youtube.com/watch?v=b8VcnN9qe1E) or on the image below to view youtube video.**
 
-[![](http://img.youtube.com/vi/b8VcnN9qe1E/0.jpg)](https://www.youtube.com/watch?v=b8VcnN9qe1E "rcraspi")
+[![](http://img.youtube.com/vi/b8VcnN9qe1E/0.jpg)](https://www.youtube.com/watch?v=b8VcnN9qe1E 'rcraspi')
 
 This application was generated using JHipster 5.7.2, you can find documentation and help at [JHipster Homepage and latest documentation][].
 
 ## About
 
-This software is intended to run on raspberry pi to control GPIO. It provides an 
-interface for controlling the GPIO remotely via the network. The GPIO can be controlled via a device 
+This software is intended to run on raspberry pi to control GPIO. It provides an
+interface for controlling the GPIO remotely via the network. The GPIO can be controlled via a device
 like smartphone or web browser.  
 The software was designed with the following requirements in mind:
+
 - simple, intuitive usage and interface
 - lightweight, can run on simple devices
 
 ## Release notes
 
+### Release 1.3
+
+- Programmable timers for GPIO output actions
+
 ### Release 1.1
+
 - Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
 - Auto select INPUT mode when sensor DHT11 is added
 
@@ -29,9 +36,9 @@ The software was designed with the following requirements in mind:
 - Select initial state (High or Low)
 - Control GPIO pin remotely
 
-### Nice to have (wishlist)
+## Nice to have (wish list)
 
-- Programmable timers for GPIO output actions
+- Push refresh when timer change GPIO status (in v1.3 the status is update with pull request every minute)
 - Add preset configuration for other many types of sensors
 
 ## Development
@@ -82,7 +89,7 @@ Note: workbox creates the respective service worker and dynamically generate the
 
 create database on raspberry pi (mysql)
 
-    create user 'rcraspi'@'%' identified by 'rcraspi';  
+    create user 'rcraspi'@'%' identified by 'rcraspi';
     create database rcraspi;
     GRANT ALL PRIVILEGES ON rcraspi.* TO 'rcraspi'@'%';
 
@@ -116,8 +123,8 @@ Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in 
 
 For more information, refer to the [Running tests page][].
 
-[JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[Using JHipster in production]: https://www.jhipster.tech/production/
-[Running tests page]: https://www.jhipster.tech/running-tests/
+[jhipster homepage and latest documentation]: https://www.jhipster.tech
+[using jhipster in production]: https://www.jhipster.tech/production/
+[running tests page]: https://www.jhipster.tech/running-tests/
 [node.js]: https://nodejs.org/
 [webpack]: https://webpack.github.io/
