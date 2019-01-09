@@ -18,11 +18,16 @@ The software was designed with the following requirements in mind:
 
 ## Release notes
 
+### Release 1.3.1
+- Add preset configuration for Flame Sensor  
+<img src="https://www.dropbox.com/s/1ekpkyc0kwj9pjh/flame_sensor.jpg?raw=1" alt="Flame Sensor" width="200"/>
+
 ### Release 1.3
 - Programmable timers for GPIO output actions
 
 ### Release 1.1
-- Add preset configuration for DHT11 sensor (Humidity Temperature sensor)
+- Add preset configuration for DHT11 sensor (Humidity Temperature sensor)  
+<img src="https://www.dropbox.com/s/7g2ef7d59sgc0pi/dht11.jpg?raw=1" alt="DHT11 Sensor" width="200"/>
 - Auto select INPUT mode when sensor DHT11 is added
 
 ### Release 1.0
