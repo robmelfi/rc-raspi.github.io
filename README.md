@@ -19,7 +19,7 @@ The software was designed with the following requirements in mind:
 ## Release notes
 
 ### Release 1.3.1
-- Add preset configuration for Flame Sensor  
+- Add preset configuration for Flame Sensor (When the fire is detected, an email is sent to all registered users).   
 <img src="https://www.dropbox.com/s/1ekpkyc0kwj9pjh/flame_sensor.jpg?raw=1" alt="Flame Sensor" width="200"/>
 
 ### Release 1.3
