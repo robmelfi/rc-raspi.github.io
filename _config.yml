@@ -1,4 +1,3 @@
-baseurl: /rcraspi
 theme: jekyll-theme-cayman
 title: Remote Control Raspberry Pi
 show_downloads: true
