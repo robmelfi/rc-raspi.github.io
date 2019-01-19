@@ -1,3 +1,4 @@
 theme: jekyll-theme-cayman
+baseurl: https://robmelfi.github.io/rc-raspi
 title: Remote Control Raspberry Pi
 show_downloads: true
