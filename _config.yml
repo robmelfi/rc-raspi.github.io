@@ -1,5 +1,6 @@
+url: "https://robmelfi.github.io/rc-raspi"
 theme: jekyll-theme-cayman
-title: Remote Control Rasperry Pi
+title: Remote Control Raspberry Pi
 show_downloads: true
 analytics:
     provider: "google-gtag"
