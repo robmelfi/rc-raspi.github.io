@@ -6,4 +6,4 @@ analytics:
     provider: "google-gtag"
     google:
         tracking_id: "UA-133227492-1"
-        anonymize_ip: true
+        anonymize_ip: fasle
